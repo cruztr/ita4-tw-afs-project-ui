@@ -1,5 +1,7 @@
 import React from "react";
-import ParkingBoyResource from "../../../Api/ParkingBoyResource.js"
+import ParkingBoyResource from "../../../Api/ParkingBoyResource.js";
+import MainPage from "../MainPage/MainPage.js";
+import { Redirect, useHistory  } from 'react-router-dom'
 
 class Login extends React.Component{
     constructor(props){
@@ -15,10 +17,12 @@ class Login extends React.Component{
             ...thisState,
             [event.target.name]: event.target.value
         });
-        
     }
     login = () => {
         this.props.login(this.state);
+        if(this.props.user.parkingBoy.id){
+             this.props.status = true;
+        }
     }
     render(){
         return(
