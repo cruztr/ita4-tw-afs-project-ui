@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import MainPage from "../ParkingBoy/MainPage/MainPage";
-import Login from "../ParkingBoy/Login/Login.js";
 import Container from "../../State/ParkingBoy/Container.js"
 
-class Main extends React.Component{
+class Main extends Component{
     constructor(props){
         super(props);
         this.state = {

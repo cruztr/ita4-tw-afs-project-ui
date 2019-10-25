@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import rootReducer from "./State/RootReducer.js"
 import { createStore } from 'redux';
 import {Provider} from 'react-redux';
-import Main from "./Components/Main/Main.js";
+import Main from "./components/Main/Main.js";
 
 let store = createStore(
     rootReducer,
