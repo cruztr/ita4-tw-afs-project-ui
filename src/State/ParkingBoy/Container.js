@@ -1,15 +1,24 @@
 import { connect } from "react-redux";
 import Login from "../../Components/ParkingBoy/Login/Login.js"
+import ParkingBoyResource from "../../Api/ParkingBoyResource.js";
 
 const mapDispatchToProps = dispatch => ({
-    updateInputValue: inputValue =>
+    login: credentials =>
+    ParkingBoyResource.login(credentials)
+    .then(res => res.json())
+      .then(
+        res => 
       dispatch({
-        type: "UPDATE_INPUT_VALUE",
-        payload: inputValue
-    })
+        type: "LOGIN",
+        payload: res
+    }))
 });
 
+const mapStateToProps = state => ({
+    user: state.parkingBoyReducer
+ });
+
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(Login);  

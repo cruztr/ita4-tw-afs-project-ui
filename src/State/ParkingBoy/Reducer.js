@@ -1,12 +1,11 @@
 const initialState = {
-    inputValue : "",
-    todoList : []
+    parkingBoy : {}
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-      case "UPDATE_INPUT_VALUE":
-        return {...state, inputValue: action.payload};
+      case "LOGIN":
+        return {...state, parkingBoy: action.payload};
     default:
         return state;
     }
