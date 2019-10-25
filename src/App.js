@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+import {Button, Card, Input} from 'antd';
+import 'antd/dist/antd.css';
 import './App.css';
+import sparkImage from './images/route.png'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    render() {
+        return (
+            <div className="Login-Whole">
+                <Card  className="Login">
+                    <Card className= "Login-Logo" bordered={false}
+                        cover={<img alt="Spark" src={sparkImage} />}>
+                    </Card>
+                    <div className="Login-Input">
+                        <Input placeholder="Username" />
+                        <Input placeholder="Password" />
+                        <Button className="Login-Button">Primary</Button>
+                    </div>
+                </Card>
+            </div>
+        );
+    }
 }
 
 export default App;
