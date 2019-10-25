@@ -1,5 +1,9 @@
 import React from "react";
-import ParkingBoyResource from "../../../Api/ParkingBoyResource.js"
+import {Button, Card, Input} from "antd";
+import 'antd/dist/antd.css';
+import './Login.css';
+import sparkImage from './images/route.png';
+
 
 class Login extends React.Component{
     constructor(props){
@@ -15,20 +19,28 @@ class Login extends React.Component{
             ...thisState,
             [event.target.name]: event.target.value
         });
-        
-    }
+    };
     login = () => {
         this.props.login(this.state);
-    }
+        if(this.props.user.parkingBoy.id){
+             this.props.status = true;
+        }
+    };
     render(){
         return(
-            <div className = "login">
-                <h1>Login</h1>
-                <span>Username</span><input type="text" value={this.state.username} name="username" onChange={this.handleChange}></input>
-                <br></br>
-                <span>Password</span><input type="password" value={this.state.password} name="password" onChange={this.handleChange}></input>
-                <br></br>
-                <button onClick = {this.login}>Login</button>
+            <div className="Login-Whole">
+                <Card  className="Login">
+                    <Card className= "Login-Logo" bordered={false}
+                          cover={<img alt="Spark" src={sparkImage} />}>
+                    </Card>
+                    <div className="Login-Input">
+                        <Input placeholder="Username" value={this.state.username} name="username"
+                               onChange={this.handleChange}/>
+                        <Input placeholder="Password" type="password" value={this.state.password} name="password"
+                               onChange={this.handleChange}/>
+                        <Button className="Login-Button" onClick = {this.login}>Login</Button>
+                    </div>
+                </Card>
             </div>
         );
     }
