@@ -14,13 +14,12 @@ export default class Order extends React.Component{
         }
     }
     createOrder = () =>{ 
-        const newOrder = {
-            parkingLotID: 1,
+        const param = {
             plateNumber: this.state.plateNumber,
-            status: "OPEN",
-            createdBy: 1 
+            parkingLotID: 1,
+            parkingBoyID: 1
         }
-        this.props.createOrder(newOrder);
+        this.props.createOrder(param);
     }
     plateNumberChange = (event) => this.setState({plateNumber: event.target.value});
     render(){

@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import ParkingBoyResouce from "../Resources/ParkingBoyResouce";
+import ParkingBoyResouce from "../Resources/OrderResource";
 import Order from "../Component/Order/Order";
 
 const mapStateToProps = state => ({
@@ -8,12 +8,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 
-    createOrder: (order) =>{
-        ParkingBoyResouce.createPackage(order).then(res => res.json()).then(({parkingLotID, plateNumber, status, createdBy}) => {
+    createOrder: (param) =>{
+        ParkingBoyResouce.createOrder(param).then(res => res.json()).then(({parkingLotId, plateNumber, timeIn, createdBy}) => {
             dispatch({
                 type: 'CREATE_ORDER',
-                // payload: {parkingLotID, plateNumber, status, createdBy}
-                payload: order
+                payload: {parkingLotId, plateNumber, timeIn, createdBy}
             })
           })
         
