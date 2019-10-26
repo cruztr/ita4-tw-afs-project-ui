@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import ParkingBoyResouce from "../Resources/OrderResource";
-import Order from "../Component/Order/Order";
+import ParkingBoyResouce from "../../../../Api/OrderResource.js";
+import Order from "../../../../Components/ParkingBoy/MainPage/Order/Order";
 
 const mapStateToProps = state => ({
     orderList: state.orderList
