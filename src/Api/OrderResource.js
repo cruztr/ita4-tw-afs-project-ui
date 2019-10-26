@@ -1,5 +1,5 @@
 export default {
-    createOrder: (param) => fetch("http://itamnl02-w10:8080/spark/parkingBoy/"+param.parkingBoyID
+    createOrder: (param) => fetch("http://localhost:8080/spark/parkingBoy/"+param.parkingBoyID
     +"/orders", {
           mode: 'cors',
           method: 'POST',

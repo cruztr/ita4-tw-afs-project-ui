@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import ParkingBoyResouce from "../../../../Api/OrderResource.js";
 import Order from "../../../../Components/ParkingBoy/MainPage/Order/Order";
+import OrderResource from "../../../../Api/OrderResource.js";
 
 const mapStateToProps = state => ({
     orderList: state.orderList
@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 
     createOrder: (param) =>{
-        ParkingBoyResouce.createOrder(param).then(res => res.json())
+        OrderResource.createOrder(param).then(res => res.json())
             .then(res => {
             dispatch({
                 type: 'CREATE_ORDER',
