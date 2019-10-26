@@ -9,10 +9,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 
     createOrder: (param) =>{
-        ParkingBoyResouce.createOrder(param).then(res => res.json()).then(({parkingLotId, plateNumber, timeIn, createdBy}) => {
+        ParkingBoyResouce.createOrder(param).then(res => res.json())
+            .then(res => {
             dispatch({
                 type: 'CREATE_ORDER',
-                payload: {parkingLotId, plateNumber, timeIn, createdBy}
+                payload: res
             })
           })
         
