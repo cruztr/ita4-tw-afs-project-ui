@@ -45,9 +45,7 @@ export default class Order extends React.Component{
                     onCancel={() => this.setModal2Visible(false)}
                     style={{ paddingBottom: "200px" }}
                     footer={[
-                        <Button className="Cancel">
-                            Cancel
-                        </Button>,
+                        <Button className="Cancel" key="back" onClick={() => this.setModal2Visible(false)}>Cancel</Button>,
                         <Button className="Create-Order" key="submit" type="primary" onClick={this.createOrder}>Create Order</Button>
                     ]}
                 >
