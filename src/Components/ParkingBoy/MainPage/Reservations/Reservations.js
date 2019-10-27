@@ -1,4 +1,4 @@
-import { Table, Menu, Icon } from 'antd'
+import {Divider, Popconfirm, Table} from 'antd'
 import 'antd/dist/antd.css';
 import React from 'react';
 import ReservationResource from "../../../../Api/ReservationResource";
@@ -29,14 +29,32 @@ export default class Reservations extends React.Component{
                     title: "Reserved Time",
                     dataIndex: "reservedTime",
                     key: "reservedTime"
+                },
+                {
+                    title: "Action",
+                    // dataIndex: "reservedTime",
+                    key: "action",
+                    render: (text,reservation) => (
+                        <span>
+                            <Popconfirm title="Sure to confirm?" onConfirm={() => {
+                                console.log(reservation);
+                            }}>
+                                <a>Confirm</a>
+                            </Popconfirm>
+                            <Divider type={"vertical"} />
+                            <Popconfirm title="Sure to void?" onConfirm={() => {
+                                console.log(reservation);
+                            }}>
+                                <a>Void</a>
+                            </Popconfirm>
+                        </span>
+                    )
                 }
             ]
         }
     }
 
     componentDidMount(){
-        console.log("Sample");
-        console.log("Working");
         ReservationResource.getAllReservation()
         .then(res => res.json()).then(res => this.props.refreshContent(res));
     }
@@ -45,8 +63,7 @@ export default class Reservations extends React.Component{
         return(
             <div id="containerID" className="container">
                 <h2>Reservation List</h2>
-                <Table columns={this.state.columns} dataSource={this.props.reservationList
-                    .map(reservation => reservation = {...reservation, key: reservation.reservationNumber})}></Table>
+                <Table columns={this.state.columns} dataSource={this.props.reservationList} size="medium"></Table>
             </div>
         );
     }
