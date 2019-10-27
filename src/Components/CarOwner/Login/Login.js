@@ -3,7 +3,7 @@ import {Button, Card, Input} from "antd";
 import 'antd/dist/antd.css';
 import './Login.css';
 import sparkImage from './Images/route.png';
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 class LoginUser extends React.Component{
     constructor(props){
@@ -43,6 +43,7 @@ class LoginUser extends React.Component{
                                onChange={this.handleChange}/>
                         <Input placeholder="Password" type="password" value={this.state.password} name="password"
                                onChange={this.handleChange}/>
+                        <p className="Sign-Up">Don't have an account? <Link to="/signUp">Sign Up</Link></p>
                         <Button className="Login-Button" onClick = {this.setUser}>Login</Button>
                     </div>
                 </Card>
