@@ -1,5 +1,7 @@
+import {PORT} from "./Config";
+
 export default {
-    createOrder: (param) => fetch("http://localhost:8080/spark/parkingBoy/"+param.parkingBoyID
+    createOrder: (param) => fetch("http://localhost:" +PORT+"/spark/parkingBoy/"+param.parkingBoyID
     +"/orders", {
           mode: 'cors',
           method: 'POST',
