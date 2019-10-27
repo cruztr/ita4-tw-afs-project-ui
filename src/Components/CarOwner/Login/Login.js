@@ -13,6 +13,7 @@ class LoginUser extends React.Component{
             password: ""
         }
     }
+
     handleChange = (event) => {
         const thisState = this.state;
         this.setState({
@@ -27,11 +28,11 @@ class LoginUser extends React.Component{
 
     goLogin = () => {
         if(this.props.user.parkingBoy.id){
-            return <Redirect to='/mainpage' />
+            return <Redirect to='/mainpageCarOwner' />
         }
     }
     render(){
-        return( 
+        return(
             <div className="Login-Whole">
                 {this.goLogin()}
                 <Card  className="Login">
