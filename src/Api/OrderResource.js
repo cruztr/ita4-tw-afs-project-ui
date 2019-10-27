@@ -1,5 +1,8 @@
+import {PROTOCOL_TO_MAIN_PATH} from "./Config";
+
+
 export default {
-    createOrder: (param) => fetch("http://localhost:8080/spark/parkingBoy/"+param.parkingBoyID
+    createOrder: (param) => fetch(PROTOCOL_TO_MAIN_PATH +"/parkingBoy/"+param.parkingBoyID
     +"/orders", {
           mode: 'cors',
           method: 'POST',
