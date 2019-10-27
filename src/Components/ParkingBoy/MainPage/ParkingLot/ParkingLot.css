@@ -1,0 +1,10 @@
+.gutter-example .ant-row > div {
+    background: transparent;
+    border: 0;
+  }
+  .Available {
+    background: #00a0e9;
+    background: yellowgreen;
+    padding: 5px 0;
+    height: 140px;
+  }

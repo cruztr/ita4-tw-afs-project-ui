@@ -20,32 +20,31 @@ export default class Order extends React.Component{
             parkingBoyID: 1
         }
         this.props.createOrder(param);
-        this.setModal2Visible(false);
+        this.props.isVisible(false);
     }
-    state = {
-        modal2Visible: false,
-    };
 
-    setModal2Visible(modal2Visible) {
-        this.setState({ modal2Visible });
-    }
+    // setModal2Visible = (isVisible) => {
+    //     this.setState({ 
+    //         modal2Visible : isVisible
+    //     });
+    // }
 
     plateNumberChange = (event) => this.setState({plateNumber: event.target.value});
     render(){
         return(
             <div>
-                <Button type="primary" onClick={() => this.setModal2Visible(true)}>
+                {/* <Button type="primary" onClick={() => this.setModal2Visible(true)}>
                     Create Order
-                </Button>
+                </Button> */}
                 <Modal
                     title="Create Order"
                     centered
-                    visible={this.state.modal2Visible}
+                    visible={true}
                     on={() => this.createOrder}
-                    onCancel={() => this.setModal2Visible(false)}
+                    onCancel={() => this.props.isVisible(false)}
                     style={{ paddingBottom: "200px" }}
                     footer={[
-                        <Button className="Cancel">
+                        <Button className="Cancel" onClick={() => this.props.isVisible(false)}>
                             Cancel
                         </Button>,
                         <Button className="Create-Order" key="submit" type="primary" onClick={this.createOrder}>Create Order</Button>
