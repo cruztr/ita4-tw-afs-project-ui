@@ -6,36 +6,23 @@ export default class Order extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            plateNumber: '',
-            parkingLot: 'Scape Building - 1st floor',
-            location: 'Macapagal Blvd., Pasay City, 1300',
-            blockNumber: '1B',
-            timeIn: '12:04 PM'
+            plateNumber: ''
         }
     }
     createOrder = () =>{ 
         const param = {
             plateNumber: this.state.plateNumber,
-            parkingLotID: 1,
+            parkingLotID: this.props.parkingLot.id,
             parkingBoyID: 1
         }
         this.props.createOrder(param);
         this.props.isVisible(false);
     }
 
-    // setModal2Visible = (isVisible) => {
-    //     this.setState({ 
-    //         modal2Visible : isVisible
-    //     });
-    // }
-
     plateNumberChange = (event) => this.setState({plateNumber: event.target.value});
     render(){
         return(
             <div>
-                {/* <Button type="primary" onClick={() => this.setModal2Visible(true)}>
-                    Create Order
-                </Button> */}
                 <Modal
                     title="Create Order"
                     centered
@@ -58,11 +45,11 @@ export default class Order extends React.Component{
                     </Row>
                     <Row type="flex" justify="center">
                         <Col span={8}>PARKING LOT:</Col>
-                        <Col span={12}>{this.state.parkingLot}</Col>
+                        <Col span={12}>{this.props.parkingLot.name}</Col>
                     </Row>
                     <Row type="flex" justify="center">
                         <Col span={8}>LOCATION:</Col>
-                        <Col span={12}>{this.state.location}</Col>
+                        <Col span={12}>{this.props.parkingLot.location}</Col>
                     </Row>
                     <Row type="flex" justify="center">
                         <Col span={8}>BLK NUMBER:</Col>

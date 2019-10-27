@@ -1,6 +1,7 @@
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import React from "react";
 import ParkingLot from "./ParkingLot/ParkingLot.js";
+import ParkingLotContainer from "../../../State/ParkingBoy/MainPage/ParkingLot/Container.js";
 import Logo from "./Images/sparkLogo.png";
 import './MainPage.css';
 const { Content, Footer, Sider } = Layout;
@@ -55,7 +56,7 @@ class MainPage extends React.Component {
                             <Breadcrumb.Item>Parking Lots</Breadcrumb.Item>
                         </Breadcrumb>
                         <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                            <ParkingLot />
+                            <ParkingLotContainer />
                         </div>
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>spark ©2019 Created by EUTeam</Footer>
