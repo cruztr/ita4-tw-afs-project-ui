@@ -1,4 +1,4 @@
-import {Input, Button, Row, Modal, Col} from 'antd'
+import { Input,  Button, Row, Modal, Col} from 'antd'
 import 'antd/dist/antd.css';
 import React from 'react';
 
@@ -7,13 +7,13 @@ export default class Order extends React.Component{
         super(props);
         this.state = {
             plateNumber: '',
-            parkingLot: 'Scape Building',
-            location: '1st floor',
-            blockNumber: 'My Block',
+            parkingLot: 'Scape Building - 1st floor',
+            location: 'Macapagal Blvd., Pasay City, 1300',
+            blockNumber: '1B',
             timeIn: '12:04 PM'
         }
     }
-    createOrder = () =>{ 
+    createOrder = () =>{
         const param = {
             plateNumber: this.state.plateNumber,
             parkingLotID: 1,
@@ -43,33 +43,35 @@ export default class Order extends React.Component{
                     visible={this.state.modal2Visible}
                     on={() => this.createOrder}
                     onCancel={() => this.setModal2Visible(false)}
-                 >
+                    style={{ paddingBottom: "200px" }}
+                    footer={[
+                        <Button className="Cancel">
+                            Cancel
+                        </Button>,
+                        <Button className="Create-Order" key="submit" type="primary" onClick={this.createOrder}>Create Order</Button>
+                    ]}
+                >
 
                     <Row type="flex" justify="center">
-                        <Col span={8}>Plate Number:</Col>
+                        <Col span={8}>PLATE NUMBER:</Col>
                         <Col span={12}><Input placeholder="Plate Number" value={this.state.plateNumber}
                                               onChange={this.plateNumberChange}/></Col>
                     </Row>
                     <Row type="flex" justify="center">
-                        <Col span={8}>Parking Lot:</Col>
-                        <Col span={12}><Input placeholder={this.state.parkingLot} disabled={true}/></Col>
-                    </Row>
-
-                    <Row type="flex" justify="center">
-                        <Col span={8}>Location:</Col>
-                        <Col span={12}><Input placeholder={this.state.location} disabled={true}/></Col>
+                        <Col span={8}>PARKING LOT:</Col>
+                        <Col span={12}>{this.state.parkingLot}</Col>
                     </Row>
                     <Row type="flex" justify="center">
-                        <Col span={8}>Blk. Number:</Col>
-                        <Col span={12}><Input placeholder={this.state.blockNumber} disabled={true}/></Col>
+                        <Col span={8}>LOCATION:</Col>
+                        <Col span={12}>{this.state.location}</Col>
                     </Row>
                     <Row type="flex" justify="center">
-                        <Col span={8}>Created By:</Col>
-                        <Col span={12}><Input placeholder={this.state.timeIn} disabled={true}/></Col>
+                        <Col span={8}>BLK NUMBER:</Col>
+                        <Col span={12}>{this.state.blockNumber}</Col>
                     </Row>
-                    <Row type="flex" justify="center" className="row">
-                        <Button className="Create-Order" onClick={this.createOrder}>Create Order</Button>
-                        <Button className="Cancel" >Cancel</Button>
+                    <Row type="flex" justify="center">
+                        <Col span={8}>CREATED BY:</Col>
+                        <Col span={12}></Col>
                     </Row>
                 </Modal>
             </div>
