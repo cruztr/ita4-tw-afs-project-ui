@@ -2,7 +2,7 @@ import React from "react";
 import 'antd/dist/antd.css';
 import './Signup.css';
 import {Redirect} from 'react-router-dom'
-import {Button, Checkbox, Form, Input, Select, Card} from 'antd';
+import {Button, Checkbox, Form, Input, Select, Card, Modal} from 'antd';
 import sparkImage from "../Signup/Images/route.png";
 
 const { Option } = Select;
@@ -11,7 +11,7 @@ class Signup extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-
+            isSuccessful: false
         }
     }
 
@@ -22,6 +22,7 @@ class Signup extends React.Component {
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
+
             if (!err) {
                 const credentials = {
                     firstName: values.firstname,
@@ -30,10 +31,18 @@ class Signup extends React.Component {
                     password: values.password,
                     plateNumber: values.platenumber
                 }
-                this.props.signUp(credentials);
+
+                this.setState({
+                    isSuccessful: this.props.registerCarOwner(credentials)
+                })
             }
         });
     };
+
+    handleCanelClick = () => {
+        this.props.closeModal();
+        this.props.form.resetFields();
+    }
 
     handleConfirmBlur = e => {
         const { value } = e.target;
@@ -81,13 +90,14 @@ class Signup extends React.Component {
                 },
             },
         };
+
         return (
             <div className={"SignUp-Whole"} style={{ background: '#d4d4d4', minHeight: 360, margin: 0 }}>
-                <Card  style={{ background: '#fff', minHeight: 360, width: 500, margin: 0}}>
-                    <Card className= "Spark-Logo" bordered={false}
-                          cover={<img alt="Spark" src={sparkImage} />}>
-                    </Card>
-                <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+            <Card  style={{ background: '#fff', minHeight: 360, width: 500, margin: 0}}>
+                <Card className= "Spark-Logo" bordered={false}
+                      cover={<img alt="Spark" src={sparkImage} />}>
+                </Card>
+                <Form {...formItemLayout} ref={(el) => this.myFormRef = el} onSubmit={this.handleSubmit}>
                     <Form.Item label={<span>First Name&nbsp;</span>}>
                         {getFieldDecorator('firstname', {
                             rules: [{ required: true, message: 'Please input your First Name!', whitespace: true }],
@@ -147,6 +157,9 @@ class Signup extends React.Component {
                         <Button type="primary" htmlType="submit" >
                             Register
                         </Button>
+                        <Button type="primary" htmlType="submit" onClick={this.handleCanelClick} >
+                            Cancel
+                        </Button>
                     </Form.Item>
                 </Form>
             </Card>
@@ -156,3 +169,4 @@ class Signup extends React.Component {
 }
 
 export default Form.create()(Signup);
+

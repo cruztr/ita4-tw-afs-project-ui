@@ -1,6 +1,7 @@
 const initialState = {
     account : {},
     order: {},
+    signUpCredentials: {},
     isLoggedIn: false
 };
 
@@ -14,6 +15,8 @@ export default (state = initialState, action) => {
             return {...state,
                     order: action.payload
             }
+        case "SIGNUP":
+            return {...state, signUpCredentials: action.payload};
         default:
             return state;
         }

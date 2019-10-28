@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import Login from "../../../Components/Accounts/Login/Login";
 import HomepageResources from "../../../Api/HomePageResources";
+import CarOwnerResources from "../../../Api/CarOwnerResources"
 
 const mapDispatchToProps = dispatch => ({
     loginParkingBoy : credentials => {
@@ -29,6 +30,17 @@ const mapDispatchToProps = dispatch => ({
         .then(res =>
             dispatch({
                 type: "CHECKORDER",
+                payload: res
+            }))
+    },
+
+    signUp: credentials => {
+    CarOwnerResources.signUp(credentials)
+        .then(res => res.json())
+        .then(
+        res =>
+            dispatch({
+                type: "SIGNUP",
                 payload: res
             }))
     }
