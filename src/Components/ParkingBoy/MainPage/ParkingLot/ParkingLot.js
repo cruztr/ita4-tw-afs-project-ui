@@ -3,6 +3,9 @@ import React from "react";
 import 'antd/dist/antd.css';
 import './ParkingLot.css';
 import OrderContainer from "../../../../State/ParkingBoy/MainPage/Order/Container.js";
+import blockOccupied from "../Images/Block/block-occupied.png";
+import blockAvailable from "../Images/Block/block-available.png";
+import blockReserved from "../Images/Block/block-reserved.png";
 
 class ParkingLot extends React.Component{
     constructor(props){
@@ -50,14 +53,17 @@ class ParkingLot extends React.Component{
             return <OrderContainer isVisible={this.showOrder} parkingLot={this.props.parkingLot} blockPosition = {this.state.blockPosition} whenOrder={this.occupyParkingBlock} />;
         else return null;
       }
-    
+      
       initializeParkingBlocks = () => {
-        const blocks = [];  
+        const blocks = [];
 
         this.props.parkingLot.parkingBlocks.sort((a, b) => (a.position > b.position)? 1: -1).forEach(block => {
             blocks.push(
               <Col className="gutter-row" key={block.id} id={block.id} span={2}  onClick={() =>this.showOrder(true, block.position)}>
-                <div className={block.status}>{block.position}</div>
+                <div className="block-image">
+                    <img className="parking-block" alt="parking block" src={block.status === "AVAILABLE" ? blockAvailable : (block.status === "OCCUPIED" ? blockOccupied : blockReserved)} />
+                    <h2>{block.position}</h2>
+                </div>
               </Col>
             );
         })
