@@ -11,21 +11,8 @@ class Signup extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            firstname: "",
-            lastname: "",
-            username: "",
-            password: "",
-            platenumber: ""
 
         }
-    }
-
-    handleChange = (event) => {
-        const thisState = this.state;
-        this.setState({
-            ...thisState,
-            [event.target.name]: event.target.value
-        });
     }
 
     setUser = () => {
@@ -36,7 +23,14 @@ class Signup extends React.Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                const credentials = {
+                    firstName: values.firstname,
+                    lastName: values.lastname,
+                    username: values.username,
+                    password: values.password,
+                    plateNumber: values.platenumber
+                }
+                this.props.signUp(credentials);
             }
         });
     };
@@ -97,22 +91,22 @@ class Signup extends React.Component {
                     <Form.Item label={<span>First Name&nbsp;</span>}>
                         {getFieldDecorator('firstname', {
                             rules: [{ required: true, message: 'Please input your First Name!', whitespace: true }],
-                        })(<Input />)}
+                        })(<Input/>)}
                     </Form.Item>
                     <Form.Item label={<span>Last Name&nbsp;</span>}>
                         {getFieldDecorator('lastname', {
                             rules: [{ required: true, message: 'Please input your Last Name!', whitespace: true }],
-                        })(<Input />)}
+                        })(<Input/>)}
                     </Form.Item>
                     <Form.Item label={<span>Username&nbsp;</span>}>
                         {getFieldDecorator('username', {
                             rules: [{ required: true, message: 'Please input a username!', whitespace: true }],
-                        })(<Input />)}
+                        })(<Input/>)}
                     </Form.Item>
                     <Form.Item label={<span>Plate Number&nbsp;</span>}>
                         {getFieldDecorator('platenumber', {
                             rules: [{ required: true, message: "Please input your car's Plate Number!", whitespace: true }],
-                        })(<Input />)}
+                        })(<Input/>)}
                     </Form.Item>
                     <Form.Item label="Password" hasFeedback>
                         {getFieldDecorator('password', {
@@ -125,7 +119,7 @@ class Signup extends React.Component {
                                     validator: this.validateToNextPassword,
                                 },
                             ],
-                        })(<Input.Password />)}
+                        })(<Input.Password/>)}
                     </Form.Item>
                     <Form.Item label="Confirm Password" hasFeedback>
                         {getFieldDecorator('confirm', {
@@ -138,7 +132,7 @@ class Signup extends React.Component {
                                     validator: this.compareToFirstPassword,
                                 },
                             ],
-                        })(<Input.Password onBlur={this.handleConfirmBlur} />)}
+                        })(<Input.Password onBlur={this.handleConfirmBlur} onChange={this.handleConfirmPassword}/>)}
                     </Form.Item>
                     <Form.Item {...tailFormItemLayout}>
                         {getFieldDecorator('agreement', {
@@ -150,7 +144,7 @@ class Signup extends React.Component {
                         )}
                     </Form.Item>
                     <Form.Item {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit" >
                             Register
                         </Button>
                     </Form.Item>

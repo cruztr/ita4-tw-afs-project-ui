@@ -1,4 +1,4 @@
-import { Row, Col } from 'antd';
+import { Row, Col, AutoComplete } from 'antd';
 import React from "react";
 import 'antd/dist/antd.css';
 import './ParkingLot.css';
@@ -9,12 +9,31 @@ class ParkingLot extends React.Component{
         super(props);
         this.state = {
           showOrder : false,
-          blockPosition : ""
+          blockPosition : "",
+          value: '',
+          dataSource: []
         }
       }
-      getParkingBlocks = () =>{
-         this.props.getParkingLot();
+      componentDidMount = () =>{
+        this.props.getAllParkingLots();
       }
+
+      onSearch = () => {
+        const parkingLotNames = this.props.allParkingLots.map(parkingLot => parkingLot.name).filter(parkingLotName => parkingLotName.toLowerCase().includes(this.state.value.toLowerCase()));
+        this.setState({
+          dataSource: !parkingLotNames ? [] : parkingLotNames
+        });
+      };
+
+      onChange = value => {
+        this.setState({ value });
+      };
+
+      getParkingBlocks = value =>{
+        console.log(value);
+        this.props.getParkingLot(value);
+      }
+
       showOrder = (isVisible, blockPostion) => {
           this.setState({
               showOrder : isVisible,
@@ -35,9 +54,9 @@ class ParkingLot extends React.Component{
       initializeParkingBlocks = () => {
         const blocks = [];  
 
-        this.props.parkingLot.parkingBlocks.forEach(block => {
+        this.props.parkingLot.parkingBlocks.sort((a, b) => (a.position > b.position)? 1: -1).forEach(block => {
             blocks.push(
-              <Col className="gutter-row" key={block.id} id={block.id} span={60 / this.props.parkingLot.parkingBlocks.length}  onClick={() =>this.showOrder(true, block.position)}>
+              <Col className="gutter-row" key={block.id} id={block.id} span={2}  onClick={() =>this.showOrder(true, block.position)}>
                 <div className={block.status}>{block.position}</div>
               </Col>
             );
@@ -46,9 +65,19 @@ class ParkingLot extends React.Component{
       }
     
       render(){
+        const { dataSource, value } = this.state;
         return (
-    <div className="gutter-example">
-    <button onClick={this.getParkingBlocks}>Get Parking Blocks</button>
+    <div className="parking-block">
+     <AutoComplete
+          value={value}
+          dataSource={dataSource}
+          style={{ width: 200 }}
+          onSelect={this.getParkingBlocks}
+          onSearch={this.onSearch}
+          onChange={this.onChange}
+          placeholder="Parking Lot Name"
+        />
+        <hr></hr>
         <Row gutter={[{ xs: 8, sm: 16, md: 24, lg: 32 }, 20]}>
           {this.initializeParkingBlocks()}
         </Row>
