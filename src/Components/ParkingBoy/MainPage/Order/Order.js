@@ -18,6 +18,7 @@ export default class Order extends React.Component{
         }
         this.props.createOrder(param);
         this.props.isVisible(false);
+        this.props.whenOrder();
     }
 
     plateNumberChange = (event) => this.setState({plateNumber: event.target.value});

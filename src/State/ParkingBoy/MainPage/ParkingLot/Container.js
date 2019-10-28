@@ -18,6 +18,12 @@ const mapDispatchToProps = dispatch => ({
             })
           })
     },
+    occupyParkingBlock: (parkingBlock) =>{
+            dispatch({
+                type: 'OCCUPY_PARKING_BLOCK',
+                payload: parkingBlock
+            })
+    }
 });
 
 export default connect(

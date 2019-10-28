@@ -22,9 +22,13 @@ class ParkingLot extends React.Component{
           })
       }
 
+      occupyParkingBlock = () =>{
+          this.props.occupyParkingBlock(this.state.blockPosition);
+      }
+
       showOrderModal = () => {
         if(this.state.showOrder)
-            return <OrderContainer isVisible={this.showOrder} parkingLot={this.props.parkingLot} blockPosition = {this.state.blockPosition} />;
+            return <OrderContainer isVisible={this.showOrder} parkingLot={this.props.parkingLot} blockPosition = {this.state.blockPosition} whenOrder={this.occupyParkingBlock} />;
         else return null;
       }
     
