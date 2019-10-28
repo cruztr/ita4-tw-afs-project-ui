@@ -20,6 +20,15 @@ export default class Order extends React.Component{
         this.props.isVisible(false);
     }
 
+    closeOrder = () =>{
+        const param = {
+            orderId: 259,
+            parkingBoyID: 14,
+        }
+        this.props.closeOrder(param);
+        this.props.isVisible(false);
+    }
+
     plateNumberChange = (event) => this.setState({plateNumber: event.target.value});
     render(){
         return(
@@ -35,7 +44,7 @@ export default class Order extends React.Component{
                         <Button className="Cancel" onClick={() => this.props.isVisible(false)}>
                             Cancel
                         </Button>,
-                        <Button className="Create-Order" key="submit" type="primary" onClick={this.createOrder}>Create Order</Button>
+                        <Button className="Create-Order" key="submit" type="primary" onClick={this.closeOrder}>Close Order</Button>
                     ]}
                  >
                     <Row type="flex" justify="center">

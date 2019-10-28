@@ -18,6 +18,16 @@ const mapDispatchToProps = dispatch => ({
           })
         
     },
+    closeOrder: (param) =>{
+        OrderResource.closeOrder(param).then(res => res.json())
+            .then(res => {
+                dispatch({
+                    type: 'CREATE_ORDER',
+                    payload: res
+                })
+            })
+
+    }
 
 });
 
