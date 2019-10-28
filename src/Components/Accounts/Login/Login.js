@@ -1,22 +1,33 @@
 import React from "react";
-import {Button, Card, Input, Layout, Row, Col } from "antd";
+import {Button, Card, Input, Layout, Row, Col, Modal } from "antd";
 import 'antd/dist/antd.css';
 import './Login.css';
 import sparkImage from './Images/logowhitebordered.png';
 import driveArriveRelax from './Images/driverarriverelax.png';
+import SignUpContainer from '../../CarOwner/Signup/Signup'
 import { Redirect, Link } from 'react-router-dom'
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
-class Login extends React.Component{
+class Login extends React.Component{y
     constructor(props){
         super(props);
         this.state = {
             username: "",
             password: "",
-            orderId: ""
+            orderId: "",
+            visible: false
         }
     }
+
+    showModal = () => {
+    const thisState = this.state;
+    this.setState({
+          ...thisState,
+          visible: true,
+      });
+    };
+
     handleChange = (event) => {
         const thisState = this.state;
         this.setState({
@@ -30,12 +41,23 @@ class Login extends React.Component{
 
     }
 
+    handleCancel = e => {
+        this.setState({
+            visible: false,
+        });
+    };
+
     setUserCarOwner = () => {
         this.props.loginCarOwner(this.state);
     }
 
     setUserParkingBoy = () => {
         this.props.loginParkingBoy(this.state);
+    }
+
+    signUpCarOwner = info =>{
+        this.props.signUp(info)
+        this.handleCancel();
     }
 
     goLogin = () => {
@@ -52,6 +74,13 @@ class Login extends React.Component{
         if(this.props.accounts.order.orderId == this.state.orderId){
             alert(JSON.stringify(this.props.accounts.order));
             // console.log(this.props.accounts.order);
+        }
+        else if (this.props.accounts.signUpCredentials.id) {
+            return <Redirect to= {{
+                pathname: 'mainpageCarOwner',
+                    account: this.props.accounts.signUpCredentials
+            }}
+            />
         }
     }
 
@@ -113,7 +142,14 @@ class Login extends React.Component{
                                                 <div className={"Div-btn"}>
                                                     <Button className={"Boy-btn"} onClick = {this.setUserParkingBoy}>I am a Parking Boy</Button>
                                                 </div>
-                                                <p className={"Ps2"}>Register as Car Owner? <Link to="/signUp">Click here</Link></p>
+                                                <p className={"Ps2"}>Register as Car Owner? <Button onClick={this.showModal} type="link" block> Sign-Up </Button></p>
+                                                    <Modal
+                                                        title="Sign Up"
+                                                        visible={this.state.visible}
+                                                        footer={null}
+                                                    >
+                                                    <SignUpContainer closeModal={this.handleCancel} registerCarOwner={this.signUpCarOwner} />
+                                                </Modal>
                                             </div>
                                         </Card>
                                     </div>
