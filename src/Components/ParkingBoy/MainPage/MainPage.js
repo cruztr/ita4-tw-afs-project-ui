@@ -12,6 +12,7 @@ const { SubMenu } = Menu;
 
 class MainPage extends React.Component {
     render() {
+        alert(JSON.stringify(this.props.location.account))
         return (
             <Router>
                 <Layout >
