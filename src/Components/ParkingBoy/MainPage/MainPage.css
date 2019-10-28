@@ -12,9 +12,26 @@
 #div-content{
     padding: 24px;
     background-color:#fff;
-    height: calc(100vh - 180px)
+    height: calc(100vh - 80px)
 }
 
-.slider{
-    background: #FFCB7C;
+.mainMenu{
+    background: #262b41;
+    color: gray;
+}
+
+.logo{
+    padding: 15px;
+}
+
+.itemText {
+    color: white;
+}
+
+.nav-link {
+    color: lightgrey;
+}
+
+.slider2{
+    background: #262b41;
 }
