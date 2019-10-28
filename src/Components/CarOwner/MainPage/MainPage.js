@@ -1,9 +1,8 @@
 import {Breadcrumb, Icon, Layout, Menu} from 'antd';
 import React from "react";
-import ParkingLotContainer from "../../../State/ParkingBoy/MainPage/ParkingLot/Container.js";
+import OrderContainer from "../../../State/ParkingBoy/MainPage/Order/Container.js";
 import ReservationContainer from "../../../State/ParkingBoy/MainPage/Reservations/Container.js";
 import Logo from "./sparkLogo.png";
-import HeaderImage from "./sparkHeader.jpg"
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 
@@ -14,7 +13,7 @@ class MainPage extends React.Component {
     render() {
         return (
             <Router>
-                <Layout >
+                <Layout style={{minHeight: '100vh' }}>
                     <Sider className="slider" >
                         <div className="logo"><img width="200px" alt="Spark" src={Logo}/></div>
                         <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" >
@@ -36,7 +35,7 @@ class MainPage extends React.Component {
                             </Menu.Item>
                             <Menu.Item key="6">
                                 <Icon type="file" />
-                                <span><Link to={'/logs'} className="nav-link">Logs</Link></span>
+                                <span><Link to={'/logs'} className="nav-link">History</Link></span>
                             </Menu.Item>
                             <Menu.Item key="7">
                                 <Icon type="info-circle" />
@@ -45,17 +44,17 @@ class MainPage extends React.Component {
                         </Menu>
                     </Sider>
                     <Layout>
-                        <Header className="header"><div><img alt="Spark Banner" src={HeaderImage}/></div></Header>
+                        <Header style={{ background: '#fff', padding: 0, paddingBottom: "101px"}} />
                         <Content style={{ margin: '0 16px' }}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                             </Breadcrumb>
-                            <div id="div-content">
+                            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                                 <Switch>
                                     <Route exact path='/'>Home</Route>
-                                    <Route path='/parkingLot'> <ParkingLotContainer /></Route>
+                                    <Route path='/parkingLot'>Parking Lots</Route>
                                     <Route path='/orders'> Orders </Route>
-                                    <Route path='/reservations'> <ReservationContainer/></Route>
-                                    <Route path='/logs'> Logs </Route>
+                                    <Route path='/reservations'> Reservations</Route>
+                                    <Route path='/logs'> History </Route>
                                     <Route path='/about'> About </Route>
                                 </Switch>
                             </div>
@@ -69,3 +68,19 @@ class MainPage extends React.Component {
 }
 
 export default MainPage;
+
+
+// import React from "react";
+// import OrderContainer from "../../../State/ParkingBoy/MainPage/Order/Container.js";
+//
+// class MainPage extends React.Component{
+//     render(){
+//         return(
+//             <div className="parkingboy-main-page">
+//                 <OrderContainer />
+//             </div>
+//         );
+//     }
+// }
+//
+// export default MainPage;

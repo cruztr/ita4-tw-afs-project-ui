@@ -45,12 +45,6 @@ export default class Reservations extends React.Component{
                             }}>
                                 <a>Confirm</a>
                             </Popconfirm>
-                            <Divider type={"vertical"} />
-                            <Popconfirm title="Sure to void?" onConfirm={() => {
-                                console.log(reservation);
-                            }}>
-                                <a>Void</a>
-                            </Popconfirm>
                         </span>
                     )
                 }

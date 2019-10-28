@@ -3,9 +3,9 @@ import {Button, Card, Input} from "antd";
 import 'antd/dist/antd.css';
 import './Login.css';
 import sparkImage from './Images/route.png';
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
-class Login extends React.Component{
+class LoginUser extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -13,6 +13,7 @@ class Login extends React.Component{
             password: ""
         }
     }
+
     handleChange = (event) => {
         const thisState = this.state;
         this.setState({
@@ -27,11 +28,11 @@ class Login extends React.Component{
 
     goLogin = () => {
         if(this.props.user.parkingBoy.id){
-            return <Redirect to={{pathname: '/mainpage', state: {id: this.props.user.parkingBoy.id}} }/>
+            return <Redirect to='/mainpageCarOwner' />
         }
     }
     render(){
-        return( 
+        return(
             <div className="Login-Whole">
                 {this.goLogin()}
                 <Card  className="Login">
@@ -43,6 +44,7 @@ class Login extends React.Component{
                                onChange={this.handleChange}/>
                         <Input placeholder="Password" type="password" value={this.state.password} name="password"
                                onChange={this.handleChange}/>
+                        <p className="Sign-Up">Don't have an account? <Link to="/signUp">Sign Up</Link></p>
                         <Button className="Login-Button" onClick = {this.setUser}>Login</Button>
                     </div>
                 </Card>
@@ -51,4 +53,4 @@ class Login extends React.Component{
     }
 }
 
-export default Login;
+export default LoginUser;

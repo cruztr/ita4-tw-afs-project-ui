@@ -1,0 +1,20 @@
+@import '~antd/dist/antd.css';
+
+.ant-layout{
+    min-height:  calc(100vh - 1px);
+}
+.header{
+    background: #63b2b8;
+    padding: 0;
+    height: 101px
+}
+
+#div-content{
+    padding: 24px;
+    background-color:#fff;
+    height: calc(100vh - 180px)
+}
+
+.slider{
+    background: #FFCB7C;
+}
