@@ -83,7 +83,7 @@ class Signup extends React.Component {
         };
         return (
             <div className={"SignUp-Whole"} style={{ background: '#d4d4d4', minHeight: 360, margin: 0 }}>
-                <Card  style={{ background: '#fff', minHeight: 360, width: 500, margin: 0}}>
+                <Card  style={{ background: '#fff', minHeight: 360, width: 500, margin: 50}}>
                     <Card className= "Spark-Logo" bordered={false}
                           cover={<img alt="Spark" src={sparkImage} />}>
                     </Card>

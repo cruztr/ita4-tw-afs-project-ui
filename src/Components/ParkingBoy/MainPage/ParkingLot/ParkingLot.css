@@ -1,0 +1,16 @@
+.gutter-example .ant-row > div {
+    background: transparent;
+    border: 0;
+  }
+  .AVAILABLE {
+    background: #00a0e9;
+    background: yellowgreen;
+    padding: 5px 0;
+    height: 140px;
+  }
+
+  .OCCUPIED {
+    background: red;
+    padding: 5px 0;
+    height: 140px;
+  }
