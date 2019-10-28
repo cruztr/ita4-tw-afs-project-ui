@@ -2,7 +2,7 @@ import {Breadcrumb, Icon, Layout, Menu} from 'antd';
 import React from "react";
 import ParkingLotContainer from "../../../State/ParkingBoy/MainPage/ParkingLot/Container.js";
 import ReservationContainer from "../../../State/ParkingBoy/MainPage/Reservations/Container.js";
-import Logo from "./sparkLogo.png";
+import LogoBordered from "./Images/logowhitebordered.png"
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 
@@ -14,9 +14,9 @@ class MainPage extends React.Component {
         return (
             <Router>
                 <Layout >
-                    <Sider className="slider" >
-                        <div className="logo"><img width="200px" alt="Spark" src={Logo}/></div>
-                        <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" >
+                    <Sider className="slider2" >
+                        <div className="logo"><img width="150px" alt="Spark" src={LogoBordered}/></div>
+                        <Menu theme="dark" className="mainMenu" defaultSelectedKeys={['1']} mode="inline" >
                             <Menu.Item key="2"><span>
                                 <Icon type="dashboard" /></span>
                                 <span><Link to={'/'} className="nav-link">Home </Link></span>
