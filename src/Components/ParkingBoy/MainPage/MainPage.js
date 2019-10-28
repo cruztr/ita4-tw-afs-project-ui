@@ -44,11 +44,11 @@ class MainPage extends React.Component {
                             </Menu.Item>
                         </Menu>
                     </Sider>
-                    <Layout>
-                        <Content style={{ margin: '0 16px' }}>
+                    <Layout className="content-layout">
+                        <Content>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                             </Breadcrumb>
-                            <div id="div-content">
+                            <div className="div-content">
                                 <Switch>
                                     <Route exact path='/'>Home</Route>
                                     <Route path='/parkingLot'> <ParkingLotContainer /></Route>
@@ -59,7 +59,7 @@ class MainPage extends React.Component {
                                 </Switch>
                             </div>
                         </Content>
-                        <Footer style={{ textAlign: 'center' }}>spark ©2019 Created by EUTeam</Footer>
+                        <Footer className="footer-layout" style={{ textAlign: 'center' }}>spark ©2019 Created by EUTeam</Footer>
                     </Layout>
                 </Layout>
             </Router>
