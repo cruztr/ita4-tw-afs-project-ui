@@ -4,6 +4,9 @@ import 'antd/dist/antd.css';
 import './ParkingLot.css';
 import OrderContainer from "../../../../State/ParkingBoy/MainPage/Order/Container.js";
 import CloseOrderContainer from '../../../../State/ParkingBoy/MainPage/CloseOrder/Container.js';
+import blockOccupied from "../Images/Block/block-occupied.png";
+import blockAvailable from "../Images/Block/block-available.png";
+import blockReserved from "../Images/Block/block-reserved.png";
 
 class ParkingLot extends React.Component{
     constructor(props){
@@ -50,14 +53,14 @@ class ParkingLot extends React.Component{
           })
         }
       }
-          
+
       closeModal = () =>{
         this.setState({
           showOrder : false,
           showCloseOrder : false
         })
       }
-      
+
 
       updateParkingBlock = (status) =>{
           let param = {
@@ -75,15 +78,18 @@ class ParkingLot extends React.Component{
             return <CloseOrderContainer isVisible={this.closeModal} parkingLot={this.props.parkingLot} blockPosition = {this.state.blockPosition} whenCloseOrder={this.updateParkingBlock} />;
         else return null;
       }
-    
+
       initializeParkingBlocks = () => {
-        const blocks = [];  
+        const blocks = [];
 
         this.props.parkingLot.parkingBlocks.sort((a, b) => (a.position > b.position)? 1: -1).forEach(block => {
           let parkingBlock = "";
                parkingBlock = <Col className="gutter-row" key={block.id} id={block.id} span={2}  onClick={() =>this.showOrder(true, block.position, block.status)}>
-                                    <div className={block.status}>{block.position}</div>
-                                 </Col>
+                   <div className="block-image">
+                       <img className="parking-block" alt="parking block" src={block.status === "AVAILABLE" ? blockAvailable : (block.status === "OCCUPIED" ? blockOccupied : blockReserved)} />
+                       <h2>{block.position}</h2>
+                   </div>
+               </Col>
             blocks.push(
               parkingBlock
             );
