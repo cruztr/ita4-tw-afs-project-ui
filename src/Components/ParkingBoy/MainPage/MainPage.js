@@ -1,6 +1,6 @@
 import {Breadcrumb, Icon, Layout, Menu} from 'antd';
 import React from "react";
-import OrderContainer from "../../../State/ParkingBoy/MainPage/Order/Container.js";
+import ParkingLotContainer from "../../../State/ParkingBoy/MainPage/ParkingLot/Container.js";
 import ReservationContainer from "../../../State/ParkingBoy/MainPage/Reservations/Container.js";
 import Logo from "./sparkLogo.png";
 import './MainPage.css';
@@ -51,7 +51,7 @@ class MainPage extends React.Component {
                             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                                 <Switch>
                                     <Route exact path='/'>Home</Route>
-                                    <Route path='/parkingLot'> <OrderContainer/></Route>
+                                    <Route path='/parkingLot'> <ParkingLotContainer /></Route>
                                     <Route path='/orders'> Orders </Route>
                                     <Route path='/reservations'> <ReservationContainer/></Route>
                                     <Route path='/logs'> Logs </Route>
@@ -68,19 +68,3 @@ class MainPage extends React.Component {
 }
 
 export default MainPage;
-
-
-// import React from "react";
-// import OrderContainer from "../../../State/ParkingBoy/MainPage/Order/Container.js";
-//
-// class MainPage extends React.Component{
-//     render(){
-//         return(
-//             <div className="parkingboy-main-page">
-//                 <OrderContainer />
-//             </div>
-//         );
-//     }
-// }
-//
-// export default MainPage;

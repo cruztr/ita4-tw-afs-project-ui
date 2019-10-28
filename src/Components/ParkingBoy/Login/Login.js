@@ -27,7 +27,7 @@ class Login extends React.Component{
 
     goLogin = () => {
         if(this.props.user.parkingBoy.id){
-            return <Redirect to='/mainpage' />
+            return <Redirect to={{pathname: '/mainpage', state: {id: this.props.user.parkingBoy.id}} }/>
         }
     }
     render(){
