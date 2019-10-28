@@ -15,11 +15,11 @@ export default (state = initialState, { type, payload}) => {
             return {...state, 
                 allParkingLots: payload
         }
-        case "OCCUPY_PARKING_BLOCK":
+        case "UPDATE_PARKING_BLOCK":
             return {...state,
                    ...state.parkingLot, parkingBlocks: state.parkingLot.parkingBlocks.map(block => {
-                if(block.position == payload){
-                    block.status = "OCCUPIED";
+                if(block.position == payload.blockPosition){
+                    block.status = payload.status;
                 }
                 return block;
             })
