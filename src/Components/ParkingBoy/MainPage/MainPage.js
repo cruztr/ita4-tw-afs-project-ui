@@ -3,6 +3,7 @@ import React from "react";
 import ParkingLotContainer from "../../../State/ParkingBoy/MainPage/ParkingLot/Container.js";
 import ReservationContainer from "../../../State/ParkingBoy/MainPage/Reservations/Container.js";
 import Logo from "./sparkLogo.png";
+import HeaderImage from "./sparkHeader.jpg"
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 
@@ -13,7 +14,7 @@ class MainPage extends React.Component {
     render() {
         return (
             <Router>
-                <Layout style={{minHeight: '100vh' }}>
+                <Layout >
                     <Sider className="slider" >
                         <div className="logo"><img width="200px" alt="Spark" src={Logo}/></div>
                         <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" >
@@ -44,11 +45,11 @@ class MainPage extends React.Component {
                         </Menu>
                     </Sider>
                     <Layout>
-                        <Header style={{ background: '#fff', padding: 0, paddingBottom: "101px"}} />
+                        <Header className="header"><div><img alt="Spark Banner" src={HeaderImage}/></div></Header>
                         <Content style={{ margin: '0 16px' }}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                             </Breadcrumb>
-                            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+                            <div id="div-content">
                                 <Switch>
                                     <Route exact path='/'>Home</Route>
                                     <Route path='/parkingLot'> <ParkingLotContainer /></Route>
