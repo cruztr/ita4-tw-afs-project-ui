@@ -3,7 +3,6 @@ import React from "react";
 import ParkingLotContainer from "../../../State/ParkingBoy/MainPage/ParkingLot/Container.js";
 import ReservationContainer from "../../../State/ParkingBoy/MainPage/Reservations/Container.js";
 import Logo from "./sparkLogo.png";
-import HeaderImage from "./sparkHeader.jpg"
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 
@@ -45,7 +44,6 @@ class MainPage extends React.Component {
                         </Menu>
                     </Sider>
                     <Layout>
-                        <Header className="header"><div><img alt="Spark Banner" src={HeaderImage}/></div></Header>
                         <Content style={{ margin: '0 16px' }}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                             </Breadcrumb>
