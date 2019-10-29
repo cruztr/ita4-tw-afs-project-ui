@@ -7,6 +7,7 @@ import driveArriveRelax from './Images/driverarriverelax.png';
 import SignUpContainer from '../../CarOwner/Signup/Signup'
 import { Redirect, Link } from 'react-router-dom'
 import CheckOrder from '../NonUser/CheckOrder'
+import OrderNotExist from "../NonUser/OrderNotExist";
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
@@ -18,7 +19,7 @@ class Login extends React.Component{
             password: "",
             orderId: "",
             visible: false,
-            modalVisible : true
+            modalVisible : false
         }
     }
 
@@ -74,11 +75,6 @@ class Login extends React.Component{
          />
         }
     }
-    updateOrderId = () =>{
-        this.setState({
-            orderId :""
-        })
-    }
 
     closeModal = () =>{
         this.setState({
@@ -87,6 +83,10 @@ class Login extends React.Component{
     }
 
     checkOrder = () => {
+        if(this.props.accounts.order.orderId != this.state.orderId){
+            if(this.state.modalVisible)
+                return <OrderNotExist order = {this.props.accounts.order} isVisible={this.state.modalVisible} handleClose={this.closeModal}/>
+        }
         if(this.props.accounts.order.orderId == this.state.orderId){
             if(this.state.modalVisible)
              return <CheckOrder order = {this.props.accounts.order} isVisible={this.state.modalVisible} handleClose={this.closeModal} />
@@ -136,11 +136,6 @@ class Login extends React.Component{
                                                   cover={<img alt="Spark" src={driveArriveRelax}/>}>
                                             </Card>
 
-                                            {/*<div>*/}
-                                            {/*    <Input placeholder="Order Id" value={this.state.orderId} name="orderId"*/}
-                                            {/*           onChange={this.handleChange}/>*/}
-                                            {/*    <Button onClick = {this.handleCheckOrder}>Submit</Button>*/}
-                                            {/*</div>*/}
                                             <p className={"pSm"}>Check the status of your parked car:</p>
                                             <Search
                                                 value={this.state.orderId} name="orderId"
