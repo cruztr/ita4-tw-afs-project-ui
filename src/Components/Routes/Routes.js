@@ -12,8 +12,8 @@ export default function Routes() {
     return (
         <BrowserRouter>
         <div>
-            <Route exact path="/" component={ViewOrder} />
-            {/*<Route exact path="/" component={AccountsContainer} />*/}
+            {/*<Route exact path="/" component={ViewOrder} />*/}
+            <Route exact path="/" component={AccountsContainer} />
             <Route exact path="/signUp" component={SignUpCarOwnerContainer} />
             <Route exact path="/mainpage" component={MainPage} />
             <Route exact path="/mainpageCarOwner" component={MainPageCarOwner} />
