@@ -6,6 +6,7 @@ import sparkImage from './Images/logowhitebordered.png';
 import driveArriveRelax from './Images/driverarriverelax.png';
 import SignUpContainer from '../../CarOwner/Signup/Signup'
 import { Redirect, Link } from 'react-router-dom'
+import CheckOrder from '../NonUser/CheckOrder'
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
@@ -16,7 +17,8 @@ class Login extends React.Component{
             username: "",
             password: "",
             orderId: "",
-            visible: false
+            visible: false,
+            modalVisible : true
         }
     }
 
@@ -37,13 +39,16 @@ class Login extends React.Component{
     }
 
     handleCheckOrder = () =>{
+        this.setState({
+            modalVisible : true
+        })
         this.props.checkOrder(this.state.orderId);
-
     }
 
     handleCancel = e => {
         this.setState({
             visible: false,
+            modalVisible : false
         });
     };
 
@@ -69,11 +74,22 @@ class Login extends React.Component{
          />
         }
     }
+    updateOrderId = () =>{
+        this.setState({
+            orderId :""
+        })
+    }
+
+    closeModal = () =>{
+        this.setState({
+            modalVisible : false
+        })
+    }
 
     checkOrder = () => {
         if(this.props.accounts.order.orderId == this.state.orderId){
-            alert(JSON.stringify(this.props.accounts.order));
-            // console.log(this.props.accounts.order);
+            if(this.state.modalVisible)
+             return <CheckOrder order = {this.props.accounts.order} isVisible={this.state.modalVisible} handleClose={this.closeModal} />
         }
         else if (this.props.accounts.signUpCredentials.id) {
             return <Redirect to= {{
@@ -109,8 +125,7 @@ class Login extends React.Component{
                         <div className={"wrapper"}>
                             <Content>
                                 {this.goLogin()}
-                                {this.checkOrder()}
-                                {/*Check Order*/}
+                                {this.checkOrder()}                      
                                 <div className={"es1"}>
                                     <div className={"Order-block"}>
                                         <Card className={"st1"} bordered={false}>

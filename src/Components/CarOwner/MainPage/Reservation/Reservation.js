@@ -2,12 +2,10 @@ import {Button, Icon, Input, Popconfirm, Table} from 'antd'
 import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
 import React from 'react';
-import ReservationResource from "../../../../Api/ReservationResource";
 import ParkingLotResource from "../../../../Api/ParkingLotResource";
 
 export default class Reservations extends React.Component{
     intervalID;
-
     constructor(props){
         super(props);
         this.state = {
@@ -49,10 +47,14 @@ export default class Reservations extends React.Component{
     }
 
     createReservation = parkingLot => {
+        let today = new Date();
+        today.setHours(today.getHours() + 1);
+        let hour = today.getHours();
+        let minutes = today.getMinutes();
         const param = {
-            carOwnerId: this.props.carOwner.id,
+            carOwnerId: this.props.account.id,
             parkingLotId: parkingLot.id,
-            reservedTime: "14:00:00"
+            reservedTime: hour+":"+minutes
         }
         this.props.createReservation(param);
     }

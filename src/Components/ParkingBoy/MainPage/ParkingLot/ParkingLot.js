@@ -100,22 +100,27 @@ class ParkingLot extends React.Component{
       render(){
         const { dataSource, value } = this.state;
         return (
-                <div className="parking-block">
-                 <AutoComplete
-                      value={value}
-                      dataSource={dataSource}
-                      style={{ width: 200 }}
-                      onSelect={this.getParkingBlocks}
-                      onSearch={this.onSearch}
-                      onChange={this.onChange}
-                      placeholder="Parking Lot Name"
-                    />
-                    <hr></hr>
-                    <Row gutter={[{ xs: 8, sm: 16, md: 24, lg: 32 }, 20]}>
-                      {this.initializeParkingBlocks()}
-                    </Row>
-                  {this.showModal()}
-                </div>
+    <div className="parking-block">
+     <AutoComplete
+          value={value}
+          dataSource={dataSource}
+          style={{ width: 200 }}
+          onSelect={this.getParkingBlocks}
+          onSearch={this.onSearch}
+          onChange={this.onChange}
+          placeholder="Parking Lot Name"
+        />
+        <div className="legends">
+          <img src={blockOccupied} width="20px" /><span>OCCUPIED | </span>
+          <img src={blockAvailable} width="20px" /><span>AVAILABLE | </span>
+          <img src={blockReserved} width="20px" /><span>RESERVED</span>
+        </div>
+        <hr/>
+        <Row gutter={[{ xs: 8, sm: 16, md: 24, lg: 32 }, 20]}>
+          {this.initializeParkingBlocks()}
+        </Row>
+      {this.showModal()}
+      </div>
         );
       }
 }
