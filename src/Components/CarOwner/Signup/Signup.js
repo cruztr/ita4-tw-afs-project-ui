@@ -2,7 +2,7 @@ import React from "react";
 import 'antd/dist/antd.css';
 import './Signup.css';
 import {Redirect} from 'react-router-dom'
-import {Button, Checkbox, Form, Input, Select, Card, Modal, Col} from 'antd';
+import {Button, Checkbox, Form, Input, Select, Card, Modal, Col, notification, Icon} from 'antd';
 import sparkImage from "../Signup/Images/route.png";
 
 const { Option } = Select;
@@ -18,6 +18,15 @@ class Signup extends React.Component {
     setUser = () => {
         this.props.login(this.state);
     }
+
+    openNotification = () => {
+        notification.open({
+            message: 'Registration Successful',
+            description:
+                'Thank you for signing up! Kindly login to start using our service! \n Happy Parking!',
+            icon: <Icon type="smile" style={{ color: '#108ee9' }} />,
+        });
+    };
 
     handleSubmit = e => {
         e.preventDefault();
@@ -36,6 +45,7 @@ class Signup extends React.Component {
                     isSuccessful: this.props.registerCarOwner(credentials)
                 })
                 this.props.form.resetFields();
+                this.openNotification();
             }
         });
     };
