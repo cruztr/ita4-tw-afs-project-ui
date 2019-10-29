@@ -129,7 +129,8 @@ class Signup extends React.Component {
                             rules: [
                                 {
                                     required: true,
-                                    message: 'Please input your password!',
+                                    message: 'Please enter a password with a minimum of 8 characters!',
+                                    min: 8,
                                 },
                                 {
                                     validator: this.validateToNextPassword,
