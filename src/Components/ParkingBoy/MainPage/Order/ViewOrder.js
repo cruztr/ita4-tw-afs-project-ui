@@ -1,42 +1,42 @@
 import {Table, Popconfirm, Input, Button, Icon} from 'antd';
 import React from 'react';
 import Highlighter from "react-highlight-words";
+import swal from 'sweetalert';
 
 export default class ViewOrder extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             searchText: '',
+            isRefreshed: '',
             columns: [
                 {
                     title: "Order Number",
                     dataIndex: "orderNumber",
-                    key: "orderNumber"
-                    // ...this.getColumnSearchProps('plateNumber')
+                    key: "orderNumber",
+                    ...this.getColumnSearchProps('orderNumber')
                 },
                 {
                     title: "Plate Number",
                     dataIndex: "plateNumber",
                     key: "plateNumber",
-                    // ...this.getColumnSearchProps('plateNumber')
+                    ...this.getColumnSearchProps('plateNumber')
                 },
                 {
                     title: "ParkingLot Name",
                     dataIndex: "parkingLotName",
                     key: "parkingLotName",
-                    // ...this.getColumnSearchProps('plateNumber')
+                    ...this.getColumnSearchProps('parkingLotName')
                 },
                 {
                     title: "Price",
                     dataIndex: "price",
-                    key: "price",
-                    // ...this.getColumnSearchProps('plateNumber')
+                    key: "price"
                 },
                 {
                     title: "Time In",
                     dataIndex: "timeIn",
-                    key: "timeIn",
-                    // ...this.getColumnSearchProps('plateNumber')
+                    key: "timeIn"
                 },
                 {
                     title: "Action",
@@ -106,18 +106,23 @@ export default class ViewOrder extends React.Component {
 
     handleSearch = (selectedKeys, confirm) => {
         confirm();
-        this.setState({ searchText: selectedKeys[0] });
+        this.setState({
+            searchText: selectedKeys[0],
+            isRefreshed: ''
+        });
     };
 
     handleReset = clearFilters => {
         clearFilters();
-        this.setState({ searchText: '' });
+        this.setState({
+            searchText: '',
+            isRefreshed: ''
+        });
     };
 
     componentDidMount(){
         this.props.viewOrder();
     }
-
 
     closeOrder = order => {
         const param = {
@@ -128,7 +133,19 @@ export default class ViewOrder extends React.Component {
             },
             parkingBoyID: 14
         }
+
         this.props.closeOrder(param);
+
+        const body = "Order " + order.orderNumber + " was successfully close. please click Ok to continue";
+        swal({
+            title: "Order Closed",
+            text: body,
+            icon: "success"
+        }).then(() => {
+            console.log("hello!")
+            this.props.viewOrder();
+            this.setState({ isRefreshed: 'Refreshed' });
+        });
     }
 
 
