@@ -103,14 +103,16 @@ class Login extends React.Component{
             if(type === "Parking Boy"){
                 return <Redirect to= {{
                     pathname: 'mainpage',
-                        account: this.props.accounts.account
+                        account: this.props.accounts.account,
+                        typeOfUser: this.props.accounts.typeOfUser
                 }}
                 />
             }
             else {
                 return <Redirect to= {{
                 pathname: 'mainpageCarOwner',
-                    account: this.props.accounts.account
+                    account: this.props.accounts.account,
+                    typeOfUser: this.props.accounts.typeOfUser
                 }}
                 />
             }

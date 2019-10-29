@@ -2,6 +2,7 @@ import {Breadcrumb, Icon, Layout, Menu} from 'antd';
 import React from "react";
 import ParkingLotContainer from "../../../State/ParkingBoy/MainPage/ParkingLot/Container.js";
 import ReservationContainer from "../../../State/ParkingBoy/MainPage/Reservations/Container.js";
+import LogsContainer from "../../../State/Logs/Container.js";
 import LogoBordered from "./Images/logowhitebordered.png"
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
@@ -55,7 +56,7 @@ class MainPage extends React.Component {
                                     <Route path='/parkingLot'> <ParkingLotContainer /></Route>
                                     <Route path='/orders'> Orders </Route>
                                     <Route path='/reservations'> <ReservationContainer account={this.props.location.account}/></Route>
-                                    <Route path='/logs'> Logs </Route>
+                                    <Route path='/logs'> <LogsContainer account={this.props.location.account} typeOfUser={this.props.location.typeOfUser}/> </Route>
                                     <Route path='/about'> About </Route>
                                 </Switch>
                             </div>
