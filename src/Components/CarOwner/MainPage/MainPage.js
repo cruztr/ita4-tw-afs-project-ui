@@ -4,6 +4,7 @@ import Logo from "../Images/logowhitebordered.png";
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import LogoBordered from "../../ParkingBoy/MainPage/Images/logowhitebordered.png";
+import ReservationContainer from "../../../State/CarOwner/MainPage/Reservation/Container.js";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -52,7 +53,7 @@ class MainPage extends React.Component {
                                     <Route exact path='/'>Home</Route>
                                     <Route path='/parkingLot'>Parking Lots</Route>
                                     <Route path='/orders'> Orders </Route>
-                                    <Route path='/reservations'> Reservations</Route>
+                                    <Route path='/reservations'> <ReservationContainer account={this.props.location.account}/></Route>
                                     <Route path='/logs'> History </Route>
                                     <Route path='/about'> About </Route>
                                 </Switch>
