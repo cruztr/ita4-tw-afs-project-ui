@@ -9,7 +9,6 @@ import LogoSmall from "../Images/logosmall.png"
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
-const { Countdown } = Statistic;
 
 class MainPage extends React.Component {
     state = {
@@ -20,8 +19,6 @@ class MainPage extends React.Component {
     onFinish =() =>{
         this.setState({ loading: false });
     };
-    deadline = Date.now() + 1 * 10 * 10 * 10 * 2 + 1 * 30;
-
     onCollapse = collapsed => {
         this.setState({ collapsed });
     };
@@ -31,7 +28,6 @@ class MainPage extends React.Component {
         const largeLogo = <div className="logo"><img width="170px" alt="Spark" src={LogoBordered}/></div>;
 
         return (
-            <Spin spinning={this.state.loading}>
             <Router>
                 <Layout>
                     <Sider className="slider2"
@@ -82,14 +78,12 @@ class MainPage extends React.Component {
                                 </Switch>
                             </div>
                             <div className={"invi"}>
-                            <Countdown title="Countdown" value={this.deadline} onFinish={this.onFinish} />
                             </div>
                         </Content>
                         <Footer className="footer-layout">spark ©2019 Created by EUTeam</Footer>
                     </Layout>
                 </Layout>
             </Router>
-            </Spin>
         );
     }
 }
