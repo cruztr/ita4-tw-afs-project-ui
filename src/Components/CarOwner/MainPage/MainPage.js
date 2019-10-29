@@ -1,11 +1,10 @@
 import {Breadcrumb, Icon, Layout, Menu, Spin, Statistic} from 'antd';
 import React from "react";
-import Logo from "../Images/logowhitebordered.png";
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import ReservationContainer from "../../../State/CarOwner/MainPage/Reservation/Container.js";
 import LogoBordered from "../Images/logowhitebordered.png";
-import LogoSmall from "../Images/logo.png"
+import LogoSmall from "../Images/logosmall.png"
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -27,6 +26,9 @@ class MainPage extends React.Component {
     };
 
     render() {
+        const smallLogo = <div className="logo"><img width="60px" alt="Spark" src={LogoSmall}/></div>;
+        const largeLogo = <div className="logo"><img width="170px" alt="Spark" src={LogoBordered}/></div>;
+
         return (
             <Spin spinning={this.state.loading}>
             <Router>
@@ -36,7 +38,7 @@ class MainPage extends React.Component {
                            collapsed={this.state.collapsed}
                            onCollapse={this.onCollapse}
                     >
-                        <div className="logo"><img width="170px" alt="Spark" src={this.state.collapsed ? LogoSmall : LogoBordered}/></div>
+                        {this.state.collapsed ? smallLogo : largeLogo}
                         <Menu theme="dark" className="mainMenu" defaultSelectedKeys={['1']} mode="inline" >
                             <Menu.Item key="2">
                                 <Icon type="dashboard" />
