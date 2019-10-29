@@ -25,9 +25,9 @@ const mapDispatchToProps = dispatch => ({
             })
           })
     },
-    occupyParkingBlock: (parkingBlock) =>{
+    updateParkingBlock: (parkingBlock) =>{
             dispatch({
-                type: 'OCCUPY_PARKING_BLOCK',
+                type: 'UPDATE_PARKING_BLOCK',
                 payload: parkingBlock
             })
     }
