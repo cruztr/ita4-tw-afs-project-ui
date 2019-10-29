@@ -25,5 +25,10 @@ export default {
         PROTOCOL_TO_MAIN_PATH +"/parkingBoy/getPendingReservations",{
           mode: 'cors',
     }),
+
+    getParkingBoyById: (parkingBoyId) => fetch(
+        PROTOCOL_TO_MAIN_PATH +"/parkingBoy/"+parkingBoyId,{
+          mode: 'cors',
+    }),
 }
   

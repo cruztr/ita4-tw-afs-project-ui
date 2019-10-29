@@ -14,7 +14,7 @@ export default class Order extends React.Component{
         const param = {
             plateNumber: this.state.plateNumber,
             parkingLotID: this.props.parkingLot.id,
-            parkingBoyID: 1,
+            parkingBoyID: this.props.account.id,
             parkingBlockPosition : this.props.blockPosition
         }
         this.props.createOrder(param);
@@ -30,6 +30,7 @@ export default class Order extends React.Component{
         }
     }
     render(){
+        const fullName = this.props.account.firstName + " " + this.props.account.lastName;
         return(
             <div>
                 <Modal
@@ -65,7 +66,7 @@ export default class Order extends React.Component{
                     </Row>
                     <Row type="flex" justify="center">
                         <Col span={8}>CREATED BY:</Col>
-                        <Col span={12}></Col>
+                        <Col span={12}>{fullName}</Col>
                     </Row>
                 </Modal>
             </div>

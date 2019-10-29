@@ -93,10 +93,10 @@ class ParkingLot extends React.Component{
 
       showModal = () =>{
         if(this.state.showOrder)
-          return <OrderContainer isVisible={this.closeModal} parkingLot={this.props.parkingLot} blockPosition = {this.state.blockPosition} whenOrder={this.updateParkingBlock} />;
+          return <OrderContainer isVisible={this.closeModal} parkingLot={this.props.parkingLot} blockPosition = {this.state.blockPosition} whenOrder={this.updateParkingBlock} account={this.props.account} />;
 
         else if(this.state.showCloseOrder)
-            return <CloseOrderContainer isVisible={this.closeModal} parkingLot={this.props.parkingLot} blockPosition = {this.state.blockPosition} whenCloseOrder={this.updateParkingBlock} />;
+            return <CloseOrderContainer isVisible={this.closeModal} parkingLot={this.props.parkingLot} blockPosition = {this.state.blockPosition} whenCloseOrder={this.updateParkingBlock} account={this.props.account} />;
         else return null;
       }
 
