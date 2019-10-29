@@ -3,34 +3,46 @@ import React from "react";
 import Logo from "../Images/logowhitebordered.png";
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
-import LogoBordered from "../../ParkingBoy/MainPage/Images/logowhitebordered.png";
+import LogoBordered from "../Images/logowhitebordered.png";
+import LogoSmall from "../Images/logo.png"
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const { Countdown } = Statistic;
 
 class MainPage extends React.Component {
-    state = { loading: true };
+    state = {
+        loading: true,
+        collapsed : false
+    };
+
     onFinish =() =>{
         this.setState({ loading: false });
     };
     deadline = Date.now() + 1 * 10 * 10 * 10 * 2 + 1 * 30;
 
+    onCollapse = collapsed => {
+        this.setState({ collapsed });
+    };
+
     render() {
-        // alert(JSON.stringify(this.props.location.account))
         return (
             <Spin spinning={this.state.loading}>
             <Router>
                 <Layout>
-                    <Sider className="slider2" >
-                        <div className="logo"><img width="170px" alt="Spark" src={LogoBordered}/></div>
+                    <Sider className="slider2"
+                           collapsible
+                           collapsed={this.state.collapsed}
+                           onCollapse={this.onCollapse}
+                    >
+                        <div className="logo"><img width="170px" alt="Spark" src={this.state.collapsed ? LogoSmall : LogoBordered}/></div>
                         <Menu theme="dark" className="mainMenu" defaultSelectedKeys={['1']} mode="inline" >
-                            <Menu.Item key="2"><span>
-                                <Icon type="dashboard" /></span>
+                            <Menu.Item key="2">
+                                <Icon type="dashboard" />
                                 <span><Link to={'/'} className="nav-link">Home </Link></span>
                             </Menu.Item>
-                            <Menu.Item key="5"><span>
-                                <Icon type="schedule" /></span>
+                            <Menu.Item key="5">
+                                <Icon type="schedule" />
                                 <span><Link to={'/reservations'} className="nav-link">My Reservations </Link></span>
                             </Menu.Item>
                             <Menu.Item key="6">

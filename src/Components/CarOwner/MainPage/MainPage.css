@@ -1,3 +1,9 @@
+.ant-layout-sider-trigger {
+    position: absolute;
+    top: 130px;
+    background: #262b41;
+}
+
 .slider2{
     background: #262b41
 }
@@ -33,6 +39,7 @@
 .logo{
     padding: 15px;
     margin-top: 25px;
+    margin-bottom: 30px;
 }
 
 .itemText {
