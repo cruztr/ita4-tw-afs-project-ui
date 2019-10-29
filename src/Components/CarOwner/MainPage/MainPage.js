@@ -1,63 +1,77 @@
 import {Breadcrumb, Icon, Layout, Menu, Spin, Statistic} from 'antd';
 import React from "react";
-import Logo from "../Images/logowhitebordered.png";
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
-import LogoBordered from "../../ParkingBoy/MainPage/Images/logowhitebordered.png";
 import ReservationContainer from "../../../State/CarOwner/MainPage/Reservation/Container.js";
 import LogsContainer from "../../../State/Logs/Container.js";
+import LogoBordered from "../Images/logowhitebordered.png";
+import LogoSmall from "../Images/logosmall.png"
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const { Countdown } = Statistic;
 
 class MainPage extends React.Component {
-    state = { loading: true };
+    state = {
+        loading: true,
+        collapsed : false
+    };
+
     onFinish =() =>{
         this.setState({ loading: false });
     };
     deadline = Date.now() + 1 * 10 * 10 * 10 * 2 + 1 * 30;
 
+    onCollapse = collapsed => {
+        this.setState({ collapsed });
+    };
+
     render() {
-        // alert(JSON.stringify(this.props.location.account))
+        const smallLogo = <div className="logo"><img width="60px" alt="Spark" src={LogoSmall}/></div>;
+        const largeLogo = <div className="logo"><img width="170px" alt="Spark" src={LogoBordered}/></div>;
+
         return (
             <Spin spinning={this.state.loading}>
             <Router>
                 <Layout>
-                    <Sider className="slider2" >
-                        <div className="logo"><img width="150px" alt="Spark" src={LogoBordered}/></div>
+                    <Sider className="slider2"
+                           collapsible
+                           collapsed={this.state.collapsed}
+                           onCollapse={this.onCollapse}
+                    >
+                        {this.state.collapsed ? smallLogo : largeLogo}
                         <Menu theme="dark" className="mainMenu" defaultSelectedKeys={['1']} mode="inline" >
                             <Menu.Item key="2">
                                 <Link to={'/'} className="nav-link">
-                                <span><Icon type="dashboard" /></span>
+                                    <Icon type="dashboard" />
                                     <span>Home</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="3">
                                 <Link to={'/reservation'} className="nav-link">
-                                <span><Icon type="schedule" /></span>
+                                    <Icon type="schedule" />
                                     <span>Reservations</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="4">
                                 <Link to={'/logs'} className="nav-link">
-                                <span><Icon type="file" /></span>
+                                    <Icon type="file" />
                                     <span>History</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="5">
                                 <Link to={'/about'} className="nav-link">
-                                <span><Icon type="info-circle" /></span>
+                                    <Icon type="info-circle" />
                                     <span>About</span>
                                 </Link>
                             </Menu.Item>
                         </Menu>
                     </Sider>
-                    <Layout>
+                    <Layout className="content-layout">
                         <Content style={{ margin: '0 16px' }}>
                            <Breadcrumb style={{ margin: '16px 0' }}>
                             </Breadcrumb>
-                            <div id="div-content">
+                            <div className="div-content">
                                 <Switch>
                                     <Route exact path='/'>Home</Route>
                                     <Route path='/parkingLot'>Parking Lots</Route>
@@ -71,7 +85,7 @@ class MainPage extends React.Component {
                             <Countdown title="Countdown" value={this.deadline} onFinish={this.onFinish} />
                             </div>
                         </Content>
-                        <Footer style={{ textAlign: 'center' }}>spark ©2019 Created by EUTeam</Footer>
+                        <Footer className="footer-layout">spark ©2019 Created by EUTeam</Footer>
                     </Layout>
                 </Layout>
             </Router>
@@ -81,19 +95,3 @@ class MainPage extends React.Component {
 }
 
 export default MainPage;
-
-
-// import React from "react";
-// import OrderContainer from "../../../State/ParkingBoy/MainPage/Order/Container.js";
-//
-// class MainPage extends React.Component{
-//     render(){
-//         return(
-//             <div className="parkingboy-main-page">
-//                 <OrderContainer />
-//             </div>
-//         );
-//     }
-// }
-//
-// export default MainPage;

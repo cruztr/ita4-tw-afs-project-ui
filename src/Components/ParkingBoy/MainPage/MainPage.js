@@ -4,6 +4,7 @@ import ParkingLotContainer from "../../../State/ParkingBoy/MainPage/ParkingLot/C
 import ReservationContainer from "../../../State/ParkingBoy/MainPage/Reservations/Container.js";
 import LogsContainer from "../../../State/Logs/Container.js";
 import LogoBordered from "./Images/logowhitebordered.png"
+import LogoSmall from "./Images/logosmall.png"
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 
@@ -11,48 +12,62 @@ const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 class MainPage extends React.Component {
+    state = {
+        collapsed : false
+    };
+
+    onCollapse = collapsed => {
+        this.setState({ collapsed });
+    };
+
     render() {
-        // alert(JSON.stringify(this.props.location.account))
+        const smallLogo = <div className="logo"><img width="60px" alt="Spark" src={LogoSmall}/></div>;
+        const largeLogo = <div className="logo"><img width="170px" alt="Spark" src={LogoBordered}/></div>;
+
         return (
             <Router>
                 <Layout >
-                    <Sider className="slider2" >
-                        <div className="logo"><img width="150px" alt="Spark" src={LogoBordered}/></div>
-                        <Menu theme="dark" className="mainMenu" defaultSelectedKeys={['1']} mode="inline" >
+                    <Sider className="slider2"
+                       collapsible
+                       collapsed={this.state.collapsed}
+                       onCollapse={this.onCollapse}
+                    >
+                        {this.state.collapsed ? smallLogo : largeLogo}
+                        <Menu mode="inline" theme="dark" className="mainMenu" defaultSelectedKeys={['1']} mode="inline" >
                             <Menu.Item key="2">
                                 <Link to={'/'} className="nav-link">
-                                <span><Icon type="dashboard" /></span>
+                                    <Icon type="dashboard" />
                                     <span>Home </span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="3">
                                 <Link to={'/parkingLot'} className="nav-link">
-                                <span><Icon type="car" /></span>
+                                    <Icon type="car" />
                                     <span>Parking Lots </span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="4">
                                 <Link to={'/orders'} className="nav-link">
-                                <span><Icon type="carry-out" /></span>
+                                    <Icon type="carry-out" />
                                     <span>Orders</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="5">
                                 <Link to={'/reservations'} className="nav-link">
-                                <span><Icon type="schedule" /></span>
+                                    <Icon type="schedule" />
                                     <span>Reservations </span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="6">
                                 <Link to={'/logs'} className="nav-link">
-                                <span><Icon type="file" /></span>
+                                    <Icon type="file" />
                                     <span>Logs</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="7">
                                 <Link to={'/about'} className="nav-link">
-                                <span><Icon type="info-circle" /></span>
-                                <span>About</span>
+                                    <Icon type="info-circle" />
+                                    <span>About</span>
                                 </Link>
                             </Menu.Item>
                         </Menu>
@@ -72,7 +87,7 @@ class MainPage extends React.Component {
                                 </Switch>
                             </div>
                         </Content>
-                        <Footer className="footer-layout" style={{ textAlign: 'center' }}>spark ©2019 Created by EUTeam</Footer>
+                        <Footer className="footer-layout">spark ©2019 Created by EUTeam</Footer>
                     </Layout>
                 </Layout>
             </Router>
