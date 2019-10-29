@@ -2,8 +2,26 @@
     background: #262b41
 }
 
-.itemText {
+.content-layout {
+    background: #262b41;
+}
+
+
+.footer-layout {
+    background: #262b41;
     color: white;
+    text-align: center;
+}
+
+.div-content{
+    margin-right: 15px;
+    background-color: white;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    padding: 24px;
+    height: calc(100vh - 80px)
 }
 
 .mainMenu{
@@ -12,22 +30,17 @@
     padding-top: 20px;
 }
 
-.nav-link {
-    color: lightgrey;
-}
-
-.slider2{
-    background: #262b41;
-}
-
 .logo{
     padding: 15px;
+    margin-top: 25px;
 }
 
-#div-content{
-    padding: 24px;
-    background-color:#fff;
-    height: calc(100vh - 80px)
+.itemText {
+    color: white;
+}
+
+.nav-link {
+    color: lightgrey;
 }
 
 .invi{

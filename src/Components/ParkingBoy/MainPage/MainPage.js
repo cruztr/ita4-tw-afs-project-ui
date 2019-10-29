@@ -11,12 +11,11 @@ const { SubMenu } = Menu;
 
 class MainPage extends React.Component {
     render() {
-        // alert(JSON.stringify(this.props.location.account))
         return (
             <Router>
                 <Layout >
                     <Sider className="slider2" >
-                        <div className="logo"><img width="150px" alt="Spark" src={LogoBordered}/></div>
+                        <div className="logo"><img width="170px" alt="Spark" src={LogoBordered}/></div>
                         <Menu theme="dark" className="mainMenu" defaultSelectedKeys={['1']} mode="inline" >
                             <Menu.Item key="2"><span>
                                 <Icon type="dashboard" /></span>
@@ -28,7 +27,7 @@ class MainPage extends React.Component {
                             </Menu.Item>
                             <Menu.Item key="4"><span>
                                 <Icon type="carry-out" /></span>
-                                <span><Link to={'/orders'} className="nav-link">Orders </Link></span>
+                                <span><Link to={'/orders'} className="nav-link">My Orders </Link></span>
                             </Menu.Item>
                             <Menu.Item key="5"><span>
                                 <Icon type="schedule" /></span>
@@ -60,7 +59,7 @@ class MainPage extends React.Component {
                                 </Switch>
                             </div>
                         </Content>
-                        <Footer className="footer-layout" style={{ textAlign: 'center' }}>spark ©2019 Created by EUTeam</Footer>
+                        <Footer className="footer-layout">spark ©2019 Created by EUTeam</Footer>
                     </Layout>
                 </Layout>
             </Router>
