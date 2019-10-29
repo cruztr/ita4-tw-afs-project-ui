@@ -103,14 +103,14 @@ export default class Reservations extends React.Component{
                 setTimeout(() => this.searchInput.select());
             }
         },
-        render: text => (
-            <Highlighter
-                highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-                searchWords={[this.state.searchText]}
-                autoEscape
-                textToHighlight={text.toString()}
-            />
-        ),
+        // render: text => (
+        //     <Highlighter
+        //         highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+        //         searchWords={[this.state.searchText]}
+        //         autoEscape
+        //         textToHighlight={text.toString()}
+        //     />
+        // ),
     });
 
     handleSearch = (selectedKeys, confirm) => {
