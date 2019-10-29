@@ -2,6 +2,7 @@ import {connect} from "react-redux";
 import Reservation from "../../../../Components/CarOwner/MainPage/Reservation/Reservation";
 import CarOwnerResources from "../../../../Api/CarOwnerResources";
 import { message } from 'antd';
+import swal from 'sweetalert';
 
 
 const mapStateToProps = state => ({
@@ -33,8 +34,11 @@ const mapDispatchToProps = dispatch => ({
                     type: 'CREATE_RESERVATION',
                     payload: res
                 })
-
-                message.success('You have successfully created a reservation.');
+                swal({
+                    title: "Reservation Created",
+                    text: "You have successfully created a reservation. This reservation is only valid within an hour",
+                    icon: "success"
+                })
                     // .then(
                     // ReservationResource.getAllReservation()
                     //     .then(reservationJson => reservationJson.json()).then(reservation => {
