@@ -35,6 +35,7 @@ class Signup extends React.Component {
                 this.setState({
                     isSuccessful: this.props.registerCarOwner(credentials)
                 })
+                this.props.form.resetFields();
             }
         });
     };
