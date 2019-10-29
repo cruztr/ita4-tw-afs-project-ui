@@ -35,7 +35,7 @@ class ParkingLot extends React.Component{
       };
 
       getParkingBlocks = value =>{
-        console.log(value);
+        this.props.getAllParkingLots();
         this.props.getParkingLot(value);
       }
 

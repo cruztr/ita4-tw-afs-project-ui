@@ -9,7 +9,7 @@ export default {
           headers: new Headers({'Content-Type': 'application/json'}),
           body: JSON.stringify({
               "parkingLotId": param.parkingLotID,
-              "plateNumber" : param.reservation.plateNumber,
+              "plateNumber" : param.plateNumber,
               "parkingBlockPosition": param.parkingBlockPosition,
               "reservation": param.reservation
           })
