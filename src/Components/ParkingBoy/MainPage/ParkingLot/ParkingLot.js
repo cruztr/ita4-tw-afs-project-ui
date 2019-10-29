@@ -100,24 +100,6 @@ class ParkingLot extends React.Component{
       render(){
         const { dataSource, value } = this.state;
         return (
-<<<<<<< origin/sparks-dev
-                <div className="parking-block">
-                 <AutoComplete
-                      value={value}
-                      dataSource={dataSource}
-                      style={{ width: 200 }}
-                      onSelect={this.getParkingBlocks}
-                      onSearch={this.onSearch}
-                      onChange={this.onChange}
-                      placeholder="Parking Lot Name"
-                    />
-                    <hr></hr>
-                    <Row gutter={[{ xs: 8, sm: 16, md: 24, lg: 32 }, 20]}>
-                      {this.initializeParkingBlocks()}
-                    </Row>
-                  {this.showModal()}
-                </div>
-=======
     <div className="parking-block">
      <AutoComplete
           value={value}
@@ -139,7 +121,6 @@ class ParkingLot extends React.Component{
         </Row>
       {this.showModal()}
       </div>
->>>>>>> local
         );
       }
 }
