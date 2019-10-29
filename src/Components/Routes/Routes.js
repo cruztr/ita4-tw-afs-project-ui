@@ -12,7 +12,7 @@ export default function Routes() {
     return (
         <BrowserRouter>
         <div>
-            <Route exact path="/" component={AccountsContainer} />
+            <Route exact path="/login" component={AccountsContainer} />
             <Route exact path="/viewOrder" component={ViewOrder} />
             <Route exact path="/signUp" component={SignUpCarOwnerContainer} />
             <Route exact path="/mainpage" component={MainPage} />

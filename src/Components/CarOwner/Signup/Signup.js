@@ -1,9 +1,7 @@
 import React from "react";
 import 'antd/dist/antd.css';
 import './Signup.css';
-import {Redirect} from 'react-router-dom'
 import {Button, Checkbox, Form, Input, Select, Card, Modal, Col} from 'antd';
-import sparkImage from "../Signup/Images/route.png";
 
 const { Option } = Select;
 

@@ -1,11 +1,11 @@
-import {Breadcrumb, Icon, Layout, Menu, Spin, Statistic} from 'antd';
+import {Breadcrumb, Icon, Layout, Menu, Statistic} from 'antd';
 import React from "react";
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import ReservationContainer from "../../../State/CarOwner/MainPage/Reservation/Container.js";
-import LogsContainer from "../../../State/Logs/Container.js";
 import LogoBordered from "../Images/logowhitebordered.png";
 import LogoSmall from "../Images/logosmall.png"
+import swal from "sweetalert";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -17,21 +17,41 @@ class MainPage extends React.Component {
         collapsed : false
     };
 
-    onFinish =() =>{
-        this.setState({ loading: false });
-    };
-    deadline = Date.now() + 1 * 10 * 10 * 10 * 2 + 1 * 30;
-
     onCollapse = collapsed => {
         this.setState({ collapsed });
     };
+
+
+    goLogout = () => {
+        return(
+            this.props.history.push('/login')
+        )
+    }
+
+    showLogoutBox = () =>{
+
+        swal({
+            title: "Log Out",
+            text: "Do you want to logout?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willLogout) => {
+            if (willLogout) {
+                swal("Thanks for using Sparks!", {
+                    icon: "success",
+                }).then(() =>{this.goLogout()})
+
+            }
+        })
+    }
 
     render() {
         const smallLogo = <div className="logo"><img width="60px" alt="Spark" src={LogoSmall}/></div>;
         const largeLogo = <div className="logo"><img width="170px" alt="Spark" src={LogoBordered}/></div>;
 
         return (
-            <Spin spinning={this.state.loading}>
+
             <Router>
                 <Layout>
                     <Sider className="slider2"
@@ -65,6 +85,12 @@ class MainPage extends React.Component {
                                     <span>About</span>
                                 </Link>
                             </Menu.Item>
+                            <Menu.Item key="6">
+                                <Link to={'/logout'} className="nav-link">
+                                    <Icon type="info-circle" />
+                                    <span>Log Out</span>
+                                </Link>
+                            </Menu.Item>
                         </Menu>
                     </Sider>
                     <Layout className="content-layout">
@@ -79,6 +105,7 @@ class MainPage extends React.Component {
                                     <Route path='/reservation'> <ReservationContainer account={this.props.location.account}/></Route>
                                     <Route path='/logs'> History </Route>
                                     <Route path='/about'> About </Route>
+                                    <Route path="/logout" render={() => this.showLogoutBox()} />
                                 </Switch>
                             </div>
                             <div className={"invi"}>
@@ -89,7 +116,6 @@ class MainPage extends React.Component {
                     </Layout>
                 </Layout>
             </Router>
-            </Spin>
         );
     }
 }
