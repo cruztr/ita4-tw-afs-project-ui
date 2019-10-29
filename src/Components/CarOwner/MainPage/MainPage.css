@@ -32,4 +32,6 @@
 
 .invi{
     visibility: hidden;
+    width: 0px;
+    height: 0px;
 }

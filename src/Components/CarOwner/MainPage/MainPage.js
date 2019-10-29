@@ -14,7 +14,7 @@ class MainPage extends React.Component {
     onFinish =() =>{
         this.setState({ loading: false });
     };
-    deadline = Date.now() + 1 * 10 * 10 * 13 * 2 + 1 * 30;
+    deadline = Date.now() + 1 * 10 * 10 * 10 * 2 + 1 * 30;
 
     render() {
         // alert(JSON.stringify(this.props.location.account))
@@ -45,10 +45,7 @@ class MainPage extends React.Component {
                     </Sider>
                     <Layout>
                         <Content style={{ margin: '0 16px' }}>
-                            <div className={"invi"}>
-                                <Countdown title="Countdown" value={this.deadline} onFinish={this.onFinish} />
-                            </div>
-                            <Breadcrumb style={{ margin: '16px 0' }}>
+                           <Breadcrumb style={{ margin: '16px 0' }}>
                             </Breadcrumb>
                             <div id="div-content">
                                 <Switch>
@@ -60,12 +57,14 @@ class MainPage extends React.Component {
                                     <Route path='/about'> About </Route>
                                 </Switch>
                             </div>
+                            <div className={"invi"}>
+                            <Countdown title="Countdown" value={this.deadline} onFinish={this.onFinish} />
+                            </div>
                         </Content>
                         <Footer style={{ textAlign: 'center' }}>spark ©2019 Created by EUTeam</Footer>
                     </Layout>
                 </Layout>
             </Router>
-
             </Spin>
         );
     }
