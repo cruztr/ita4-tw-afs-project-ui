@@ -3,6 +3,7 @@ import React from "react";
 import Logo from "../Images/logowhitebordered.png";
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import ReservationContainer from "../../../State/CarOwner/MainPage/Reservation/Container.js";
 import LogoBordered from "../Images/logowhitebordered.png";
 import LogoSmall from "../Images/logo.png"
 
@@ -64,7 +65,7 @@ class MainPage extends React.Component {
                                     <Route exact path='/'>Home</Route>
                                     <Route path='/parkingLot'>Parking Lots</Route>
                                     <Route path='/orders'> Orders </Route>
-                                    <Route path='/reservations'> Reservations</Route>
+                                    <Route path='/reservations'> <ReservationContainer account={this.props.location.account}/></Route>
                                     <Route path='/logs'> History </Route>
                                     <Route path='/about'> About </Route>
                                 </Switch>

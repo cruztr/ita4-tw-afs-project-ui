@@ -44,8 +44,8 @@ class MainPage extends React.Component {
                             </Menu.Item>
                             <Menu.Item key="5">
                                 <Icon type="schedule" />
-                                 {/*<span><Link to={'/reservations'} className="nav-link">Reservations</Link></span>*/}
-                                <span>Reservations</span>
+                                 <span><Link to={'/reservations'} className="nav-link">Reservations</Link></span>
+                                {/*<span>Reservations</span>*/}
                             </Menu.Item>
                             <Menu.Item key="6">
                                 <Icon type="file" />
@@ -66,7 +66,7 @@ class MainPage extends React.Component {
                                     <Route exact path='/'>Home</Route>
                                     <Route path='/parkingLot'> <ParkingLotContainer /></Route>
                                     <Route path='/orders'> Orders </Route>
-                                    <Route path='/reservations'> <ReservationContainer/></Route>
+                                    <Route path='/reservations'> <ReservationContainer account={this.props.location.account}/></Route>
                                     <Route path='/logs'> Logs </Route>
                                     <Route path='/about'> About </Route>
                                 </Switch>
