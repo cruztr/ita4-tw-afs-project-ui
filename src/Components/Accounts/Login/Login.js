@@ -9,7 +9,7 @@ import { Redirect, Link } from 'react-router-dom'
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
-class Login extends React.Component{y
+class Login extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -78,7 +78,7 @@ class Login extends React.Component{y
         else if (this.props.accounts.signUpCredentials.id) {
             return <Redirect to= {{
                 pathname: 'mainpageCarOwner',
-                    account: this.props.accounts.signUpCredentials
+                account: this.props.accounts.signUpCredentials
             }}
             />
         }
@@ -147,6 +147,7 @@ class Login extends React.Component{y
                                                         title="Sign Up"
                                                         visible={this.state.visible}
                                                         footer={null}
+                                                        closable={false}
                                                     >
                                                     <SignUpContainer closeModal={this.handleCancel} registerCarOwner={this.signUpCarOwner} />
                                                 </Modal>

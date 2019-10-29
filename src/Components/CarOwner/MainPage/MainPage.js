@@ -1,4 +1,4 @@
-import {Breadcrumb, Icon, Layout, Menu} from 'antd';
+import {Breadcrumb, Icon, Layout, Menu, Spin, Statistic} from 'antd';
 import React from "react";
 import Logo from "../Images/logowhitebordered.png";
 import './MainPage.css';
@@ -7,11 +7,19 @@ import LogoBordered from "../../ParkingBoy/MainPage/Images/logowhitebordered.png
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
+const { Countdown } = Statistic;
 
 class MainPage extends React.Component {
+    state = { loading: true };
+    onFinish =() =>{
+        this.setState({ loading: false });
+    };
+    deadline = Date.now() + 1 * 10 * 10 * 13 * 2 + 1 * 30;
+
     render() {
         // alert(JSON.stringify(this.props.location.account))
         return (
+            <Spin spinning={this.state.loading}>
             <Router>
                 <Layout>
                     <Sider className="slider2" >
@@ -37,6 +45,9 @@ class MainPage extends React.Component {
                     </Sider>
                     <Layout>
                         <Content style={{ margin: '0 16px' }}>
+                            <div className={"invi"}>
+                                <Countdown title="Countdown" value={this.deadline} onFinish={this.onFinish} />
+                            </div>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                             </Breadcrumb>
                             <div id="div-content">
@@ -54,6 +65,8 @@ class MainPage extends React.Component {
                     </Layout>
                 </Layout>
             </Router>
+
+            </Spin>
         );
     }
 }

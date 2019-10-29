@@ -2,7 +2,7 @@ import React from "react";
 import 'antd/dist/antd.css';
 import './Signup.css';
 import {Redirect} from 'react-router-dom'
-import {Button, Checkbox, Form, Input, Select, Card, Modal} from 'antd';
+import {Button, Checkbox, Form, Input, Select, Card, Modal, Col} from 'antd';
 import sparkImage from "../Signup/Images/route.png";
 
 const { Option } = Select;
@@ -39,9 +39,10 @@ class Signup extends React.Component {
         });
     };
 
-    handleCanelClick = () => {
+    handleCancelClick = () => {
         this.props.closeModal();
         this.props.form.resetFields();
+        window.location.reload(true);
     }
 
     handleConfirmBlur = e => {
@@ -92,11 +93,7 @@ class Signup extends React.Component {
         };
 
         return (
-            <div className={"SignUp-Whole"} style={{ background: '#d4d4d4', minHeight: 360, margin: 0 }}>
-                <Card  style={{ background: '#fff', minHeight: 360, width: 500, margin: 50}}>
-                <Card className= "Spark-Logo" bordered={false}
-                      cover={<img alt="Spark" src={sparkImage} />}>
-                </Card>
+            <div className={"SignUp-Whole"} style={{ minHeight: 360, margin: 0 }}>
                 <Form {...formItemLayout} ref={(el) => this.myFormRef = el} onSubmit={this.handleSubmit}>
                     <Form.Item label={<span>First Name&nbsp;</span>}>
                         {getFieldDecorator('firstname', {
@@ -154,15 +151,16 @@ class Signup extends React.Component {
                         )}
                     </Form.Item>
                     <Form.Item {...tailFormItemLayout}>
+                        <Col span={24} style={{ textAlign: 'center' }}>
                         <Button type="primary" htmlType="submit" >
                             Register
                         </Button>
-                        <Button type="primary" htmlType="submit" onClick={this.handleCanelClick} >
+                        <Button  style={{ marginLeft: 8 }} type="primary" htmlType="submit" onClick={this.handleCancelClick} >
                             Cancel
                         </Button>
+                        </Col>
                     </Form.Item>
                 </Form>
-            </Card>
         </div>
         );
     }
