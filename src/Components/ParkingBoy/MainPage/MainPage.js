@@ -82,7 +82,7 @@ class MainPage extends React.Component {
                             <div className="div-content">
                                 <Switch>
                                     <Route exact path='/'><Home user={this.props.location.account} /></Route>
-                                    <Route path='/parkingLot'> <ParkingLotContainer /></Route>
+                                    <Route path='/parkingLot'> <ParkingLotContainer account={this.props.location.account}/></Route>
                                     <Route path='/orders'> Orders <ViewOrderContainer /></Route>
                                     <Route path='/reservations'> <ReservationContainer account={this.props.location.account}/></Route>
                                     <Route path='/logs'> <LogsContainer account={this.props.location.account} typeOfUser={this.props.location.typeOfUser}/> </Route>

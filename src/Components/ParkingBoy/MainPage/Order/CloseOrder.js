@@ -1,10 +1,14 @@
 import {Input, Button, Row, Modal, Col} from 'antd'
 import 'antd/dist/antd.css';
 import React from 'react';
+import ParkingBoyResource from "../../../../Api/ParkingBoyResource.js";
 
 export default class CloseOrder extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            createdBy : {}
+        }
     }
     componentDidMount = () =>{
         const parkingLotPosition = {
@@ -12,21 +16,31 @@ export default class CloseOrder extends React.Component{
             blockNumber : this.props.blockPosition
         }
         this.props.getOrder(parkingLotPosition);
-        console.log(this.props.orderDetails.plateNumber);
     }
 
     closeOrder = () =>{
         const param = {
             orderDetails : this.props.orderDetails,
-            parkingBoyID: 1
+            parkingBoyID: this.props.account.id
         }
         this.props.closeOrder(param);
         this.props.isVisible();
         this.props.whenCloseOrder("AVAILABLE");
     };
 
+    getParkingBoyById = (parkingBoyId) => {
+        ParkingBoyResource.getParkingBoyById(parkingBoyId).then(res => res.json())
+        .then(res => this.setState({
+            createdBy : res
+        }));
+    }
+
     plateNumberChange = (event) => this.setState({plateNumber: event.target.value});
+
     render(){
+        this.getParkingBoyById(this.props.orderDetails.createdBy);
+        const creatorFullName = this.state.createdBy.firstName + " " + this.state.createdBy.lastName;
+        const fullName = this.props.account.firstName + " " + this.props.account.lastName;
         return(
             <div>
                 <Modal
@@ -63,11 +77,11 @@ export default class CloseOrder extends React.Component{
                     </Row>
                     <Row type="flex" justify="center">
                         <Col span={8}>Created By:</Col>
-                        <Col span={12}>{this.props.orderDetails.createdBy}</Col>
+                        <Col span={12}>{creatorFullName}</Col>
                     </Row>
                     <Row type="flex" justify="center">
                         <Col span={8}>Closed By:</Col>
-                        <Col span={12}></Col>
+                        <Col span={12}>{fullName}</Col>
                     </Row>
                 </Modal>
             </div>
