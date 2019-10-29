@@ -34,7 +34,7 @@ class MainPage extends React.Component {
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="3">
-                                <Link to={'/reservations'} className="nav-link">
+                                <Link to={'/reservation'} className="nav-link">
                                 <span><Icon type="schedule" /></span>
                                     <span>Reservations</span>
                                 </Link>

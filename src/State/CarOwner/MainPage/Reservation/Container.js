@@ -1,8 +1,7 @@
 import {connect} from "react-redux";
 import Reservation from "../../../../Components/CarOwner/MainPage/Reservation/Reservation";
-import OrderResource from "../../../../Api/OrderResource";
-import ReservationResource from "../../../../Api/ReservationResource";
 import CarOwnerResources from "../../../../Api/CarOwnerResources";
+import { message } from 'antd';
 
 
 const mapStateToProps = state => ({
@@ -34,6 +33,8 @@ const mapDispatchToProps = dispatch => ({
                     type: 'CREATE_RESERVATION',
                     payload: res
                 })
+
+                message.success('You have successfully created a reservation.');
                     // .then(
                     // ReservationResource.getAllReservation()
                     //     .then(reservationJson => reservationJson.json()).then(reservation => {
@@ -42,9 +43,9 @@ const mapDispatchToProps = dispatch => ({
                     //         payload: reservation})
                     // })
                 // )
-
-
-            })
+            }).catch(() => {
+            message.error('Creating reservation failed.');
+        })
 
     }
 });
