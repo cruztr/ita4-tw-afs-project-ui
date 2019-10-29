@@ -70,7 +70,7 @@ class Login extends React.Component{
         if(this.props.accounts.account.id){
             return <Redirect to= {{
                 pathname: '/mainpageCarOwner',
-                account:this.props.accounts.account
+                    account:this.props.accounts.account
             }}
          />
         }
@@ -93,7 +93,7 @@ class Login extends React.Component{
         }
         else if (this.props.accounts.signUpCredentials.id) {
             return <Redirect to= {{
-                pathname: '',
+                pathname: 'login',
                 account: this.props.accounts.signUpCredentials
             }}
             />

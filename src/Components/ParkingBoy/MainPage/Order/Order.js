@@ -6,7 +6,8 @@ export default class Order extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            plateNumber: ''
+            plateNumber: '',
+            disableButton: true
         }
     }
     createOrder = () =>{
@@ -22,7 +23,12 @@ export default class Order extends React.Component{
     }
 
 
-    plateNumberChange = (event) => this.setState({plateNumber: event.target.value});
+    plateNumberChange = (event) => {
+        this.setState({plateNumber: event.target.value});
+        if(event.target.value){
+            this.setState({disableButton: false});
+        }
+    }
     render(){
         const fullName = this.props.account.firstName + " " + this.props.account.lastName;
         return(
@@ -38,13 +44,13 @@ export default class Order extends React.Component{
                         <Button className="Cancel" onClick={() => this.props.isVisible(false)}>
                             Cancel
                         </Button>,
-                        <Button className="Create-Order" key="submit" type="primary" onClick={this.createOrder}>Create Order</Button>
+                        <Button className="Create-Order" key="submit" type="primary" disabled={this.state.disableButton} onClick={this.createOrder}>Create Order</Button>
                     ]}
                  >
                     <Row type="flex" justify="center">
                         <Col span={8}>PLATE NUMBER:</Col>
                         <Col span={12}><Input placeholder="Plate Number" value={this.state.plateNumber}
-                                              onChange={this.plateNumberChange}/></Col>
+                                              onChange={this.plateNumberChange} /></Col>
                     </Row>
                     <Row type="flex" justify="center">
                         <Col span={8}>PARKING LOT:</Col>
