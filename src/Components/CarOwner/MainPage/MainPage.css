@@ -29,3 +29,7 @@
     background-color:#fff;
     height: calc(100vh - 80px)
 }
+
+.invi{
+    visibility: hidden;
+}
