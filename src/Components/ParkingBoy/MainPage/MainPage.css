@@ -1,5 +1,15 @@
 @import '~antd/dist/antd.css';
 
+.ant-layout-sider-trigger {
+    position: absolute;
+    top: 130px;
+    background: #262b41;
+}
+
+.slider2{
+    background: #262b41;
+}
+
 .content-layout {
     background: #262b41;
 }
@@ -7,15 +17,7 @@
 .footer-layout {
     background: #262b41;
     color: white;
-}
-
-.ant-layout{
-    min-height:  calc(100vh - 1px);
-}
-.header{
-    background: #63b2b8;
-    padding: 0;
-    height: 101px
+    text-align: center;
 }
 
 .div-content{
@@ -32,10 +34,13 @@
 .mainMenu{
     background: #262b41;
     color: gray;
+    padding-top: 20px;
 }
 
 .logo{
     padding: 15px;
+    margin-top: 25px;
+    margin-bottom: 30px;
 }
 
 .itemText {
@@ -44,8 +49,4 @@
 
 .nav-link {
     color: lightgrey;
-}
-
-.slider2{
-    background: #262b41;
 }
