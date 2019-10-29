@@ -1,12 +1,12 @@
 const initialState = {
-    orderListDetails : {}
+    orderListDetails : []
 };
 
 export default (state = initialState, { type, payload}) => {
     switch(type) {
         case "GET_ORDERS":
             return {...state,
-                orderDetails: payload
+                orderListDetails: payload
             }
         default:
             return state;
