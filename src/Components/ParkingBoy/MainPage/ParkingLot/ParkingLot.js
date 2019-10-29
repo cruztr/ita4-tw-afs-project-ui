@@ -63,11 +63,32 @@ class ParkingLot extends React.Component{
 
 
       updateParkingBlock = (status) =>{
-          let param = {
-            status : status,
-            blockPosition :  this.state.blockPosition
+        let name = this.props.parkingLot.name;
+        let blockPosition =this.state.blockPosition;
+
+        let thisParkingLots = [];
+        let thisParkingLot = {};
+
+        this.props.allParkingLots.forEach(parkingLot => {
+          if(parkingLot.name == name){
+            thisParkingLot = parkingLot;
+              parkingLot.parkingBlocks.forEach(parkingBlock => {
+                  if(parkingBlock.position == blockPosition){
+                      parkingBlock.status = status;
+                  }
+              });
           }
-          this.props.updateParkingBlock(param);
+          thisParkingLots.push(parkingLot);
+      });
+
+
+          let params = {
+              parkingLots : thisParkingLots,
+              parkingLot : thisParkingLot
+          }
+
+          this.props.updateParkingBlock(params);
+
       }
 
       showModal = () =>{

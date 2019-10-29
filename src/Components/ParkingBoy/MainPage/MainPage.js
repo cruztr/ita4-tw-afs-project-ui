@@ -8,6 +8,7 @@ import LogoBordered from "./Images/logowhitebordered.png"
 import LogoSmall from "./Images/logosmall.png"
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch, Redirect} from 'react-router-dom';
+import Home from "./Home/Home.js";
 import swal from "sweetalert";
 
 const { Content, Footer, Sider } = Layout;
@@ -50,6 +51,7 @@ class MainPage extends React.Component {
         const smallLogo = <div className="logo"><img width="60px" alt="Spark" src={LogoSmall}/></div>;
         const largeLogo = <div className="logo"><img width="170px" alt="Spark" src={LogoBordered}/></div>;
 
+        //  alert(JSON.stringify(this.props.location.account))
         return (
             <Router>
                 <Layout >
@@ -110,7 +112,7 @@ class MainPage extends React.Component {
                             </Breadcrumb>
                             <div className="div-content">
                                 <Switch>
-                                    <Route exact path='/'>Home</Route>
+                                    <Route exact path='/'><Home user={this.props.location.account} /></Route>
                                     <Route path='/parkingLot'> <ParkingLotContainer /></Route>
                                     <Route path='/orders'> Orders <ViewOrderContainer /></Route>
                                     <Route path='/reservations'> <ReservationContainer account={this.props.location.account}/></Route>
