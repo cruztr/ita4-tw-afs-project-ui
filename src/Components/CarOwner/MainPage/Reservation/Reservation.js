@@ -1,4 +1,4 @@
-import {Button, Icon, Input, Popconfirm, Table} from 'antd'
+import {Button, Icon, Input, Popconfirm, Table, Menu, Tag } from 'antd'
 import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
 import React from 'react';
@@ -29,22 +29,42 @@ export default class Reservations extends React.Component{
                     key: "rate"
                 },
                 {
+                    title: "Status",
+                    dataIndex: "status",
+                    key: "status",
+                    render: status => (
+                        <span>
+                            <Tag color={(status==="AVAILABLE" ? "green" : "volcano")}>{status}</Tag>
+                        </span>
+                    ),
+                },
+                {
                     title: "Action",
                     key: "action",
-                    render: (text,parkingLot) => (
-                        <span>
-                            <Popconfirm title="Sure to reserve?" onConfirm={() => {
-                                {this.createReservation(parkingLot)}
-                            }}>
-                                <a>Reserve</a>
-
-                            </Popconfirm>
-                        </span>
-                    )
+                    render: (text,parkingLot) => {
+                        if(parkingLot.status === "AVAILABLE"){
+                            return (
+                                <span>
+                                    <Popconfirm title="Sure to reserve?" onConfirm={() => {
+                                        {this.createReservation(parkingLot)}
+                                    }}>
+                                        <a>Reserve</a>
+                                    </Popconfirm>
+                                </span>
+                            );
+                        }
+                    }
                 }
             ]
         }
     }
+    handleClick = e => {
+        this.props.filterTypeChanged(e.key);
+        ParkingLotResource.getParkingLots(e.key)
+            .then(res => res.json()).then(res => {
+            this.props.refreshContent(res);
+        });
+    };
 
     createReservation = parkingLot => {
         let today = new Date();
@@ -120,25 +140,26 @@ export default class Reservations extends React.Component{
     };
 
     componentDidMount(){
-        this.getData();
-    }
-
-    getData = () => {
-        ParkingLotResource.getAvailableParkingLots()
+        // GET KUNG MAY EXISTING RESERVATION
+        //FOR GETTING ALL PARKING LOT
+        ParkingLotResource.getParkingLots(this.props.filterType)
             .then(res => res.json()).then(res => {
             this.props.refreshContent(res);
-            // this.intervalID = setTimeout(this.getData.bind(this), 5000);
         });
-    }
-
-    componentWillUnmount() {
-        // clearTimeout(this.intervalID);
     }
 
     render(){
         return(
             <div id="containerID" className="container">
-                <h2>Available Parking Lot List</h2>
+                <h2>Parking Lot List</h2>
+                <Menu onClick={this.handleClick} selectedKeys={this.props.filterType} mode="horizontal">
+                    <Menu.Item key="all">
+                        <Icon type="filter" />All
+                    </Menu.Item>
+                    <Menu.Item key="available">
+                        <Icon type="filter" />Available
+                    </Menu.Item>
+                </Menu>
                 <Table columns={this.state.columns} dataSource={this.props.parkingLots} size="medium"></Table>
             </div>
         );

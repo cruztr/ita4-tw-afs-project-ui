@@ -1,6 +1,7 @@
 const initialState = {
     reservation: {},
-    parkingLots: []
+    parkingLots: [],
+    filterType: 'all'
 };
 
 export default (state = initialState, { type, payload}) => {
@@ -9,6 +10,8 @@ export default (state = initialState, { type, payload}) => {
             return {...state, parkingLots: payload}
         case "CREATE_RESERVATION":
             return {...state, reservation: payload}
+        case "CHANGE_FILTER_TYPE":
+            return {...state, filterType: payload}
         default:
             return state;
     }

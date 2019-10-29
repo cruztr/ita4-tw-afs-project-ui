@@ -4,7 +4,7 @@ export default {
     getAllParkingLots: () => fetch("http://localhost:8089/parkingLot", {
         mode: 'cors'
     }),
-    getAvailableParkingLots: () => fetch("http://localhost:8089/parkingLot/available", {
+    getParkingLots: (filterType) => fetch("http://localhost:8089/parkingLot/"+filterType, {
         mode: 'cors'
     })
 }

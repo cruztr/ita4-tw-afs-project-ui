@@ -32,7 +32,7 @@ class MainPage extends React.Component {
                             </Menu.Item>
                             <Menu.Item key="5"><span>
                                 <Icon type="schedule" /></span>
-                                <span><Link to={'/reservations'} className="nav-link">Reservations </Link></span>
+                                <span><Link to={'/reservation'} className="nav-link">Reservations </Link></span>
                             </Menu.Item>
                             <Menu.Item key="6">
                                 <Icon type="file" />
@@ -53,7 +53,7 @@ class MainPage extends React.Component {
                                     <Route exact path='/'>Home</Route>
                                     <Route path='/parkingLot'>Parking Lots</Route>
                                     <Route path='/orders'> Orders </Route>
-                                    <Route path='/reservations'> <ReservationContainer account={this.props.location.account}/></Route>
+                                    <Route path='/reservation'> <ReservationContainer account={this.props.location.account}/></Route>
                                     <Route path='/logs'> History </Route>
                                     <Route path='/about'> About </Route>
                                 </Switch>

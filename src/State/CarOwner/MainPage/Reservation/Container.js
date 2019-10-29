@@ -7,7 +7,8 @@ import CarOwnerResources from "../../../../Api/CarOwnerResources";
 
 const mapStateToProps = state => ({
     reservation: state.userReservationReducer.reservation,
-    parkingLots: state.userReservationReducer.parkingLots
+    parkingLots: state.userReservationReducer.parkingLots,
+    filterType: state.userReservationReducer.filterType
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -18,6 +19,12 @@ const mapDispatchToProps = dispatch => ({
             payload: contentList
         })
     },
+
+    filterTypeChanged: (filterType) =>
+        dispatch({
+            type: "CHANGE_FILTER_TYPE",
+            payload: filterType
+        }),
 
     createReservation: (reservation) =>{
         CarOwnerResources.createReservation(reservation).then(res => res.json())

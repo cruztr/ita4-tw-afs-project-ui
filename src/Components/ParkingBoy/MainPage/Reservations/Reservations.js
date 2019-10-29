@@ -131,12 +131,12 @@ export default class Reservations extends React.Component{
         ReservationResource.getAllReservation()
             .then(res => res.json()).then(res => {
             this.props.refreshContent(res);
-            this.intervalID = setTimeout(this.getData.bind(this), 5000);
+            // this.intervalID = setTimeout(this.getData.bind(this), 5000);
         });
     }
 
     componentWillUnmount() {
-        clearTimeout(this.intervalID);
+        // clearTimeout(this.intervalID);
     }
 
     render(){
