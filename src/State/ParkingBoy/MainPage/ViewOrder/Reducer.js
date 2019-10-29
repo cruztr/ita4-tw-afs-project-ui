@@ -21,7 +21,8 @@ export default (state = initialState, { type, payload}) => {
             }
         case "GET_ORDERS":
             return {...state,
-                orderListDetails: payload
+                orderListDetails: payload,
+                status:null
             }
         default:
             return state;

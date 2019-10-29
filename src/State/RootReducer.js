@@ -5,8 +5,9 @@ import signUpReducer from "./CarOwner/Signup/Reducer.js";
 import accountsReducer from "./Accounts/Login/Reducer.js";
 import parkingLotReducer from "./ParkingBoy/MainPage/ParkingLot/Reducer.js";
 import orderCloseReducer from "./ParkingBoy/MainPage/CloseOrder/Reducer.js";
-import viewOrderReducer from "./ParkingBoy/MainPage/ViewOrder/Reducer.js";
-import userReservationReducer from "./CarOwner/MainPage/Reservation/Container.js"
+import userReservationReducer from "./CarOwner/MainPage/Reservation/Reducer.js";
+import logsReduce from "./Logs/Reducer";
+import viewOrderReducer from "./ParkingBoy/MainPage/ViewOrder/Reducer"
 
 export default combineReducers({
     orderReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
     signUpReducer,
     accountsReducer,
     parkingLotReducer,
-    userReservationReducer
+    userReservationReducer,
+    logsReduce
 });

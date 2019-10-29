@@ -5,6 +5,7 @@ import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import LogoBordered from "../../ParkingBoy/MainPage/Images/logowhitebordered.png";
 import ReservationContainer from "../../../State/CarOwner/MainPage/Reservation/Container.js";
+import LogsContainer from "../../../State/Logs/Container.js";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -26,21 +27,29 @@ class MainPage extends React.Component {
                     <Sider className="slider2" >
                         <div className="logo"><img width="150px" alt="Spark" src={LogoBordered}/></div>
                         <Menu theme="dark" className="mainMenu" defaultSelectedKeys={['1']} mode="inline" >
-                            <Menu.Item key="2"><span>
-                                <Icon type="dashboard" /></span>
-                                <span><Link to={'/'} className="nav-link">Home </Link></span>
+                            <Menu.Item key="2">
+                                <Link to={'/'} className="nav-link">
+                                <span><Icon type="dashboard" /></span>
+                                    <span>Home</span>
+                                </Link>
                             </Menu.Item>
-                            <Menu.Item key="5"><span>
-                                <Icon type="schedule" /></span>
-                                <span><Link to={'/reservations'} className="nav-link">Reservations </Link></span>
+                            <Menu.Item key="3">
+                                <Link to={'/reservation'} className="nav-link">
+                                <span><Icon type="schedule" /></span>
+                                    <span>Reservations</span>
+                                </Link>
                             </Menu.Item>
-                            <Menu.Item key="6">
-                                <Icon type="file" />
-                                <span><Link to={'/logs'} className="nav-link">History</Link></span>
+                            <Menu.Item key="4">
+                                <Link to={'/logs'} className="nav-link">
+                                <span><Icon type="file" /></span>
+                                    <span>History</span>
+                                </Link>
                             </Menu.Item>
-                            <Menu.Item key="7">
-                                <Icon type="info-circle" />
-                                <span><Link to={'/about'} className="nav-link">About</Link></span>
+                            <Menu.Item key="5">
+                                <Link to={'/about'} className="nav-link">
+                                <span><Icon type="info-circle" /></span>
+                                    <span>About</span>
+                                </Link>
                             </Menu.Item>
                         </Menu>
                     </Sider>
@@ -53,7 +62,7 @@ class MainPage extends React.Component {
                                     <Route exact path='/'>Home</Route>
                                     <Route path='/parkingLot'>Parking Lots</Route>
                                     <Route path='/orders'> Orders </Route>
-                                    <Route path='/reservations'> <ReservationContainer account={this.props.location.account}/></Route>
+                                    <Route path='/reservation'> <ReservationContainer account={this.props.location.account}/></Route>
                                     <Route path='/logs'> History </Route>
                                     <Route path='/about'> About </Route>
                                 </Switch>

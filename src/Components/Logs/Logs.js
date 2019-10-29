@@ -1,66 +1,35 @@
-import {Button, Icon, Input, Popconfirm, Table} from 'antd'
+import {Button, Icon, Input, Table} from 'antd'
 import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
 import React from 'react';
-import ReservationResource from "../../../../Api/ReservationResource";
+import LogsResources from "../../Api/LogsResources";
 
-export default class Reservations extends React.Component{
-    intervalID;
-
+export default class Logs extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             searchText: '',
             columns: [
                 {
-                    title: "Reservation Number.",
-                    dataIndex: "reservationNumber",
-                    key: "reservationNumber"
-                },
-                {
-                    title: "Driver Name",
-                    dataIndex: "fullName",
-                    key: "fullName",
-                    ...this.getColumnSearchProps('fullName')
-                },
-                {
-                    title: "Plate Number",
-                    dataIndex: "plateNumber",
-                    key: "plateNumber",
-                    ...this.getColumnSearchProps('plateNumber')
-                },
-                {
-                    title: "Reserved Time",
-                    dataIndex: "reservedTime",
-                    key: "reservedTime"
-                },
-                {
                     title: "Action",
+                    dataIndex: "action",
                     key: "action",
-                    render: (text,reservation) => (
-                        <span>
-                            <Popconfirm title="Sure to confirm?" onConfirm={() => {
-                                {this.createOrder(reservation)}
-                            }}>
-                                <a>Confirm</a>
-
-                            </Popconfirm>
-                        </span>
-                    )
+                    ...this.getColumnSearchProps('action')
+                },
+                {
+                    title: "Action Detail",
+                    dataIndex: "actionDetails",
+                    key: "actionDetails",
+                    ...this.getColumnSearchProps('actionDetails')
+                },
+                {
+                    title: "Date and Time",
+                    dataIndex: "dateTime",
+                    key: "dateTime",
+                    ...this.getColumnSearchProps('dateTime')
                 }
             ]
         }
-    }
-
-    createOrder = reservation => {
-        const param = {
-            parkingLotID: reservation.parkingLotId,
-            parkingBoyID: this.props.account.id,
-            plateNumber: reservation.plateNumber,
-            parkingBlockPosition: reservation.position,
-            reservation: reservation
-        }
-        this.props.createOrder(param);
     }
 
     getColumnSearchProps = dataIndex => ({
@@ -128,7 +97,11 @@ export default class Reservations extends React.Component{
     }
 
     getData = () => {
-        ReservationResource.getAllReservation()
+        const param = {
+            userId: this.props.account.id,
+            userType: this.props.typeOfUser
+        }
+        LogsResources.getLogs(param)
             .then(res => res.json()).then(res => {
             this.props.refreshContent(res);
             // this.intervalID = setTimeout(this.getData.bind(this), 5000);
@@ -142,8 +115,8 @@ export default class Reservations extends React.Component{
     render(){
         return(
             <div id="containerID" className="container">
-                <h2>Reservation List</h2>
-                <Table columns={this.state.columns} dataSource={this.props.reservationList} size="medium"></Table>
+                <h2>Logs</h2>
+                <Table columns={this.state.columns} dataSource={this.props.logs} size="medium"></Table>
             </div>
         );
     }

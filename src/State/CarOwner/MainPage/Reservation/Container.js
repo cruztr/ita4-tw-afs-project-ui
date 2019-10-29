@@ -1,11 +1,13 @@
 import {connect} from "react-redux";
 import Reservation from "../../../../Components/CarOwner/MainPage/Reservation/Reservation";
 import CarOwnerResources from "../../../../Api/CarOwnerResources";
+import { message } from 'antd';
 
 
 const mapStateToProps = state => ({
     reservation: state.userReservationReducer.reservation,
-    parkingLots: state.userReservationReducer.parkingLots
+    parkingLots: state.userReservationReducer.parkingLots,
+    filterType: state.userReservationReducer.filterType
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -17,6 +19,12 @@ const mapDispatchToProps = dispatch => ({
         })
     },
 
+    filterTypeChanged: (filterType) =>
+        dispatch({
+            type: "CHANGE_FILTER_TYPE",
+            payload: filterType
+        }),
+
     createReservation: (reservation) =>{
         CarOwnerResources.createReservation(reservation).then(res => res.json())
             .then(res =>
@@ -25,6 +33,8 @@ const mapDispatchToProps = dispatch => ({
                     type: 'CREATE_RESERVATION',
                     payload: res
                 })
+
+                message.success('You have successfully created a reservation.');
                     // .then(
                     // ReservationResource.getAllReservation()
                     //     .then(reservationJson => reservationJson.json()).then(reservation => {
@@ -33,9 +43,9 @@ const mapDispatchToProps = dispatch => ({
                     //         payload: reservation})
                     // })
                 // )
-
-
-            })
+            }).catch(() => {
+            message.error('Creating reservation failed.');
+        })
 
     }
 });

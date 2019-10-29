@@ -1,9 +1,6 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
-import { throwStatement } from '@babel/types';
-
-
-
+import "./CheckOrder.css"
 class OrderDetails extends React.Component{
     constructor(props){
         super(props);
@@ -20,7 +17,8 @@ class OrderDetails extends React.Component{
     render(){
         const order = this.props.order;
         return(
-            <Modal
+            <div>
+            <Modal className={"order"}
                     title="Order Information"
                     visible={this.state.visible}
                     onOk={this.handleOk}
@@ -37,7 +35,8 @@ class OrderDetails extends React.Component{
                     <p>Time In: {order.timeIn}</p>
                     <p>Time Out: {order.timeOut}</p>
                     <p>Cost: {order.price}</p>
-                </Modal>
+            </Modal>
+            </div>
         )
     }
 }
