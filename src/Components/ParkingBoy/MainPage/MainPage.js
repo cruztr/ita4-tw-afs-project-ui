@@ -11,7 +11,7 @@ const { SubMenu } = Menu;
 
 class MainPage extends React.Component {
     render() {
-        alert(JSON.stringify(this.props.location.account))
+        // alert(JSON.stringify(this.props.location.account))
         return (
             <Router>
                 <Layout >
@@ -32,7 +32,8 @@ class MainPage extends React.Component {
                             </Menu.Item>
                             <Menu.Item key="5"><span>
                                 <Icon type="schedule" /></span>
-                                <span><Link to={'/reservations'} className="nav-link">Reservations </Link></span>
+                                {/* <span><Link to={'/reservations'} className="nav-link">Reservations </Link></span> */}
+                                <span>Reservations</span>
                             </Menu.Item>
                             <Menu.Item key="6">
                                 <Icon type="file" />
