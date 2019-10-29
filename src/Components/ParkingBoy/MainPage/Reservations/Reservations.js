@@ -54,24 +54,15 @@ export default class Reservations extends React.Component{
 
     createOrder = reservation => {
         const param = {
-            parkingLotID: reservation.parkingLot.parkingLotID,
-            parkingBoyID: this.props.parkingBoy.parkingBoyID,
+            parkingLotID: reservation.parkingLotId,
+            parkingBoyID: this.props.account.id,
             plateNumber: reservation.plateNumber,
-            parkingBlockPosition: reservation.parkingBlockPosition,
+            parkingBlockPosition: reservation.position,
             reservation: reservation
         }
         this.props.createOrder(param);
     }
 
-    createOrder = reservation => {
-        const param = {
-            parkingLotID: 223,
-            parkingBoyID: 14,
-            parkingBlockPosition: 12,
-            reservation: reservation
-        }
-        this.props.createOrder(param);
-    }
     getColumnSearchProps = dataIndex => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
             <div style={{ padding: 8 }}>

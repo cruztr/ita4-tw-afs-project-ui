@@ -19,23 +19,21 @@ const mapDispatchToProps = dispatch => ({
     },
 
     createOrder: (order) =>{
-        OrderResource.createReservation(order).then(res => res.json())
+        OrderResource.createOrder(order).then(res => res.json())
             .then(res =>
             {
                 dispatch({
-                    type: 'CREATE_RESERVATION',
+                    type: 'CREATE_ORDER',
                     payload: res
-                }).then(
-                    ReservationResource.getAllReservation()
-                        .then(reservationJson => reservationJson.json()).then(reservation => {
-                        dispatch({
-                            type: "REFRESH",
-                            payload: reservation})
-                    })
-                )
-
-
+                })
+            }).then(() => {
+            ReservationResource.getAllReservation()
+                .then(reservationJson => reservationJson.json()).then(reservation => {
+                dispatch({
+                    type: "REFRESH",
+                    payload: reservation})
             })
+        })
 
     }
 
