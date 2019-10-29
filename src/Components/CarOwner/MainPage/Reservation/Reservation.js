@@ -3,6 +3,7 @@ import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
 import React from 'react';
 import ReservationResource from "../../../../Api/ReservationResource";
+import ParkingLotResource from "../../../../Api/ParkingLotResource";
 
 export default class Reservations extends React.Component{
     intervalID;
@@ -13,36 +14,31 @@ export default class Reservations extends React.Component{
             searchText: '',
             columns: [
                 {
-                    title: "Reservation Number.",
-                    dataIndex: "reservationNumber",
-                    key: "reservationNumber"
+                    title: "Parking Lot Name",
+                    dataIndex: "name",
+                    key: "name",
+                    ...this.getColumnSearchProps('name')
                 },
                 {
-                    title: "Driver Name",
-                    dataIndex: "fullName",
-                    key: "fullName",
-                    ...this.getColumnSearchProps('fullName')
+                    title: "Location",
+                    dataIndex: "location",
+                    key: "location",
+                    ...this.getColumnSearchProps('location')
                 },
                 {
-                    title: "Plate Number",
-                    dataIndex: "plateNumber",
-                    key: "plateNumber",
-                    ...this.getColumnSearchProps('plateNumber')
-                },
-                {
-                    title: "Reserved Time",
-                    dataIndex: "reservedTime",
-                    key: "reservedTime"
+                    title: "Rate",
+                    dataIndex: "rate",
+                    key: "rate"
                 },
                 {
                     title: "Action",
                     key: "action",
-                    render: (text,reservation) => (
+                    render: (text,parkingLot) => (
                         <span>
-                            <Popconfirm title="Sure to confirm?" onConfirm={() => {
-                                {this.createOrder(reservation)}
+                            <Popconfirm title="Sure to reserve?" onConfirm={() => {
+                                {this.createReservation(parkingLot)}
                             }}>
-                                <a>Confirm</a>
+                                <a>Reserve</a>
 
                             </Popconfirm>
                         </span>
@@ -52,15 +48,13 @@ export default class Reservations extends React.Component{
         }
     }
 
-    createOrder = reservation => {
+    createReservation = parkingLot => {
         const param = {
-            parkingLotID: reservation.parkingLotId,
-            parkingBoyID: this.props.account.id,
-            plateNumber: reservation.plateNumber,
-            parkingBlockPosition: reservation.position,
-            reservation: reservation
+            carOwnerId: this.props.carOwner.id,
+            parkingLotId: parkingLot.id,
+            reservedTime: "14:00:00"
         }
-        this.props.createOrder(param);
+        this.props.createReservation(param);
     }
 
     getColumnSearchProps = dataIndex => ({
@@ -128,22 +122,22 @@ export default class Reservations extends React.Component{
     }
 
     getData = () => {
-        ReservationResource.getAllReservation()
+        ParkingLotResource.getAvailableParkingLots()
             .then(res => res.json()).then(res => {
             this.props.refreshContent(res);
-            this.intervalID = setTimeout(this.getData.bind(this), 5000);
+            // this.intervalID = setTimeout(this.getData.bind(this), 5000);
         });
     }
 
     componentWillUnmount() {
-        clearTimeout(this.intervalID);
+        // clearTimeout(this.intervalID);
     }
 
     render(){
         return(
             <div id="containerID" className="container">
-                <h2>Reservation List</h2>
-                <Table columns={this.state.columns} dataSource={this.props.reservationList} size="medium"></Table>
+                <h2>Available Parking Lot List</h2>
+                <Table columns={this.state.columns} dataSource={this.props.parkingLots} size="medium"></Table>
             </div>
         );
     }
