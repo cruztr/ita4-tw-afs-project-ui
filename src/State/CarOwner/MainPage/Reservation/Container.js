@@ -27,19 +27,29 @@ const mapDispatchToProps = dispatch => ({
                     type: 'CREATE_RESERVATION',
                     payload: res
                 })
-                    // .then(
-                    // ReservationResource.getAllReservation()
-                    //     .then(reservationJson => reservationJson.json()).then(reservation => {
-                    //     dispatch({
-                    //         type: "REFRESH",
-                    //         payload: reservation})
-                    // })
-                // )
-
 
             })
 
-    }
+    },
+
+    cancelMyReservation: (reservationId) =>{
+        CarOwnerResources.cancelReservation(reservationId).then(res => res.json())
+            .then(() => {
+                dispatch({
+                    type: 'CANCEL_RESERVATION'
+                })
+            })
+},
+    getMyReservation: (accountId) =>{
+        CarOwnerResources.getMyReservation(accountId).then(res => res.json())
+            .then(res => {
+                dispatch({
+                  type: 'GET_RESERVATION',
+                  payload:res
+                })
+            })
+    },
+
 });
 
 export default connect(

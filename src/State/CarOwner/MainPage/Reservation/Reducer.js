@@ -9,6 +9,10 @@ export default (state = initialState, { type, payload}) => {
             return {...state, parkingLots: payload}
         case "CREATE_RESERVATION":
             return {...state, reservation: payload}
+        case "GET_RESERVATION":
+            return {...state, reservation: payload}
+        case "CANCEL_RESERVATION":
+            return {...state, reservation: {}}
         default:
             return state;
     }
