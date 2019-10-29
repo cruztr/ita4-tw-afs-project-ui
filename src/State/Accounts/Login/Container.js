@@ -10,7 +10,9 @@ const mapDispatchToProps = dispatch => ({
         .then(res =>
             dispatch({
                 type: "LOGIN",
-                payload: res
+                payload: {
+                    body: res,
+                    type: "Parking Boy"}
             }))
     },
 
@@ -20,7 +22,10 @@ const mapDispatchToProps = dispatch => ({
         .then(res =>
             dispatch({
                 type: "LOGIN",
-                payload: res
+                payload: {
+                    body: res,
+                    type: "Car Owner"
+                }
             }))
     },
 

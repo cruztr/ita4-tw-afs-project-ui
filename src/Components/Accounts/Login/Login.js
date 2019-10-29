@@ -82,6 +82,23 @@ class Login extends React.Component{
             }}
             />
         }
+        else if(this.props.accounts.account.id){
+            const type = this.props.accounts.typeOfUser;
+            if(type === "Parking Boy"){
+                return <Redirect to= {{
+                    pathname: 'mainpage',
+                        account: this.props.accounts.account
+                }}
+                />
+            }
+            else {
+                return <Redirect to= {{
+                pathname: 'mainpageCarOwner',
+                    account: this.props.accounts.account
+                }}
+                />
+            }
+        }
     }
 
     render(){
