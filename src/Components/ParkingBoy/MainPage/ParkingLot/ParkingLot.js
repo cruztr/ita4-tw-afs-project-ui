@@ -3,12 +3,17 @@ import React from "react";
 import 'antd/dist/antd.css';
 import './ParkingLot.css';
 import OrderContainer from "../../../../State/ParkingBoy/MainPage/Order/Container.js";
+import CloseOrderContainer from '../../../../State/ParkingBoy/MainPage/CloseOrder/Container.js';
+import blockOccupied from "../Images/Block/block-occupied.png";
+import blockAvailable from "../Images/Block/block-available.png";
+import blockReserved from "../Images/Block/block-reserved.png";
 
 class ParkingLot extends React.Component{
     constructor(props){
         super(props);
         this.state = {
           showOrder : false,
+          showCloseOrder : false,
           blockPosition : "",
           value: '',
           dataSource: []
@@ -30,35 +35,63 @@ class ParkingLot extends React.Component{
       };
 
       getParkingBlocks = value =>{
-        console.log(value);
+        this.props.getAllParkingLots();
         this.props.getParkingLot(value);
       }
 
-      showOrder = (isVisible, blockPostion) => {
-          this.setState({
+      showOrder = (isVisible, blockPostion, status) => {
+        if(status == "AVAILABLE"){
+            this.setState({
               showOrder : isVisible,
               blockPosition : blockPostion
           })
+        }
+        else if (status == "OCCUPIED"){
+            this.setState({
+              showCloseOrder : isVisible,
+              blockPosition : blockPostion
+          })
+        }
       }
 
-      occupyParkingBlock = () =>{
-          this.props.occupyParkingBlock(this.state.blockPosition);
+      closeModal = () =>{
+        this.setState({
+          showOrder : false,
+          showCloseOrder : false
+        })
       }
 
-      showOrderModal = () => {
+
+      updateParkingBlock = (status) =>{
+          let param = {
+            status : status,
+            blockPosition :  this.state.blockPosition
+          }
+          this.props.updateParkingBlock(param);
+      }
+
+      showModal = () =>{
         if(this.state.showOrder)
-            return <OrderContainer isVisible={this.showOrder} parkingLot={this.props.parkingLot} blockPosition = {this.state.blockPosition} whenOrder={this.occupyParkingBlock} />;
+          return <OrderContainer isVisible={this.closeModal} parkingLot={this.props.parkingLot} blockPosition = {this.state.blockPosition} whenOrder={this.updateParkingBlock} />;
+
+        else if(this.state.showCloseOrder)
+            return <CloseOrderContainer isVisible={this.closeModal} parkingLot={this.props.parkingLot} blockPosition = {this.state.blockPosition} whenCloseOrder={this.updateParkingBlock} />;
         else return null;
       }
-    
+
       initializeParkingBlocks = () => {
-        const blocks = [];  
+        const blocks = [];
 
         this.props.parkingLot.parkingBlocks.sort((a, b) => (a.position > b.position)? 1: -1).forEach(block => {
+          let parkingBlock = "";
+               parkingBlock = <Col className="gutter-row" key={block.id} id={block.id} span={2}  onClick={() =>this.showOrder(true, block.position, block.status)}>
+                   <div className="block-image">
+                       <img className="parking-block" alt="parking block" src={block.status === "AVAILABLE" ? blockAvailable : (block.status === "OCCUPIED" ? blockOccupied : blockReserved)} />
+                       <h2>{block.position}</h2>
+                   </div>
+               </Col>
             blocks.push(
-              <Col className="gutter-row" key={block.id} id={block.id} span={2}  onClick={() =>this.showOrder(true, block.position)}>
-                <div className={block.status}>{block.position}</div>
-              </Col>
+              parkingBlock
             );
         })
         return blocks;
@@ -81,7 +114,7 @@ class ParkingLot extends React.Component{
         <Row gutter={[{ xs: 8, sm: 16, md: 24, lg: 32 }, 20]}>
           {this.initializeParkingBlocks()}
         </Row>
-      {this.showOrderModal()}
+      {this.showModal()}
       </div>
         );
       }

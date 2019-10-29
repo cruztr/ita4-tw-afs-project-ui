@@ -11,7 +11,7 @@ const { SubMenu } = Menu;
 
 class MainPage extends React.Component {
     render() {
-        alert(JSON.stringify(this.props.location.account))
+        // alert(JSON.stringify(this.props.location.account))
         return (
             <Router>
                 <Layout >
@@ -32,7 +32,8 @@ class MainPage extends React.Component {
                             </Menu.Item>
                             <Menu.Item key="5"><span>
                                 <Icon type="schedule" /></span>
-                                <span><Link to={'/reservations'} className="nav-link">Reservations </Link></span>
+                                {/* <span><Link to={'/reservations'} className="nav-link">Reservations </Link></span> */}
+                                <span>Reservations</span>
                             </Menu.Item>
                             <Menu.Item key="6">
                                 <Icon type="file" />
@@ -44,11 +45,11 @@ class MainPage extends React.Component {
                             </Menu.Item>
                         </Menu>
                     </Sider>
-                    <Layout>
-                        <Content style={{ margin: '0 16px' }}>
+                    <Layout className="content-layout">
+                        <Content>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                             </Breadcrumb>
-                            <div id="div-content">
+                            <div className="div-content">
                                 <Switch>
                                     <Route exact path='/'>Home</Route>
                                     <Route path='/parkingLot'> <ParkingLotContainer /></Route>
@@ -59,7 +60,7 @@ class MainPage extends React.Component {
                                 </Switch>
                             </div>
                         </Content>
-                        <Footer style={{ textAlign: 'center' }}>spark ©2019 Created by EUTeam</Footer>
+                        <Footer className="footer-layout" style={{ textAlign: 'center' }}>spark ©2019 Created by EUTeam</Footer>
                     </Layout>
                 </Layout>
             </Router>

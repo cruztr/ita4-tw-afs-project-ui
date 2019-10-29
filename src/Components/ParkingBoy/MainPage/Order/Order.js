@@ -17,9 +17,10 @@ export default class Order extends React.Component{
             parkingBlockPosition : this.props.blockPosition
         }
         this.props.createOrder(param);
-        this.props.isVisible(false);
-        this.props.whenOrder();
+        this.props.isVisible();
+        this.props.whenOrder("OCCUPIED");
     }
+
 
     plateNumberChange = (event) => this.setState({plateNumber: event.target.value});
     render(){

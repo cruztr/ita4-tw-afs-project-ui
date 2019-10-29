@@ -1,5 +1,14 @@
 @import '~antd/dist/antd.css';
 
+.content-layout {
+    background: #262b41;
+}
+
+.footer-layout {
+    background: #262b41;
+    color: white;
+}
+
 .ant-layout{
     min-height:  calc(100vh - 1px);
 }
@@ -9,9 +18,14 @@
     height: 101px
 }
 
-#div-content{
+.div-content{
+    margin-right: 15px;
+    background-color: white;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
     padding: 24px;
-    background-color:#fff;
     height: calc(100vh - 80px)
 }
 
