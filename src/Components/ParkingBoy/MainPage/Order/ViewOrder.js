@@ -8,7 +8,7 @@ export default class ViewOrder extends React.Component {
         super(props);
         this.state = {
             searchText: '',
-            isRefreshed: '',
+            closeOrder: '',
             columns: [
                 {
                     title: "Order Number",
@@ -108,7 +108,7 @@ export default class ViewOrder extends React.Component {
         confirm();
         this.setState({
             searchText: selectedKeys[0],
-            isRefreshed: ''
+            isRefreshed: null
         });
     };
 
@@ -116,7 +116,7 @@ export default class ViewOrder extends React.Component {
         clearFilters();
         this.setState({
             searchText: '',
-            isRefreshed: ''
+            isRefreshed: null
         });
     };
 
@@ -131,29 +131,50 @@ export default class ViewOrder extends React.Component {
                 plateNumber: order.plateNumber,
                 parkingBlockPosition: order.parkingBlockPosition,
             },
-            parkingBoyID: 14
+            parkingBoyID: 14,
+            orderNumber: order.orderNumber
         }
 
         this.props.closeOrder(param);
+        this.setState({ closeOrder: param });
+    }
 
-        const body = "Order " + order.orderNumber + " was successfully close. please click Ok to continue";
-        swal({
-            title: "Order Closed",
-            text: body,
-            icon: "success"
-        }).then(() => {
-            console.log("hello!")
-            this.props.viewOrder();
-            this.setState({ isRefreshed: 'Refreshed' });
-        });
+    validateStatus(){
+        const status = this.props.orders.status;
+        if(status !== null && this.state.closeOrder !== null) {
+            if(status === true){
+                const body = "Order " + this.state.closeOrder.orderNumber + " was successfully close. please click Ok to continue";
+                swal({
+                    title: "Order Closed",
+                    text: body,
+                    icon: "success"
+                }).then(() => {
+                    this.props.viewOrder();
+                    this.setState({ closeOrder: null });
+                });
+            }
+            else {
+                const body = "Order " + this.state.closeOrder.orderNumber + " was not successfully close.";
+                swal({
+                    title: "Exceptions",
+                    text: body,
+                    icon: "warning"
+                }).then(() => {
+                    this.props.viewOrder();
+                    this.setState({closeOrder: null});
+                });
+            }
+        }
     }
 
 
     render(){
+        const validate = this.validateStatus();
         return(
             <div>
+                {validate}
                 <h2>Open Orders</h2>
-                <Table columns={this.state.columns} dataSource={this.props.orderListDetails} size="medium"></Table>
+                <Table columns={this.state.columns} dataSource={this.props.orders.orderListDetails} size="medium"></Table>
             </div>
         )
     }
