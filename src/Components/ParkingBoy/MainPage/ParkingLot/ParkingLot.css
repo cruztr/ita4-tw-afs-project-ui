@@ -1,0 +1,27 @@
+.gutter-example .ant-row > div {
+    background: transparent;
+    border: 0;
+  }
+
+  .parking-block {
+    padding: 5px 0;
+    height: 140px;
+  }
+
+  .block-image {
+    position: relative;
+    width: 150%;
+  }
+
+  .block-image img {
+    position: relative;
+    width: 100%;
+  }
+
+  .block-image h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #262b41;
+  }

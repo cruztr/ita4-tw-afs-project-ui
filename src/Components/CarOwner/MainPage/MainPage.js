@@ -1,20 +1,27 @@
-import {Breadcrumb, Icon, Layout, Menu} from 'antd';
+import {Breadcrumb, Icon, Layout, Menu, Spin, Statistic} from 'antd';
 import React from "react";
-import ParkingLotContainer from "../../../State/ParkingBoy/MainPage/ParkingLot/Container.js";
-import ReservationContainer from "../../../State/ParkingBoy/MainPage/Reservations/Container.js";
-import LogoBordered from "./Images/logowhitebordered.png"
+import Logo from "../Images/logowhitebordered.png";
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import LogoBordered from "../../ParkingBoy/MainPage/Images/logowhitebordered.png";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
+const { Countdown } = Statistic;
 
 class MainPage extends React.Component {
+    state = { loading: true };
+    onFinish =() =>{
+        this.setState({ loading: false });
+    };
+    deadline = Date.now() + 1 * 10 * 10 * 13 * 2 + 1 * 30;
+
     render() {
         // alert(JSON.stringify(this.props.location.account))
         return (
+            <Spin spinning={this.state.loading}>
             <Router>
-                <Layout >
+                <Layout>
                     <Sider className="slider2" >
                         <div className="logo"><img width="150px" alt="Spark" src={LogoBordered}/></div>
                         <Menu theme="dark" className="mainMenu" defaultSelectedKeys={['1']} mode="inline" >
@@ -22,22 +29,13 @@ class MainPage extends React.Component {
                                 <Icon type="dashboard" /></span>
                                 <span><Link to={'/'} className="nav-link">Home </Link></span>
                             </Menu.Item>
-                            <Menu.Item key="3">
-                                <span><Icon type="car" /></span>
-                                <span><Link to={'/parkingLot'} className="nav-link">Parking Lots </Link></span>
-                            </Menu.Item>
-                            <Menu.Item key="4"><span>
-                                <Icon type="carry-out" /></span>
-                                <span><Link to={'/orders'} className="nav-link">Orders </Link></span>
-                            </Menu.Item>
                             <Menu.Item key="5"><span>
                                 <Icon type="schedule" /></span>
-                                {/* <span><Link to={'/reservations'} className="nav-link">Reservations </Link></span> */}
-                                <span>Reservations</span>
+                                <span><Link to={'/reservations'} className="nav-link">Reservations </Link></span>
                             </Menu.Item>
                             <Menu.Item key="6">
                                 <Icon type="file" />
-                                <span><Link to={'/logs'} className="nav-link">Logs</Link></span>
+                                <span><Link to={'/logs'} className="nav-link">History</Link></span>
                             </Menu.Item>
                             <Menu.Item key="7">
                                 <Icon type="info-circle" />
@@ -45,27 +43,48 @@ class MainPage extends React.Component {
                             </Menu.Item>
                         </Menu>
                     </Sider>
-                    <Layout className="content-layout">
-                        <Content>
+                    <Layout>
+                        <Content style={{ margin: '0 16px' }}>
+                            <div className={"invi"}>
+                                <Countdown title="Countdown" value={this.deadline} onFinish={this.onFinish} />
+                            </div>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                             </Breadcrumb>
-                            <div className="div-content">
+                            <div id="div-content">
                                 <Switch>
                                     <Route exact path='/'>Home</Route>
-                                    <Route path='/parkingLot'> <ParkingLotContainer /></Route>
+                                    <Route path='/parkingLot'>Parking Lots</Route>
                                     <Route path='/orders'> Orders </Route>
-                                    <Route path='/reservations'> <ReservationContainer/></Route>
-                                    <Route path='/logs'> Logs </Route>
+                                    <Route path='/reservations'> Reservations</Route>
+                                    <Route path='/logs'> History </Route>
                                     <Route path='/about'> About </Route>
                                 </Switch>
                             </div>
                         </Content>
-                        <Footer className="footer-layout" style={{ textAlign: 'center' }}>spark ©2019 Created by EUTeam</Footer>
+                        <Footer style={{ textAlign: 'center' }}>spark ©2019 Created by EUTeam</Footer>
                     </Layout>
                 </Layout>
             </Router>
+
+            </Spin>
         );
     }
 }
 
 export default MainPage;
+
+
+// import React from "react";
+// import OrderContainer from "../../../State/ParkingBoy/MainPage/Order/Container.js";
+//
+// class MainPage extends React.Component{
+//     render(){
+//         return(
+//             <div className="parkingboy-main-page">
+//                 <OrderContainer />
+//             </div>
+//         );
+//     }
+// }
+//
+// export default MainPage;
