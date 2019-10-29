@@ -1,57 +1,60 @@
-import {Table, Popconfirm, Input, Button, Icon} from 'antd';
+import {Button, Icon, Input, Popconfirm, Table} from 'antd'
+import Highlighter from 'react-highlight-words';
+import 'antd/dist/antd.css';
 import React from 'react';
-import Highlighter from "react-highlight-words";
+import ReservationResource from "../../../../Api/ReservationResource";
+import ParkingLotResource from "../../../../Api/ParkingLotResource";
 
-export default class ViewOrder extends React.Component {
-    constructor(props) {
+export default class Reservations extends React.Component{
+    intervalID;
+
+    constructor(props){
         super(props);
         this.state = {
             searchText: '',
             columns: [
                 {
-                    title: "Order Number",
-                    dataIndex: "orderNumber",
-                    key: "orderNumber"
-                    // ...this.getColumnSearchProps('plateNumber')
+                    title: "Parking Lot Name",
+                    dataIndex: "name",
+                    key: "name",
+                    ...this.getColumnSearchProps('name')
                 },
                 {
-                    title: "Plate Number",
-                    dataIndex: "plateNumber",
-                    key: "plateNumber",
-                    // ...this.getColumnSearchProps('plateNumber')
+                    title: "Location",
+                    dataIndex: "location",
+                    key: "location",
+                    ...this.getColumnSearchProps('location')
                 },
                 {
-                    title: "ParkingLot Name",
-                    dataIndex: "parkingLotName",
-                    key: "parkingLotName",
-                    // ...this.getColumnSearchProps('plateNumber')
-                },
-                {
-                    title: "Price",
-                    dataIndex: "price",
-                    key: "price",
-                    // ...this.getColumnSearchProps('plateNumber')
-                },
-                {
-                    title: "Time In",
-                    dataIndex: "timeIn",
-                    key: "timeIn",
-                    // ...this.getColumnSearchProps('plateNumber')
+                    title: "Rate",
+                    dataIndex: "rate",
+                    key: "rate"
                 },
                 {
                     title: "Action",
                     key: "action",
-                    render: (text, order) => (
+                    render: (text,parkingLot) => (
                         <span>
-                            <Popconfirm title="Sure to confirm?" onConfirm={() => {
-                                {this.closeOrder(order)}
-                            }}> <a>Close Order</a>
+                            <Popconfirm title="Sure to reserve?" onConfirm={() => {
+                                {this.createReservation(parkingLot)}
+                            }}>
+                                <a>Reserve</a>
+
                             </Popconfirm>
                         </span>
                     )
                 }
             ]
         }
+    }
+
+    createReservation = parkingLot => {
+        const param = {
+            carOwnerId: this.props.carOwner.id,
+            parkingLotId: parkingLot.id,
+            reservedTime: "14:00:00"
+        }
+        this.props.createReservation(param);
     }
 
     getColumnSearchProps = dataIndex => ({
@@ -115,29 +118,27 @@ export default class ViewOrder extends React.Component {
     };
 
     componentDidMount(){
-        this.props.viewOrder();
+        this.getData();
     }
 
-
-    closeOrder = order => {
-        const param = {
-            orderDetails:{
-                parkingLotId: order.parkingLotId,
-                plateNumber: order.plateNumber,
-                parkingBlockPosition: order.parkingBlockPosition,
-            },
-            parkingBoyID: 14
-        }
-        this.props.closeOrder(param);
+    getData = () => {
+        ParkingLotResource.getAvailableParkingLots()
+            .then(res => res.json()).then(res => {
+            this.props.refreshContent(res);
+            // this.intervalID = setTimeout(this.getData.bind(this), 5000);
+        });
     }
 
+    componentWillUnmount() {
+        // clearTimeout(this.intervalID);
+    }
 
     render(){
         return(
-            <div>
-                <h2>Open Orders</h2>
-                <Table columns={this.state.columns} dataSource={this.props.orderListDetails} size="medium"></Table>
+            <div id="containerID" className="container">
+                <h2>Available Parking Lot List</h2>
+                <Table columns={this.state.columns} dataSource={this.props.parkingLots} size="medium"></Table>
             </div>
-        )
+        );
     }
 }

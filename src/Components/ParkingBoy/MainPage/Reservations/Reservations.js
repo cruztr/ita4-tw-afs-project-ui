@@ -54,9 +54,10 @@ export default class Reservations extends React.Component{
 
     createOrder = reservation => {
         const param = {
-            parkingLotID: reservation.parkingLot.parkingLotID,
-            parkingBoyID: this.props.parkingBoy.parkingBoyID,
-            parkingBlockPosition: reservation.parkingBlockPosition,
+            parkingLotID: reservation.parkingLotId,
+            parkingBoyID: this.props.account.id,
+            plateNumber: reservation.plateNumber,
+            parkingBlockPosition: reservation.position,
             reservation: reservation
         }
         this.props.createOrder(param);

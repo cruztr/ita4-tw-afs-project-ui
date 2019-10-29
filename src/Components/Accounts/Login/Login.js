@@ -63,7 +63,7 @@ class Login extends React.Component{
     goLogin = () => {
         if(this.props.accounts.account.id){
             return <Redirect to= {{
-                pathname: '/mainpage',
+                pathname: '/mainpageCarOwner',
                 account:this.props.accounts.account
             }}
          />
