@@ -1,7 +1,8 @@
 import React from "react";
 import 'antd/dist/antd.css';
 import './Signup.css';
-import {Button, Checkbox, Form, Input, Select, Card, Modal, Col, notification, Icon} from 'antd';
+import {Button, Checkbox, Form, Input, Select, Card, Modal, Col, notification, Icon, Drawer} from 'antd';
+import EULA from '../Signup/EULA'
 
 const { Option } = Select;
 
@@ -9,7 +10,8 @@ class Signup extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            isSuccessful: false
+            isSuccessful: false,
+            visible: false
         }
     }
 
@@ -25,6 +27,33 @@ class Signup extends React.Component {
             icon: <Icon type="smile" style={{ color: '#108ee9' }} />,
         });
     };
+
+    onClose = () => {
+        this.setState({
+            visible: false,
+        });
+    };
+
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    };
+
+    handleOk = e => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    };
+
+    handleCancel = e => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    };
+
 
     handleSubmit = e => {
         e.preventDefault();
@@ -156,7 +185,7 @@ class Signup extends React.Component {
                             valuePropName: 'checked',
                         })(
                             <Checkbox>
-                                I have read the <a href="">agreement</a>
+                                <span>I have read the <Button className={"buttonEULA"}  onClick={this.showModal} type="link" block> agreement.</Button></span>
                             </Checkbox>,
                         )}
                     </Form.Item>
@@ -165,13 +194,22 @@ class Signup extends React.Component {
                         <Button type="primary" htmlType="submit" >
                             Register
                         </Button>
-                        <Button  style={{ marginLeft: 8 }} type="primary" htmlType="submit" onClick={this.handleCancelClick} >
+                        <Button style={{ marginLeft: 8 }} type="primary" htmlType="submit" onClick={this.handleCancelClick} >
                             Cancel
                         </Button>
                         </Col>
                     </Form.Item>
                 </Form>
-        </div>
+                <Drawer
+                    title="End-user License Agreement"
+                    visible={this.state.visible}
+                    onClose={this.onClose}
+                    width={600}
+                >
+                    <EULA />
+                </Drawer>
+
+            </div>
         );
     }
 }

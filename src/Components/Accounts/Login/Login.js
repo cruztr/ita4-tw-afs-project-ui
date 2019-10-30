@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Card, Input, Layout, Modal } from "antd";
+import {Button, Card, Drawer, Input, Layout, Modal} from "antd";
 import 'antd/dist/antd.css';
 import './Login.css';
 import sparkImage from './Images/logowhitebordered.png';
@@ -26,7 +26,7 @@ class Login extends React.Component{
         }
     }
 
-    showModal = () => {
+    showDrawer = () => {
     const thisState = this.state;
     this.setState({
           ...thisState,
@@ -183,12 +183,14 @@ class Login extends React.Component{
                                                 <div className={"Div-btn"}>
                                                     <Button className={"Boy-btn"} onClick = {this.setUserParkingBoy}>I am a Parking Boy</Button>
                                                 </div>
-                                                <p className={"Ps2"}>Register as Car Owner? <Button onClick={this.showModal} type="link" block> Sign-Up </Button></p>
+                                                <p className={"Ps2"}>Register as Car Owner? <Button onClick={this.showDrawer} type="link" block> Sign-Up </Button></p>
                                                     <Modal
                                                         title="Sign Up"
                                                         visible={this.state.visible}
                                                         footer={null}
-                                                        closable={false}
+                                                        // closable={false}
+                                                        width={600}
+                                                        onClose={this.handleCancel}
                                                     >
                                                     <SignUpContainer closeModal={this.handleCancel} registerCarOwner={this.signUpCarOwner} />
                                                 </Modal>

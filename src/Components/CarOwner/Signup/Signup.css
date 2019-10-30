@@ -1,29 +1,46 @@
-.Spark-Logo{
-    width: 120px;
-    /*display: block;*/
-    margin-left: auto;
-    margin-right: auto;
-}
+/*.Spark-Logo{*/
+/*    width: 120px;*/
+/*    !*display: block;*!*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+/*}*/
 .SignUp-Whole {
     align-items: center;
     justify-content: center;
 }
 
-.SignUp-Container {
-    background-color:white;
-    align-content: center;
-    min-height: 80vh;
-    width: 100vh;
-    border-radius: 25px;
-}
+/*.SignUp-Container {*/
+/*    background-color:white;*/
+/*    align-content: center;*/
+/*    min-height: 80vh;*/
+/*    width: 100vh;*/
+/*    border-radius: 25px;*/
+/*}*/
 
-.SignUp-Container-Input{
-    margin: 50px;
-}
+/*.SignUp-Container-Input{*/
+/*    margin: 50px;*/
+/*}*/
 
 /*.SignUp-Container-Button{*/
 /*    margin-top: 30px;*/
 /*}*/
+
+.buttonEULA{
+    margin-left: -22px;
+    position: absolute;
+    margin-top: 3px;
+}
+
+.EULA{
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #ebedf0;
+    border-radius: 2px;
+    padding: 48px;
+    text-align: center;
+    background: #fafafa;
+}
 
 .SignUp-Button{
     font-size: calc(3px + 1.5vmin);
