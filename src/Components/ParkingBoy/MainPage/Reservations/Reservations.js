@@ -14,13 +14,20 @@ export default class Reservations extends React.Component{
                 {
                     title: "Reservation Number",
                     dataIndex: "reservationNumber",
-                    key: "reservationNumber"
+                    key: "reservationNumber",
+                    ...this.getColumnSearchProps('reservationNumber'),
                 },
                 {
                     title: "Location",
                     dataIndex: "parkingLotName",
                     key: "parkingLotName",
                     ...this.getColumnSearchProps('parkingLotName'),
+                },
+                {
+                    title: "Block Position",
+                    dataIndex: "position",
+                    key: "position",
+                    ...this.getColumnSearchProps('position')
                 },
                 {
                     title: "Driver Name",
