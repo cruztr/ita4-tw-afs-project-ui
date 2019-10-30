@@ -40,7 +40,7 @@ class ParkingLot extends React.Component{
       }
 
       showOrder = (isVisible, blockPostion, status) => {
-        if(status == "AVAILABLE"){
+        if(status == "AVAILABLE" || status == "RESERVED"){
             this.setState({
               showOrder : isVisible,
               blockPosition : blockPostion

@@ -35,8 +35,13 @@ export default {
             body: JSON.stringify({
             })
         }),
-    getMyReservation: (carownerId) => fetch(
-        PROTOCOL_TO_MAIN_PATH +"/carOwner/"+carownerId,{
+        getMyReservation: (carownerId) => fetch(
+            PROTOCOL_TO_MAIN_PATH +"/carOwner/"+carownerId,{
+                mode: 'cors'
+            }),
+    getCarOwner: (id) => fetch(
+        PROTOCOL_TO_MAIN_PATH +"/carOwner/getById/"+id,{
             mode: 'cors'
-        }),
+        })
 }
+

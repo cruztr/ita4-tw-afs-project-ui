@@ -5,17 +5,32 @@ import React from 'react';
 export default class Order extends React.Component{
     constructor(props){
         super(props);
+        let parkingBlock = this.props.parkingLot.parkingBlocks.filter(parkingBlock => parkingBlock.position == this.props.blockPosition)[0];
         this.state = {
             plateNumber: '',
-            disableButton: true
+            disableButton: true,
+            status: parkingBlock.status
+        }
+        this.getReservation();
+    }
+    getReservation = () => {
+        if(this.state.status == "RESERVED"){
+            const param = {
+                parkingLotId : this.props.parkingLot.id,
+                blockPosition : this.props.blockPosition
+            }
+            this.props.getReservation(param);
         }
     }
+
+
     createOrder = () =>{
         const param = {
-            plateNumber: this.state.plateNumber,
+            plateNumber: this.state.status == "RESERVED" ? this.props.carOwner.plateNumber : this.state.plateNumber,
             parkingLotID: this.props.parkingLot.id,
             parkingBoyID: this.props.account.id,
-            parkingBlockPosition : this.props.blockPosition
+            parkingBlockPosition : this.props.blockPosition,
+            reservation : this.props.reservation
         }
         this.props.createOrder(param);
         this.props.isVisible();
@@ -25,8 +40,11 @@ export default class Order extends React.Component{
 
     plateNumberChange = (event) => {
         this.setState({plateNumber: event.target.value});
-        if(event.target.value){
+        if(event.target.value.length>0){
             this.setState({disableButton: false});
+        }
+        else{
+            this.setState({disableButton: true});
         }
     }
     render(){
@@ -44,13 +62,14 @@ export default class Order extends React.Component{
                         <Button className="Cancel" onClick={() => this.props.isVisible(false)}>
                             Cancel
                         </Button>,
-                        <Button className="Create-Order" key="submit" type="primary" disabled={this.state.disableButton} onClick={this.createOrder}>Create Order</Button>
+                        <Button className="Create-Order" key="submit" type="primary" disabled={this.state.status == "RESERVED" ? false:this.state.disableButton} onClick={this.createOrder}>Create Order</Button>
                     ]}
                  >
                     <Row type="flex" justify="center">
                         <Col span={8}>PLATE NUMBER:</Col>
-                        <Col span={12}><Input placeholder="Plate Number" value={this.state.plateNumber}
-                                              onChange={this.plateNumberChange} /></Col>
+                        <Col span={12}><Input placeholder="Plate Number" value={this.state.status == "RESERVED" ? this.props.carOwner.plateNumber : this.state.plateNumber}
+                                              onChange={this.plateNumberChange}
+                                              disabled={this.state.status == "RESERVED" ? true : false} /></Col>
                     </Row>
                     <Row type="flex" justify="center">
                         <Col span={8}>PARKING LOT:</Col>

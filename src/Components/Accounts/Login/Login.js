@@ -8,8 +8,10 @@ import SignUpContainer from '../../CarOwner/Signup/Signup'
 import { Redirect, Link } from 'react-router-dom'
 import CheckOrder from '../NonUser/CheckOrder'
 import OrderNotExist from "../NonUser/OrderNotExist";
+import swal from "sweetalert";
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
+
 
 class Login extends React.Component{
     constructor(props){
@@ -52,6 +54,12 @@ class Login extends React.Component{
             modalVisible : false
         });
     };
+
+    componentWillReceiveProps = nextProps => {
+       if(nextProps.accounts.account.code === 404){
+           swal( "Validation","Username or password incorrect, please try again.","warning")
+       }
+    }
 
     setUserCarOwner = () => {
         this.props.loginCarOwner(this.state);
