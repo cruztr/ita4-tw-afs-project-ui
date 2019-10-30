@@ -89,12 +89,6 @@ class MainPage extends React.Component {
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="6">
-                                <Link to={'/about'} className="nav-link">
-                                    <Icon type="info-circle" />
-                                    <span>About</span>
-                                </Link>
-                            </Menu.Item>
-                            <Menu.Item key="7">
                                 <Link to={'/logout'} className="nav-link">
                                     <Icon type="info-circle" />
                                     <span>Log Out</span>
@@ -113,12 +107,11 @@ class MainPage extends React.Component {
                                     <Route path='/orders'> Orders <ViewOrderContainer /></Route>
                                     <Route path='/reservations'> <ReservationContainer account={this.props.location.account}/></Route>
                                     <Route path='/logs'> <LogsContainer account={this.props.location.account} typeOfUser={this.props.location.typeOfUser}/> </Route>
-                                    <Route path='/about'> About </Route>
                                     <Route path="/logout" render={() => this.showLogoutBox()} ></Route>
                                 </Switch>
                             </div>
                         </Content>
-                        <Footer className="footer-layout">spark ©2019 Created by EUTeam</Footer>
+                        <Footer className="footer-layout">spark ©2019 Created by EUTeam | ITA 4 | TWS</Footer>
                     </Layout>
                 </Layout>
             </Router>
