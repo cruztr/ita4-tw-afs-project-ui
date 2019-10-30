@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import React from 'react';
 import ParkingLotResource from "../../../../Api/ParkingLotResource";
 import CarOwnerResources from "../../../../Api/CarOwnerResources";
+import swal from "sweetalert";
 
 export default class Reservations extends React.Component{
     intervalID;
@@ -96,7 +97,12 @@ export default class Reservations extends React.Component{
 
     createReservation = parkingLot => {
         if(this.props.reservation.reservationNumber) {
-            message.error('You have pending reservation');
+            // message.error('You have pending reservation');
+            swal({
+                title: "You have a pending reservation",
+                text: "Please check reservation.",
+                icon: "warning"
+            })
         }
         else{
             let today = new Date();
@@ -204,7 +210,11 @@ export default class Reservations extends React.Component{
             });
         }
         else {
-            message.error('You have no pending');
+            // message.error('You have no pending reservation');
+            swal({
+                title: "You have no pending reservation",
+                icon: "warning"
+            })
 
         }
     };
