@@ -60,6 +60,11 @@ class Login extends React.Component{
        if(nextProps.accounts.account.code === 404){
            swal( "Validation","Username or password incorrect, please try again.","warning")
        }
+       else if (nextProps.accounts.order){
+           this.setState({
+               accounts: null
+           })
+       }
        else{
            this.setState({
                accounts: nextProps.accounts.account
@@ -88,17 +93,21 @@ class Login extends React.Component{
 
     checkState = () => {
         if(this.props.accounts.order.orderId != this.state.orderId){
-            if(this.state.modalVisible)
-                return <OrderNotExist order = {this.props.accounts.order} isVisible={this.state.modalVisible} handleClose={this.closeModal}/>
+            if(this.state.modalVisible) {
+                return <OrderNotExist order={this.props.accounts.order} isVisible={this.state.modalVisible}
+                                      handleClose={this.closeModal}/>
+            }
         }
         if(this.props.accounts.order.orderId == this.state.orderId){
-            if(this.state.modalVisible)
-             return <CheckOrder order = {this.props.accounts.order} isVisible={this.state.modalVisible} handleClose={this.closeModal} />
+            if(this.state.modalVisible) {
+                return <CheckOrder order={this.props.accounts.order} isVisible={this.state.modalVisible}
+                                   handleClose={this.closeModal}/>
+            }
         }
         else if (this.props.accounts.signUpCredentials.id) {
             return <Redirect to= {{
                 pathname: 'login',
-                account: this.props.accounts.signUpCredentials
+                accounts: this.props.accounts.signUpCredentials
             }}
             />
         }
