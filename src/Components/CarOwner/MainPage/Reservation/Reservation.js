@@ -225,7 +225,7 @@ export default class Reservations extends React.Component{
 
             return (
                 <div>
-                    <Button type="primary" onClick={this.getCurrentReservation}>
+                    <Button style={{float: "right"}} type="primary" onClick={this.getCurrentReservation}>
                         View Reservation
                     </Button>
                     <Drawer
