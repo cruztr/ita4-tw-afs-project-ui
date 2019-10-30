@@ -1,7 +1,8 @@
 const initialState = {
     status: "",
     reservation : {},
-    carOwner : {}
+    carOwner : {},
+    orderList: []
 };
 
 export default (state = initialState, { type, payload}) => {
@@ -15,6 +16,9 @@ export default (state = initialState, { type, payload}) => {
         case "GET_CAR_OWNER":
                 return {...state, 
                     carOwner: payload}
+        case "CREATE_ORDER":
+            return {...state, 
+                orderList: [...state.orderList, payload]}
         default:
             return state;
     }
