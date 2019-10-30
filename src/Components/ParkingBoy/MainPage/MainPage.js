@@ -40,7 +40,6 @@ class MainPage extends React.Component {
                 swal("Thanks for using Sparks!", {
                     icon: "success",
                 }).then(() =>{this.goLogout()})
-
             }
         })
     }
@@ -60,7 +59,7 @@ class MainPage extends React.Component {
                         {this.state.collapsed ? smallLogo : largeLogo}
                         <Menu mode="inline" theme="dark" className="mainMenu" defaultSelectedKeys={['1']} mode="inline" >
                             <Menu.Item key="2">
-                                <Link to={'/'} className="nav-link">
+                                <Link to={'/mainpage'} className="nav-link">
                                     <Icon type="dashboard" />
                                     <span>Home </span>
                                 </Link>
@@ -109,7 +108,7 @@ class MainPage extends React.Component {
                             </Breadcrumb>
                             <div className="div-content">
                                 <Switch>
-                                    <Route exact path='/'><Home user={this.props.location.account} /></Route>
+                                    <Route exact path='/mainpage'><Home user={this.props.location.account} /></Route>
                                     <Route path='/parkingLot'> <ParkingLotContainer account={this.props.location.account}/></Route>
                                     <Route path='/orders'> Orders <ViewOrderContainer /></Route>
                                     <Route path='/reservations'> <ReservationContainer account={this.props.location.account}/></Route>
