@@ -145,7 +145,7 @@ class Signup extends React.Component {
                     </Form.Item>
                     <Form.Item label={<span>Username&nbsp;</span>}>
                         {getFieldDecorator('username', {
-                            rules: [{ required: true, min: 6, message: 'Please input a username!', whitespace: true }],
+                            rules: [{ required: true, min: 6, message: 'Please input a username with a minimum of 6 characters!', whitespace: true }],
                         })(<Input/>)}
                     </Form.Item>
                     <Form.Item label={<span>Plate Number&nbsp;</span>}>
