@@ -27,4 +27,16 @@ export default {
                 "reservedTime": reservation.reservedTime
             })
         }),
+    cancelReservation: (reservationId) => fetch(
+        PROTOCOL_TO_MAIN_PATH +"/carOwner/reservation/"+reservationId,{
+            mode: 'cors',
+            method: 'POST',
+            headers: new Headers({'Content-Type': 'application/json'}),
+            body: JSON.stringify({
+            })
+        }),
+    getMyReservation: (carownerId) => fetch(
+        PROTOCOL_TO_MAIN_PATH +"/carOwner/"+carownerId,{
+            mode: 'cors'
+        }),
 }
