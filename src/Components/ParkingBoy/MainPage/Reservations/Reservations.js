@@ -13,9 +13,17 @@ export default class Reservations extends React.Component{
             searchText: '',
             columns: [
                 {
-                    title: "Reservation Number.",
+                    title: "Reservation Number",
                     dataIndex: "reservationNumber",
                     key: "reservationNumber"
+                },
+                {
+                    title: "Location",
+                    dataIndex: "parkingLotName",
+                    key: "parkingLotName",
+                    ...this.getColumnSearchProps('parkingLotName'),
+                    filters: this.props.filters
+                    // filters:
                 },
                 {
                     title: "Driver Name",
@@ -32,7 +40,9 @@ export default class Reservations extends React.Component{
                 {
                     title: "Reserved Time",
                     dataIndex: "reservedTime",
-                    key: "reservedTime"
+                    key: "reservedTime",
+                    sorter: (a, b) => a.reservedTime.length - b.reservedTime.length,
+                    sortDirections: ['descend', 'ascend']
                 },
                 {
                     title: "Action",
@@ -131,8 +141,31 @@ export default class Reservations extends React.Component{
         ReservationResource.getAllReservation()
             .then(res => res.json()).then(res => {
             this.props.refreshContent(res);
+            this.getLocationFilters();
             // this.intervalID = setTimeout(this.getData.bind(this), 5000);
         });
+    }
+
+    getLocationFilters = () => {
+        let filters = [];
+
+        let filterList = this.props.reservationList.map(reservation => reservation.parkingLotName);
+        let distinctList = [...new Set(filterList)];
+
+        distinctList.forEach(parkingLotName => {
+                filters.push((
+                    {
+                        text: parkingLotName,
+                        value: parkingLotName
+                    })
+                )
+        });
+
+        // const filterData = () => formatter => distinctList.map(parkingLotName => ({
+        //
+        // }))
+
+        this.props.createFilters(filters);
     }
 
     componentWillUnmount() {
