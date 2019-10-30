@@ -1,6 +1,7 @@
 const initialState = {
     reservation: {},
-    parkingLots: []
+    parkingLots: [],
+    filterType: 'all',
 };
 
 export default (state = initialState, { type, payload}) => {

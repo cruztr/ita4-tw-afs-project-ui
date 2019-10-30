@@ -185,7 +185,7 @@ export default class Reservations extends React.Component{
 
     getData = () => {
         this.props.getMyReservation(this.props.account.id);
-        ParkingLotResource.getAvailableParkingLots()
+        ParkingLotResource.getParkingLots(this.props.filterType)
             .then(res => res.json()).then(res => {
             this.props.refreshContent(res);
             // this.intervalID = setTimeout(this.getData.bind(this), 5000);
