@@ -29,9 +29,14 @@ export default class ViewOrder extends React.Component {
                     ...this.getColumnSearchProps('parkingLotName')
                 },
                 {
-                    title: "Price",
+                    title: "Price Rate",
                     dataIndex: "price",
                     key: "price"
+                },
+                {
+                    title: "Total Cost",
+                    dataIndex: "cost",
+                    key: "cost"
                 },
                 {
                     title: "Time In",
