@@ -50,8 +50,7 @@ class MainPage extends React.Component {
     render() {
         const smallLogo = <div className="logo"><img width="60px" alt="Spark" src={LogoSmall}/></div>;
         const largeLogo = <div className="logo"><img width="170px" alt="Spark" src={LogoBordered}/></div>;
-
-        //  alert(JSON.stringify(this.props.location.account))
+        
         return (
             <Router>
                 <Layout >

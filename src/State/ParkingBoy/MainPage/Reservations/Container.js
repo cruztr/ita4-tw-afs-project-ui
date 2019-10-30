@@ -6,7 +6,8 @@ import ReservationResource from "../../../../Api/ReservationResource";
 
 const mapStateToProps = state => ({
     reservationList: state.reservationReducer.reservationList,
-    orderList: state.reservationReducer.orderList
+    orderList: state.reservationReducer.orderList,
+    filters: state.reservationReducer.filters
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -34,7 +35,13 @@ const mapDispatchToProps = dispatch => ({
                     payload: reservation})
             })
         })
+    },
 
+    createFilters: (filters) => {
+        dispatch({
+            type: 'CREATE_PARKING_LOT_FILTERS',
+            payload: filters
+        })
     }
 
 });

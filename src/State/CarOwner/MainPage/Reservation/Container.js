@@ -4,6 +4,7 @@ import OrderResource from "../../../../Api/OrderResource";
 import ReservationResource from "../../../../Api/ReservationResource";
 import CarOwnerResources from "../../../../Api/CarOwnerResources";
 import { message } from 'antd';
+import swal from 'sweetalert';
 
 
 const mapStateToProps = state => ({
@@ -35,14 +36,18 @@ const mapDispatchToProps = dispatch => ({
                     type: 'CREATE_RESERVATION',
                     payload: res
                 })
-                message.success('You have successfully created a reservation.');
-                // .then(
-                // ReservationResource.getAllReservation()
-                //     .then(reservationJson => reservationJson.json()).then(reservation => {
-                //     dispatch({
-                //         type: "REFRESH",
-                //         payload: reservation})
-                // })
+                swal({
+                    title: "Reservation Created",
+                    text: "You have successfully created a reservation. This reservation is only valid within an hour",
+                    icon: "success"
+                })
+                    // .then(
+                    // ReservationResource.getAllReservation()
+                    //     .then(reservationJson => reservationJson.json()).then(reservation => {
+                    //     dispatch({
+                    //         type: "REFRESH",
+                    //         payload: reservation})
+                    // })
                 // )
             }).catch(() => {
             message.error('Creating reservation failed.');
