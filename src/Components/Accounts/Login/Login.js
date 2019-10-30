@@ -91,11 +91,11 @@ class Login extends React.Component{
     }
 
     checkOrder = () => {
-        if(this.props.accounts.order.orderId !== this.state.orderId){
+        if(this.props.accounts.order.orderId != this.state.orderId){
             if(this.state.modalVisible)
                 return <OrderNotExist order = {this.props.accounts.order} isVisible={this.state.modalVisible} handleClose={this.closeModal}/>
         }
-        if(this.props.accounts.order.orderId === this.state.orderId){
+        if(this.props.accounts.order.orderId == this.state.orderId){
             if(this.state.modalVisible)
              return <CheckOrder order = {this.props.accounts.order} isVisible={this.state.modalVisible} handleClose={this.closeModal} />
         }
