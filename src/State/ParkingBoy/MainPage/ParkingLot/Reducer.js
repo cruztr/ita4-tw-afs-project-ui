@@ -19,6 +19,10 @@ export default (state = initialState, { type, payload}) => {
             return {allParkingLots: payload.parkingLots,
                  parkingLot:payload.parkingLot
         }
+        case "CLEAR_PARKING_LOT":
+            return {...state,
+                parkingLot: {parkingBlocks:[]}
+            }
         default:
             return state;
     }

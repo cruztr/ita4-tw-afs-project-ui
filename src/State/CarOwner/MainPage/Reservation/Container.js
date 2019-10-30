@@ -61,6 +61,11 @@ const mapDispatchToProps = dispatch => ({
                 dispatch({
                     type: 'CANCEL_RESERVATION'
                 })
+                swal({
+                    title: "Reservation Cancelled",
+                    text: "You have successfully cancelled a reservation.",
+                    icon: "success"
+                })
             })
 },
     getMyReservation: (accountId) =>{
