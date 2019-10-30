@@ -60,25 +60,25 @@ class MainPage extends React.Component {
                     >
                         {this.state.collapsed ? smallLogo : largeLogo}
                         <Menu theme="dark" className="mainMenu" defaultSelectedKeys={['1']} mode="inline" >
-                            <Menu.Item key="2">
+                            <Menu.Item key="1">
                                 <Link to={'/mainpageCarOwner'} className="nav-link">
                                     <Icon type="schedule" />
                                     <span>Reservations</span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="3">
+                            <Menu.Item key="2">
                                 <Link to={'/logs'} className="nav-link">
                                     <Icon type="file" />
                                     <span>History</span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="4">
+                            <Menu.Item key="3">
                                 <Link to={'/about'} className="nav-link">
                                     <Icon type="info-circle" />
                                     <span>About</span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="5">
+                            <Menu.Item key="4">
                                 <Link to={'/logout'} className="nav-link">
                                     <Icon type="info-circle" />
                                     <span>Log Out</span>

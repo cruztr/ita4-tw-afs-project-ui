@@ -58,43 +58,43 @@ class MainPage extends React.Component {
                     >
                         {this.state.collapsed ? smallLogo : largeLogo}
                         <Menu mode="inline" theme="dark" className="mainMenu" defaultSelectedKeys={['1']} mode="inline" >
-                            <Menu.Item key="2">
+                            <Menu.Item key="1">
                                 <Link to={'/mainpage'} className="nav-link">
                                     <Icon type="dashboard" />
                                     <span>Home </span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="3">
+                            <Menu.Item key="2">
                                 <Link to={'/parkingLot'} className="nav-link">
                                     <Icon type="car" />
                                     <span>Parking Lots </span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="4">
+                            <Menu.Item key="3">
                                 <Link to={'/orders'} className="nav-link">
                                     <Icon type="carry-out" />
                                     <span>Orders</span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="5">
+                            <Menu.Item key="4">
                                 <Link to={'/reservations'} className="nav-link">
                                     <Icon type="schedule" />
                                     <span>Reservations </span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="6">
+                            <Menu.Item key="5">
                                 <Link to={'/logs'} className="nav-link">
                                     <Icon type="file" />
                                     <span>Logs</span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="7">
+                            <Menu.Item key="6">
                                 <Link to={'/about'} className="nav-link">
                                     <Icon type="info-circle" />
                                     <span>About</span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="8">
+                            <Menu.Item key="7">
                                 <Link to={'/logout'} className="nav-link">
                                     <Icon type="info-circle" />
                                     <span>Log Out</span>
