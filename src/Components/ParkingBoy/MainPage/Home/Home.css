@@ -1,0 +1,46 @@
+.ant-card-head {
+    color: rgba(93, 93, 93, 0.9);
+    font-size: 30px;
+    text-align: center;
+}
+
+.ant-card{
+font-size: 20px;
+font-variant: tabular-nums;
+line-height: 1.5;
+list-style: none;
+font-feature-settings: 'tnum', "tnum";
+text-align: center;
+}
+
+.number-of-created .ant-alert-message{
+    color: gray;
+    font-size: 100px;
+}
+
+.number-of-closed .ant-alert-message{
+    color: gray;
+    font-size: 100px;
+}
+
+.number-of-pending .ant-alert-message{
+    color: gray;
+    font-size: 100px;
+}
+
+.ant-descriptions-item-content{
+    font-size: 25px;
+}
+
+.ant-descriptions-item-label{
+    color: rgba(140, 140, 140, 0.9);
+}
+
+.h3.ant-typography{
+    margin-bottom: 0;
+}
+
+.date{
+    color:white;
+    text-align: right;
+}

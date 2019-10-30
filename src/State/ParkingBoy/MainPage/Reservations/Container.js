@@ -6,7 +6,8 @@ import ReservationResource from "../../../../Api/ReservationResource";
 
 const mapStateToProps = state => ({
     reservationList: state.reservationReducer.reservationList,
-    orderList: state.reservationReducer.orderList
+    orderList: state.reservationReducer.orderList,
+    filters: state.reservationReducer.filters
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -25,18 +26,22 @@ const mapDispatchToProps = dispatch => ({
                 dispatch({
                     type: 'CREATE_ORDER',
                     payload: res
-                }).then(
-                    ReservationResource.getAllReservation()
-                        .then(reservationJson => reservationJson.json()).then(reservation => {
-                        dispatch({
-                            type: "REFRESH",
-                            payload: reservation})
-                    })
-                )
-
-
+                })
+            }).then(() => {
+            ReservationResource.getAllReservation()
+                .then(reservationJson => reservationJson.json()).then(reservation => {
+                dispatch({
+                    type: "REFRESH",
+                    payload: reservation})
             })
+        })
+    },
 
+    createFilters: (filters) => {
+        dispatch({
+            type: 'CREATE_PARKING_LOT_FILTERS',
+            payload: filters
+        })
     }
 
 });

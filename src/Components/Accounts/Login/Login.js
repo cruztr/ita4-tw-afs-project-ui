@@ -6,6 +6,8 @@ import sparkImage from './Images/logowhitebordered.png';
 import driveArriveRelax from './Images/driverarriverelax.png';
 import SignUpContainer from '../../CarOwner/Signup/Signup'
 import { Redirect, Link } from 'react-router-dom'
+import CheckOrder from '../NonUser/CheckOrder'
+import OrderNotExist from "../NonUser/OrderNotExist";
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
@@ -16,7 +18,8 @@ class Login extends React.Component{
             username: "",
             password: "",
             orderId: "",
-            visible: false
+            visible: false,
+            modalVisible : false
         }
     }
 
@@ -37,13 +40,16 @@ class Login extends React.Component{
     }
 
     handleCheckOrder = () =>{
+        this.setState({
+            modalVisible : true
+        })
         this.props.checkOrder(this.state.orderId);
-
     }
 
     handleCancel = e => {
         this.setState({
             visible: false,
+            modalVisible : false
         });
     };
 
@@ -63,21 +69,31 @@ class Login extends React.Component{
     goLogin = () => {
         if(this.props.accounts.account.id){
             return <Redirect to= {{
-                pathname: '/mainpage',
-                account:this.props.accounts.account
+                pathname: '/mainpageCarOwner',
+                    account:this.props.accounts.account
             }}
          />
         }
     }
 
+    closeModal = () =>{
+        this.setState({
+            modalVisible : false
+        })
+    }
+
     checkOrder = () => {
+        if(this.props.accounts.order.orderId != this.state.orderId){
+            if(this.state.modalVisible)
+                return <OrderNotExist order = {this.props.accounts.order} isVisible={this.state.modalVisible} handleClose={this.closeModal}/>
+        }
         if(this.props.accounts.order.orderId == this.state.orderId){
-            alert(JSON.stringify(this.props.accounts.order));
-            // console.log(this.props.accounts.order);
+            if(this.state.modalVisible)
+             return <CheckOrder order = {this.props.accounts.order} isVisible={this.state.modalVisible} handleClose={this.closeModal} />
         }
         else if (this.props.accounts.signUpCredentials.id) {
             return <Redirect to= {{
-                pathname: 'mainpageCarOwner',
+                pathname: 'login',
                 account: this.props.accounts.signUpCredentials
             }}
             />
@@ -87,14 +103,16 @@ class Login extends React.Component{
             if(type === "Parking Boy"){
                 return <Redirect to= {{
                     pathname: 'mainpage',
-                        account: this.props.accounts.account
+                        account: this.props.accounts.account,
+                        typeOfUser: this.props.accounts.typeOfUser
                 }}
                 />
             }
             else {
                 return <Redirect to= {{
                 pathname: 'mainpageCarOwner',
-                    account: this.props.accounts.account
+                    account: this.props.accounts.account,
+                    typeOfUser: this.props.accounts.typeOfUser
                 }}
                 />
             }
@@ -109,8 +127,7 @@ class Login extends React.Component{
                         <div className={"wrapper"}>
                             <Content>
                                 {this.goLogin()}
-                                {this.checkOrder()}
-                                {/*Check Order*/}
+                                {this.checkOrder()}                      
                                 <div className={"es1"}>
                                     <div className={"Order-block"}>
                                         <Card className={"st1"} bordered={false}>
@@ -119,11 +136,6 @@ class Login extends React.Component{
                                                   cover={<img alt="Spark" src={driveArriveRelax}/>}>
                                             </Card>
 
-                                            {/*<div>*/}
-                                            {/*    <Input placeholder="Order Id" value={this.state.orderId} name="orderId"*/}
-                                            {/*           onChange={this.handleChange}/>*/}
-                                            {/*    <Button onClick = {this.handleCheckOrder}>Submit</Button>*/}
-                                            {/*</div>*/}
                                             <p className={"pSm"}>Check the status of your parked car:</p>
                                             <Search
                                                 value={this.state.orderId} name="orderId"

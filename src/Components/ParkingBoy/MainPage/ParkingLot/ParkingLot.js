@@ -63,19 +63,40 @@ class ParkingLot extends React.Component{
 
 
       updateParkingBlock = (status) =>{
-          let param = {
-            status : status,
-            blockPosition :  this.state.blockPosition
+        let name = this.props.parkingLot.name;
+        let blockPosition =this.state.blockPosition;
+
+        let thisParkingLots = [];
+        let thisParkingLot = {};
+
+        this.props.allParkingLots.forEach(parkingLot => {
+          if(parkingLot.name == name){
+            thisParkingLot = parkingLot;
+              parkingLot.parkingBlocks.forEach(parkingBlock => {
+                  if(parkingBlock.position == blockPosition){
+                      parkingBlock.status = status;
+                  }
+              });
           }
-          this.props.updateParkingBlock(param);
+          thisParkingLots.push(parkingLot);
+      });
+
+
+          let params = {
+              parkingLots : thisParkingLots,
+              parkingLot : thisParkingLot
+          }
+
+          this.props.updateParkingBlock(params);
+
       }
 
       showModal = () =>{
         if(this.state.showOrder)
-          return <OrderContainer isVisible={this.closeModal} parkingLot={this.props.parkingLot} blockPosition = {this.state.blockPosition} whenOrder={this.updateParkingBlock} />;
+          return <OrderContainer isVisible={this.closeModal} parkingLot={this.props.parkingLot} blockPosition = {this.state.blockPosition} whenOrder={this.updateParkingBlock} account={this.props.account} />;
 
         else if(this.state.showCloseOrder)
-            return <CloseOrderContainer isVisible={this.closeModal} parkingLot={this.props.parkingLot} blockPosition = {this.state.blockPosition} whenCloseOrder={this.updateParkingBlock} />;
+            return <CloseOrderContainer isVisible={this.closeModal} parkingLot={this.props.parkingLot} blockPosition = {this.state.blockPosition} whenCloseOrder={this.updateParkingBlock} account={this.props.account} />;
         else return null;
       }
 
@@ -110,7 +131,12 @@ class ParkingLot extends React.Component{
           onChange={this.onChange}
           placeholder="Parking Lot Name"
         />
-        <hr></hr>
+        <div className="legends">
+          <img src={blockOccupied} width="20px" /><span>OCCUPIED | </span>
+          <img src={blockAvailable} width="20px" /><span>AVAILABLE | </span>
+          <img src={blockReserved} width="20px" /><span>RESERVED</span>
+        </div>
+        <hr/>
         <Row gutter={[{ xs: 8, sm: 16, md: 24, lg: 32 }, 20]}>
           {this.initializeParkingBlocks()}
         </Row>

@@ -30,5 +30,8 @@ export default {
             "parkingLotId": param.parkingLotId,
             "parkingBlockPosition": param.blockNumber
         })
+    }),
+    getAllAvailableOrders:() => fetch(PROTOCOL_TO_MAIN_PATH +"/parkingBoy/orders", {
+        mode: 'cors',
     })
 }

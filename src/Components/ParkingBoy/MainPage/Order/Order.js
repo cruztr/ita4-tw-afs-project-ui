@@ -6,14 +6,15 @@ export default class Order extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            plateNumber: ''
+            plateNumber: '',
+            disableButton: true
         }
     }
     createOrder = () =>{
         const param = {
             plateNumber: this.state.plateNumber,
             parkingLotID: this.props.parkingLot.id,
-            parkingBoyID: 1,
+            parkingBoyID: this.props.account.id,
             parkingBlockPosition : this.props.blockPosition
         }
         this.props.createOrder(param);
@@ -22,8 +23,14 @@ export default class Order extends React.Component{
     }
 
 
-    plateNumberChange = (event) => this.setState({plateNumber: event.target.value});
+    plateNumberChange = (event) => {
+        this.setState({plateNumber: event.target.value});
+        if(event.target.value){
+            this.setState({disableButton: false});
+        }
+    }
     render(){
+        const fullName = this.props.account.firstName + " " + this.props.account.lastName;
         return(
             <div>
                 <Modal
@@ -37,13 +44,13 @@ export default class Order extends React.Component{
                         <Button className="Cancel" onClick={() => this.props.isVisible(false)}>
                             Cancel
                         </Button>,
-                        <Button className="Create-Order" key="submit" type="primary" onClick={this.createOrder}>Create Order</Button>
+                        <Button className="Create-Order" key="submit" type="primary" disabled={this.state.disableButton} onClick={this.createOrder}>Create Order</Button>
                     ]}
                  >
                     <Row type="flex" justify="center">
                         <Col span={8}>PLATE NUMBER:</Col>
                         <Col span={12}><Input placeholder="Plate Number" value={this.state.plateNumber}
-                                              onChange={this.plateNumberChange}/></Col>
+                                              onChange={this.plateNumberChange} /></Col>
                     </Row>
                     <Row type="flex" justify="center">
                         <Col span={8}>PARKING LOT:</Col>
@@ -59,7 +66,7 @@ export default class Order extends React.Component{
                     </Row>
                     <Row type="flex" justify="center">
                         <Col span={8}>CREATED BY:</Col>
-                        <Col span={12}></Col>
+                        <Col span={12}>{fullName}</Col>
                     </Row>
                 </Modal>
             </div>

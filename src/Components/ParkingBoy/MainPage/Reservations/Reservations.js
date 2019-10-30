@@ -13,9 +13,17 @@ export default class Reservations extends React.Component{
             searchText: '',
             columns: [
                 {
-                    title: "Reservation Number.",
+                    title: "Reservation Number",
                     dataIndex: "reservationNumber",
                     key: "reservationNumber"
+                },
+                {
+                    title: "Location",
+                    dataIndex: "parkingLotName",
+                    key: "parkingLotName",
+                    ...this.getColumnSearchProps('parkingLotName'),
+                    filters: this.props.filters
+                    // filters:
                 },
                 {
                     title: "Driver Name",
@@ -32,7 +40,9 @@ export default class Reservations extends React.Component{
                 {
                     title: "Reserved Time",
                     dataIndex: "reservedTime",
-                    key: "reservedTime"
+                    key: "reservedTime",
+                    sorter: (a, b) => a.reservedTime.length - b.reservedTime.length,
+                    sortDirections: ['descend', 'ascend']
                 },
                 {
                     title: "Action",
@@ -54,9 +64,10 @@ export default class Reservations extends React.Component{
 
     createOrder = reservation => {
         const param = {
-            parkingLotID: reservation.parkingLot.parkingLotID,
-            parkingBoyID: this.props.parkingBoy.parkingBoyID,
-            parkingBlockPosition: reservation.parkingBlockPosition,
+            parkingLotID: reservation.parkingLotId,
+            parkingBoyID: this.props.account.id,
+            plateNumber: reservation.plateNumber,
+            parkingBlockPosition: reservation.position,
             reservation: reservation
         }
         this.props.createOrder(param);
@@ -102,14 +113,14 @@ export default class Reservations extends React.Component{
                 setTimeout(() => this.searchInput.select());
             }
         },
-        render: text => (
-            <Highlighter
-                highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-                searchWords={[this.state.searchText]}
-                autoEscape
-                textToHighlight={text.toString()}
-            />
-        ),
+        // render: text => (
+        //     <Highlighter
+        //         highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+        //         searchWords={[this.state.searchText]}
+        //         autoEscape
+        //         textToHighlight={text.toString()}
+        //     />
+        // ),
     });
 
     handleSearch = (selectedKeys, confirm) => {
@@ -130,12 +141,35 @@ export default class Reservations extends React.Component{
         ReservationResource.getAllReservation()
             .then(res => res.json()).then(res => {
             this.props.refreshContent(res);
-            this.intervalID = setTimeout(this.getData.bind(this), 5000);
+            this.getLocationFilters();
+            // this.intervalID = setTimeout(this.getData.bind(this), 5000);
         });
     }
 
+    getLocationFilters = () => {
+        let filters = [];
+
+        let filterList = this.props.reservationList.map(reservation => reservation.parkingLotName);
+        let distinctList = [...new Set(filterList)];
+
+        distinctList.forEach(parkingLotName => {
+                filters.push((
+                    {
+                        text: parkingLotName,
+                        value: parkingLotName
+                    })
+                )
+        });
+
+        // const filterData = () => formatter => distinctList.map(parkingLotName => ({
+        //
+        // }))
+
+        this.props.createFilters(filters);
+    }
+
     componentWillUnmount() {
-        clearTimeout(this.intervalID);
+        // clearTimeout(this.intervalID);
     }
 
     render(){

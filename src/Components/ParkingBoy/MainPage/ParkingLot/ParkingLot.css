@@ -25,3 +25,7 @@
     transform: translate(-50%,-50%);
     color: #262b41;
   }
+
+  .legends{
+    float: right;
+  }
