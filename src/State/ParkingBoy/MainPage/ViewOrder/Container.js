@@ -1,14 +1,13 @@
 import { connect } from "react-redux";
 import ViewOrder from "../../../../Components/ParkingBoy/MainPage/Order/ViewOrder"
-import OrderResource from "../../../../Api/OrderResource"
-import swal from "sweetalert";
+import OrderResource from "../../../../Api/OrderResource";
 
 const mapStateToProps = state => ({
     orders : state.viewOrderReducer
 });
 
 const mapDispatchToProps = dispatch => ({
-    closeOrder: (param, resetState) => {
+    closeOrder: (param) => {
         OrderResource.closeOrder(param)
             .then(res => res.json())
             .then(res => {
