@@ -3,6 +3,7 @@ import React from "react";
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import ReservationContainer from "../../../State/CarOwner/MainPage/Reservation/Container.js";
+import LogsContainer from "../../../State/Logs/Container.js";
 import LogoBordered from "../Images/logowhitebordered.png";
 import LogoSmall from "../Images/logosmall.png"
 import swal from "sweetalert";
@@ -101,7 +102,7 @@ class MainPage extends React.Component {
                                     <Route path='/parkingLot'>Parking Lots</Route>
                                     <Route path='/orders'> Orders </Route>
                                     <Route path='/reservation'> <ReservationContainer account={this.props.location.account}/></Route>
-                                    <Route path='/logs'> History </Route>
+                                    <Route path='/logs'> <LogsContainer account={this.props.location.account}typeOfUser={this.props.location.typeOfUser} /> </Route>
                                     <Route path='/about'> About </Route>
                                     <Route path="/logout" render={() => this.showLogoutBox()} />
                                 </Switch>
