@@ -18,9 +18,8 @@ class ParkingLot extends React.Component{
           value: '',
           dataSource: []
         }
-      }
-      componentDidMount = () =>{
-        this.props.getAllParkingLots();
+        props.getAllParkingLots();
+        this.props.clearParkingLot();
       }
 
       onSearch = () => {

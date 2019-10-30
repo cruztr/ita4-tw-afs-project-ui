@@ -1,6 +1,6 @@
 const initialState = {
     status: "",
-    reservation : {},
+    reservation : null,
     carOwner : {},
     orderList: []
 };

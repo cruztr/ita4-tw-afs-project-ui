@@ -30,6 +30,12 @@ const mapDispatchToProps = dispatch => ({
                 type: 'UPDATE_PARKING_BLOCK',
                 payload: parkingBlock
             })
+    },
+    clearParkingLot: () =>{
+        dispatch({
+            type: 'CLEAR_PARKING_LOT',
+            payload: null
+        })
     }
 });
 
