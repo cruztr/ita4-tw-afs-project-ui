@@ -61,30 +61,24 @@ class MainPage extends React.Component {
                         {this.state.collapsed ? smallLogo : largeLogo}
                         <Menu theme="dark" className="mainMenu" defaultSelectedKeys={['1']} mode="inline" >
                             <Menu.Item key="2">
-                                <Link to={'/'} className="nav-link">
-                                    <Icon type="dashboard" />
-                                    <span>Home</span>
-                                </Link>
-                            </Menu.Item>
-                            <Menu.Item key="3">
-                                <Link to={'/reservation'} className="nav-link">
+                                <Link to={'/mainpageCarOwner'} className="nav-link">
                                     <Icon type="schedule" />
                                     <span>Reservations</span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="4">
+                            <Menu.Item key="3">
                                 <Link to={'/logs'} className="nav-link">
                                     <Icon type="file" />
                                     <span>History</span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="5">
+                            <Menu.Item key="4">
                                 <Link to={'/about'} className="nav-link">
                                     <Icon type="info-circle" />
                                     <span>About</span>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item key="6">
+                            <Menu.Item key="5">
                                 <Link to={'/logout'} className="nav-link">
                                     <Icon type="info-circle" />
                                     <span>Log Out</span>
@@ -98,10 +92,7 @@ class MainPage extends React.Component {
                             </Breadcrumb>
                             <div className="div-content">
                                 <Switch>
-                                    <Route exact path='/'>Home</Route>
-                                    <Route path='/parkingLot'>Parking Lots</Route>
-                                    <Route path='/orders'> Orders </Route>
-                                    <Route path='/reservation'> <ReservationContainer account={this.props.location.account}/></Route>
+                                    <Route path='/mainpageCarOwner'> <ReservationContainer account={this.props.location.account}/></Route>
                                     <Route path='/logs'> <LogsContainer account={this.props.location.account}typeOfUser={this.props.location.typeOfUser} /> </Route>
                                     <Route path='/about'> About </Route>
                                     <Route path="/logout" render={() => this.showLogoutBox()} />
