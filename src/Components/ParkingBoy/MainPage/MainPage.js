@@ -7,7 +7,7 @@ import LogsContainer from "../../../State/Logs/Container.js";
 import LogoBordered from "./Images/logowhitebordered.png"
 import LogoSmall from "./Images/logosmall.png"
 import './MainPage.css';
-import {BrowserRouter as Router, Link, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route, Switch, withRouter} from 'react-router-dom';
 import Home from "./Home/Home.js";
 import swal from "sweetalert";
 
@@ -23,10 +23,8 @@ class MainPage extends React.Component {
         this.setState({ collapsed });
     };
 
-    goLogout = () => {
-        return(
-            this.props.history.push('/login')
-        )
+    goLogout() {
+        this.props.history.push('/login');
     }
 
     showLogoutBox = () =>{
@@ -50,7 +48,7 @@ class MainPage extends React.Component {
     render() {
         const smallLogo = <div className="logo"><img width="60px" alt="Spark" src={LogoSmall}/></div>;
         const largeLogo = <div className="logo"><img width="170px" alt="Spark" src={LogoBordered}/></div>;
-        
+
         return (
             <Router>
                 <Layout >
@@ -117,7 +115,7 @@ class MainPage extends React.Component {
                                     <Route path='/reservations'> <ReservationContainer account={this.props.location.account}/></Route>
                                     <Route path='/logs'> <LogsContainer account={this.props.location.account} typeOfUser={this.props.location.typeOfUser}/> </Route>
                                     <Route path='/about'> About </Route>
-                                    <Route path="/logout" render={() => this.showLogoutBox()} />
+                                    <Route path="/logout" render={() => this.showLogoutBox()} ></Route>
                                 </Switch>
                             </div>
                         </Content>
@@ -129,4 +127,4 @@ class MainPage extends React.Component {
     }
 }
 
-export default MainPage;
+export default withRouter(MainPage);

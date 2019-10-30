@@ -1,15 +1,15 @@
 import React from "react";
-import {Button, Card, Input, Layout, Row, Col, Modal } from "antd";
+import {Button, Card, Input, Layout, Modal } from "antd";
 import 'antd/dist/antd.css';
 import './Login.css';
 import sparkImage from './Images/logowhitebordered.png';
 import driveArriveRelax from './Images/driverarriverelax.png';
 import SignUpContainer from '../../CarOwner/Signup/Signup'
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import CheckOrder from '../NonUser/CheckOrder'
 import OrderNotExist from "../NonUser/OrderNotExist";
 import swal from "sweetalert";
-const { Header, Footer, Sider, Content } = Layout;
+const { Footer, Content } = Layout;
 const { Search } = Input;
 
 
@@ -20,6 +20,7 @@ class Login extends React.Component{
             username: "",
             password: "",
             orderId: "",
+            accounts: null,
             visible: false,
             modalVisible : false
         }
@@ -59,6 +60,11 @@ class Login extends React.Component{
        if(nextProps.accounts.account.code === 404){
            swal( "Validation","Username or password incorrect, please try again.","warning")
        }
+       else{
+           this.setState({
+               accounts: nextProps.accounts.account
+           })
+       }
     }
 
     setUserCarOwner = () => {
@@ -74,23 +80,13 @@ class Login extends React.Component{
         this.handleCancel();
     }
 
-    goLogin = () => {
-        if(this.props.accounts.account.id){
-            return <Redirect to= {{
-                pathname: '/mainpageCarOwner',
-                    account:this.props.accounts.account
-            }}
-         />
-        }
-    }
-
     closeModal = () =>{
         this.setState({
             modalVisible : false
         })
     }
 
-    checkOrder = () => {
+    checkState = () => {
         if(this.props.accounts.order.orderId != this.state.orderId){
             if(this.state.modalVisible)
                 return <OrderNotExist order = {this.props.accounts.order} isVisible={this.state.modalVisible} handleClose={this.closeModal}/>
@@ -106,13 +102,13 @@ class Login extends React.Component{
             }}
             />
         }
-        else if(this.props.accounts.account.id){
+        else if(this.state.accounts){
             const type = this.props.accounts.typeOfUser;
             if(type === "Parking Boy"){
                 return <Redirect to= {{
                     pathname: 'mainpage',
                         account: this.props.accounts.account,
-                        typeOfUser: this.props.accounts.typeOfUser
+                        typeOfUser: type
                 }}
                 />
             }
@@ -120,7 +116,7 @@ class Login extends React.Component{
                 return <Redirect to= {{
                 pathname: 'mainpageCarOwner',
                     account: this.props.accounts.account,
-                    typeOfUser: this.props.accounts.typeOfUser
+                    typeOfUser: type
                 }}
                 />
             }
@@ -134,8 +130,7 @@ class Login extends React.Component{
                     <div className={"Content"}>
                         <div className={"wrapper"}>
                             <Content>
-                                {this.goLogin()}
-                                {this.checkOrder()}                      
+                                {this.checkState()}
                                 <div className={"es1"}>
                                     <div className={"Order-block"}>
                                         <Card className={"st1"} bordered={false}>
