@@ -15,7 +15,8 @@ export default (state = initialState, action) => {
                 order: ""};
         case "CHECKORDER" :
             return {...state,
-                    order: action.payload
+                    order: action.payload,
+                    account : {}
             }
         case "SIGNUP":
             return {...state, signUpCredentials: action.payload};
