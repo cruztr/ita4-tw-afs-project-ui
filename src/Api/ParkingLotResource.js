@@ -6,5 +6,8 @@ export default {
     }),
     getParkingLots: (filterType) => fetch("http://localhost:8089/parkingLot/"+filterType, {
         mode: 'cors'
+    }),
+    getReservation: (param) => fetch("http://localhost:8089/parkingLot/"+ param.parkingLotId +"/parkingBlock/"+ param.blockPosition, {
+        mode: 'cors'
     })
 }
