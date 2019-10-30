@@ -260,13 +260,13 @@ export default class Reservations extends React.Component{
                                 }}
                                 onClick={this.onClose}
                             >
-                                Cancel
+                                Close
                             </Button>
                             <Popconfirm title="Cancel reservation?" onConfirm={() => {
                                 {this.cancelReservation(myReservation.reservationNumber)}
                             }}>
-                                <Button type="primary">
-                                    Submit
+                                <Button type="danger">
+                                    Cancel
                                 </Button>
                             </Popconfirm>
                         </div>
