@@ -104,7 +104,7 @@ class MainPage extends React.Component {
                                 <Switch>
                                     <Route exact path='/mainpage'><Home user={this.props.location.account} /></Route>
                                     <Route path='/parkingLot'> <ParkingLotContainer account={this.props.location.account}/></Route>
-                                    <Route path='/orders'> <ViewOrderContainer /></Route>
+                                    <Route path='/orders'> <ViewOrderContainer account={this.props.location.account} /></Route>
                                     <Route path='/reservations'> <ReservationContainer account={this.props.location.account}/></Route>
                                     <Route path='/logs'> <LogsContainer account={this.props.location.account} typeOfUser={this.props.location.typeOfUser}/> </Route>
                                     <Route path="/logout" render={() => this.showLogoutBox()} ></Route>

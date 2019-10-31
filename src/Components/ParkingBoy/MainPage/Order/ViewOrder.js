@@ -136,7 +136,7 @@ export default class ViewOrder extends React.Component {
                 plateNumber: order.plateNumber,
                 parkingBlockPosition: order.parkingBlockPosition,
             },
-            parkingBoyID: 14,
+            parkingBoyID: this.props.account.id,
             orderNumber: order.orderNumber
         }
 
