@@ -19,7 +19,9 @@ export default (state = initialState, action) => {
                     account : {}
             }
         case "SIGNUP":
-            return {...state, signUpCredentials: action.payload};
+            return {...state,
+                signUpCredentials: action.payload,
+                account: null};
         default:
             return state;
         }

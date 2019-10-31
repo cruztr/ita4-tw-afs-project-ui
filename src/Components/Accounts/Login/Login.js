@@ -57,19 +57,21 @@ class Login extends React.Component{
     };
 
     componentWillReceiveProps = nextProps => {
-       if(nextProps.accounts.account.code === 404){
-           swal( "Validation","Username or password incorrect, please try again.","warning")
-       }
-       else if (nextProps.accounts.order){
-           this.setState({
-               accounts: null
-           })
-       }
-       else{
-           this.setState({
-               accounts: nextProps.accounts.account
-           })
-       }
+        if(nextProps.accounts.account){
+            if(nextProps.accounts.account.code === 404){
+                swal( "Validation","Username or password incorrect, please try again.","warning")
+            }
+            else if (nextProps.accounts.order){
+                this.setState({
+                    accounts: null
+                })
+            }
+            else{
+                this.setState({
+                    accounts: nextProps.accounts.account
+                })
+            }
+        }
     }
 
     setUserCarOwner = () => {
@@ -104,14 +106,8 @@ class Login extends React.Component{
                                    handleClose={this.closeModal}/>
             }
         }
-        else if (this.props.accounts.signUpCredentials.id) {
-            return <Redirect to= {{
-                pathname: 'login',
-                accounts: this.props.accounts.signUpCredentials
-            }}
-            />
-        }
         else if(this.state.accounts){
+
             const type = this.props.accounts.typeOfUser;
             if(type === "Parking Boy"){
                 return <Redirect to= {{
@@ -129,6 +125,9 @@ class Login extends React.Component{
                 }}
                 />
             }
+        }
+        else{
+
         }
     }
 
