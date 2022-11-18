@@ -9,7 +9,7 @@
     "react-highlight-words": "^0.16.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
+    "react-scripts": "5.0.1",
     "redux": "^4.0.4",
     "sweetalert": "^2.1.2",
     "redux-react-session": "^2.6.0"
